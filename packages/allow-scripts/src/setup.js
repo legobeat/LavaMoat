@@ -178,8 +178,18 @@ function editPackageJson() {
     }
     // If you think `node ` is redundant below, be aware that `./cli.js` won't work on Windows,
     // but passing a unix-style path to node on Windows works fine.
+
     packageJson.scripts['allow-scripts'] =
       'node ./node_modules/@lavamoat/allow-scripts/src/cli.js --experimental-bins'
+    // why --experimental-bins being ignored?
+    // and not by default:
+    // packageJson.scripts['allow-scripts'] = 'node ./node_modules/@lavamoat/allow-scripts/src/cli.js'
+
+    // why not this?
+    // packageJson.scripts['allow-scripts'] = 'yarn allow-scripts --experimental-bins'
+    // in case yarn or allow-scripts is compromised?
+    // why only do this for FEATURE.bins?
+    // /leotm
     console.log(
       '@lavamoat/allow-scripts: Adding allow-scripts as a package.json script with direct path.'
     )
@@ -187,6 +197,11 @@ function editPackageJson() {
       addInstallParentDir('package.json'),
       JSON.stringify(packageJson, null, 2)
     )
+
+    packageJson.scripts['allow-scripts'] = 'node ./node_modules/@lavamoat/allow-scripts/src/cli.js --experimental-bins'
+
+    console.log('@lavamoat/allow-scripts: Adding allow-scripts as a package.json script with direct path.')
+    writeFileSync(addInstallParentDir('package.json'), JSON.stringify(packageJson, null, 2))
   }
 }
 
