@@ -124,12 +124,12 @@
       "packages": {
         "@lavamoat/lavapack>combine-source-map": true,
         "@lavamoat/lavapack>convert-source-map": true,
-        "@lavamoat/lavapack>json-stable-stringify": true,
         "@lavamoat/lavapack>readable-stream": true,
         "@lavamoat/lavapack>through2": true,
         "@lavamoat/lavapack>umd": true,
         "browserify>JSONStream": true,
-        "lavamoat-core": true
+        "lavamoat-core": true,
+        "lavamoat-core>json-stable-stringify": true
       }
     },
     "@lavamoat/lavapack>combine-source-map": {
@@ -170,11 +170,6 @@
         "atob": true,
         "btoa": true,
         "value": true
-      }
-    },
-    "@lavamoat/lavapack>json-stable-stringify": {
-      "packages": {
-        "@lavamoat/lavapack>json-stable-stringify>jsonify": true
       }
     },
     "@lavamoat/lavapack>readable-stream": {
@@ -796,9 +791,14 @@
         "define": true
       },
       "packages": {
-        "json-stable-stringify": true,
+        "lavamoat-core>json-stable-stringify": true,
         "lavamoat-core>lavamoat-tofu": true,
         "lavamoat-core>merge-deep": true
+      }
+    },
+    "lavamoat-core>json-stable-stringify": {
+      "packages": {
+        "lavamoat-core>json-stable-stringify>jsonify": true
       }
     },
     "lavamoat-core>lavamoat-tofu": {
