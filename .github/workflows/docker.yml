@@ -1,0 +1,68 @@
+name: CI-Docker
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  test-dev-alpine:
+    name: test-dev-alpine
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          driver: docker-container
+          driver-opts: |
+            image=moby/buildkit:master
+      - name: Build OCI image
+        uses: docker/build-push-action@v4
+        with:
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          context: .
+          file: test/integration/Dockerfile-alpine
+          load: true
+          push: false
+          tags: dev:latest
+      - name: lint
+        uses: addnab/docker-run-action@v3
+        with:
+          image: dev:latest
+          run: 'npm run lint && npm run lint:fix'
+      - name: publish
+        uses: addnab/docker-run-action@v3
+        env:
+          VERDACCIO_STORAGE_PATH: /app/verdaccio/storage
+        with:
+          image: dev:latest
+          run: >
+            git init -b main &&
+              git add package.json packages/*/package.json &&
+              git commit -m 'feat!: Add manifests' &&
+              npm ci &&
+              (verdaccio &) &&
+              sleep 7 &&
+              npm set registry http://localhost:4873 &&
+              sh -c '(echo user; sleep 0.5; echo password; sleep 0.5; echo email@example.com) | npm --registry=http://localhost:4873 adduser --auth-type legacy' &&
+              npm run publish -- -y
+      - name: rebuild
+        uses: addnab/docker-run-action@v3
+        with:
+          image: dev:latest
+          run: npm run setup && npm run rebuild
+      - name: lint:git
+        uses: addnab/docker-run-action@v3
+        with:
+          image: dev:latest
+          run: >
+            git init -b main &&
+              git add README.md && npm run lint:staged &&
+              git commit -m 'docs: Add README.md' && npm run lint:commit -- -e
+      - name: test
+        uses: addnab/docker-run-action@v3
+        with:
+          image: dev:latest
+          run: npm run test:prep && npm run test
