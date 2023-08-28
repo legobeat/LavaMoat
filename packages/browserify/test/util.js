@@ -54,7 +54,7 @@ function overrideDepsWithLocalPackages(projectDir) {
   for (const [dirName, name] of Object.entries(localLavaMoatDeps)) {
     const src = path.resolve(__dirname, '..', '..', dirName)
     spawnSync('yarn', ['unlink', name], { cwd: projectDir })
-    const res = spawnSync('yarn', ['link'], { cwd: src })
+    const res = spawnSync('yarn', ['link', '--no-bin-links'], { cwd: src })
     if (res.status !== 0) {
       const err = res.stderr.toString()
       console.error({
@@ -67,7 +67,7 @@ function overrideDepsWithLocalPackages(projectDir) {
       throw new Error(err)
     }
   }
-  const res = spawnSync('yarn', ['link', ...Object.values(localLavaMoatDeps)], { cwd: projectDir })
+  const res = spawnSync('yarn', ['link', '--no-bin-links', ...Object.values(localLavaMoatDeps)], { cwd: projectDir })
   if (res.status !== 0) {
     const err = res.stderr.toString()
     console.error({
