@@ -13,6 +13,32 @@ In order to help mitigate the risk of such an attack we are building a suite of 
 
 **The goal of LavaMoat** is to bring added protections to modern JavaScript apps without having to rewrite them from scratch and automate a good first-start security configuration.
 
+## Developing
+
+### Dependencies
+
+- Git
+- Node.js v18
+- NPM v9
+
+### Supported development environments
+
+LavaMoat officially supports building on the following operating systems and architectures:
+
+- Latest Ubuntu LTS [`x86_64`]
+- Debian Stable [`x86_64`]
+- Latest Alpine Linux Stable [`x86_64`]
+
+On a best-effort basis, development should also be expected to work on:
+
+- macOS 13.5+ [`x86_64` / `aarch64`]
+- Windows Subsystem for Linux 1 [`x86_64`]
+- Windows Subsystem for Linux 2 [`x86_64` / `aarch64`]
+- Latest Ubuntu LTS [`aarch64`]
+- Debian Stable [`aarch64`]
+- Latest Alpine Linux Stable [`aarch64`]
+
+Developer experience reports for supported and unsupported platforms and compatibility fixes are welcome.
 
 ## [Watch the introduction video](https://www.youtube.com/watch?v=iaqe6F4S2tA&feature=emb_title&ab_channel=Feross)
 
@@ -30,14 +56,14 @@ Even starting with adding just step 1 - the allow-scripts is a great improvement
 ### Install scripts
 
 Lavamoat's allow-scripts configures your project to disable running install scripts by default and
-gives you a configuration section in package.json where the allowed ones can be listed.  
+gives you a configuration section in package.json where the allowed ones can be listed.
 It also installs a package with an install script that fails installation as early as possible if the configuration is accidentally removed.
 
 No new install scripts showing up in your dependencies will run unexpectedly. That way you eliminate the most popular attack vector of malicious packages in recent years.
 
 ### Runtime protections
 
-You can use lavamoat to prevent malicious code introduced into a package from running. 
+You can use lavamoat to prevent malicious code introduced into a package from running.
 
 The LavaMoat runtime reduces the supply chain risk by:
   1. Prevent modifying JavaScript's primordials (Object, String, Number, Array, ...)
