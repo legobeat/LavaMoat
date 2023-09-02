@@ -14,7 +14,8 @@ RUN git config --global user.email "you@example.com" && \
   npm run setup && \
   npm run build && \
   mkdir -p /app/verdaccio/storage && \
-  npm i -g verdaccio
+  npm i -g verdaccio && \
+  rm /home/node/.npmrc
 
 ENV PATH="/home/node/.local/bin:$PATH"
 ENTRYPOINT ["/usr/local/bin/npm"]
