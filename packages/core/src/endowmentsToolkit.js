@@ -1,63 +1,64 @@
 // the contents of this file will be copied into the prelude template
 // this module has been written so that it required directly or copied and added to the template with a small wrapper
-module.exports = makeGetEndowmentsForConfig
+module.exports = endowmentsToolkit
 
-// utilities for generating the endowments object based on a globalRef and a config
+// utilities for generating the endowments object based on a globalRef and a packagePolicy
 
-// The config uses a period-deliminated path notation to pull out deep values from objects
-// These utilities help create an object populated with only the deep properties specified in the config
+// The packagePolicy uses a period-deliminated path notation to pull out deep values from objects
+// These utilities help create an object populated with only the deep properties specified in the packagePolicy
 
-function makeGetEndowmentsForConfig ({ createFunctionWrapper }) {
+function endowmentsToolkit({ createFunctionWrapper = defaultCreateFunctionWrapper } = {}) {
   return {
     getEndowmentsForConfig,
     makeMinimalViewOfRef,
     copyValueAtPath,
     applyGetSetPropDescTransforms,
     applyEndowmentPropDescTransforms,
+    copyWrappedGlobals,
+    createFunctionWrapper,
   }
 
   /**
-   *
-   * @function getEndowmentsForConfig
+   * @function getEndowmentsForConfig Creates an object populated with only the deep properties specified in the packagePolicy
    * @param {object} sourceRef - Object from which to copy properties
-   * @param {object} config - LavaMoat package config
+   * @param {object} packagePolicy - LavaMoat policy item representing a package
    * @param {object} unwrapTo - For getters and setters, when the this-value is unwrapFrom, is replaced as unwrapTo
    * @param {object} unwrapFrom - For getters and setters, the this-value to replace (default: targetRef)
    * @return {object} - The targetRef
    *
    */
-  function getEndowmentsForConfig (sourceRef, config, unwrapTo, unwrapFrom) {
-    if (!config.globals) {
+  function getEndowmentsForConfig(sourceRef, packagePolicy, unwrapTo, unwrapFrom) {
+    if (!packagePolicy.globals) {
       return {}
     }
-    // validate read access from config
+    // validate read access from packagePolicy
     const whitelistedReads = []
     const explicitlyBanned = []
-    Object.entries(config.globals).forEach(([path, configValue]) => {
+    Object.entries(packagePolicy.globals).forEach(([path, packagePolicyValue]) => {
       const pathParts = path.split('.')
       // disallow dunder proto in path
       const pathContainsDunderProto = pathParts.some(pathPart => pathPart === '__proto__')
       if (pathContainsDunderProto) {
-        throw new Error(`Lavamoat - "__proto__" disallowed when creating minial view. saw "${path}"`)
+        throw new Error(`Lavamoat - "__proto__" disallowed when creating minimal view. saw "${path}"`)
       }
       // false means no access. It's necessary so that overrides can also be used to tighten the policy
-      if (configValue === false) {
+      if (packagePolicyValue === false) {
         explicitlyBanned.push(path)
         return
       }
       // write access handled elsewhere
-      if (configValue === 'write') {
+      if (packagePolicyValue === 'write') {
         return
       }
-      if (configValue !== true) {
-        throw new Error(`LavaMoat - unrecognizable policy value (${typeof configValue}) for path "${path}"`)
+      if (packagePolicyValue !== true) {
+        throw new Error(`LavaMoat - unrecognizable policy value (${typeof packagePolicyValue}) for path "${path}"`)
       }
       whitelistedReads.push(path)
     })
     return makeMinimalViewOfRef(sourceRef, whitelistedReads, unwrapTo, unwrapFrom, explicitlyBanned)
   }
 
-  function makeMinimalViewOfRef (sourceRef, paths, unwrapTo, unwrapFrom, explicitlyBanned = []) {
+  function makeMinimalViewOfRef(sourceRef, paths, unwrapTo, unwrapFrom, explicitlyBanned = []) {
     const targetRef = {}
     paths.forEach(path => {
       copyValueAtPath('', path.split('.'), explicitlyBanned, sourceRef, targetRef, unwrapTo, unwrapFrom)
@@ -72,7 +73,7 @@ function makeGetEndowmentsForConfig ({ createFunctionWrapper }) {
     return `${visited}.${next}`
   }
 
-  function copyValueAtPath (visitedPath, pathParts, explicitlyBanned, sourceRef, targetRef, unwrapTo = sourceRef, unwrapFrom = targetRef) {
+  function copyValueAtPath(visitedPath, pathParts, explicitlyBanned, sourceRef, targetRef, unwrapTo = sourceRef, unwrapFrom = targetRef) {
     if (pathParts.length === 0) {
       throw new Error('unable to copy, must have pathParts, was empty')
     }
@@ -163,7 +164,7 @@ function makeGetEndowmentsForConfig ({ createFunctionWrapper }) {
     }
     Reflect.defineProperty(targetRef, nextPart, newPropDesc)
 
-    function getSourceValue () {
+    function getSourceValue() {
       // determine the source value, this coerces getters to values
       // im deeply sorry, respecting getters was complicated and
       // my brain is not very good
@@ -181,14 +182,14 @@ function makeGetEndowmentsForConfig ({ createFunctionWrapper }) {
     }
   }
 
-  function applyEndowmentPropDescTransforms (propDesc, unwrapFromCompartment, unwrapToGlobalThis) {
+  function applyEndowmentPropDescTransforms(propDesc, unwrapFromCompartmentGlobalThis, unwrapToGlobalThis) {
     let newPropDesc = propDesc
-    newPropDesc = applyFunctionPropDescTransform(newPropDesc, unwrapFromCompartment, unwrapToGlobalThis)
-    newPropDesc = applyGetSetPropDescTransforms(newPropDesc, unwrapFromCompartment.globalThis, unwrapToGlobalThis)
+    newPropDesc = applyFunctionPropDescTransform(newPropDesc, unwrapFromCompartmentGlobalThis, unwrapToGlobalThis)
+    newPropDesc = applyGetSetPropDescTransforms(newPropDesc, unwrapFromCompartmentGlobalThis, unwrapToGlobalThis)
     return newPropDesc
   }
 
-  function applyGetSetPropDescTransforms (sourcePropDesc, unwrapFromGlobalThis, unwrapToGlobalThis) {
+  function applyGetSetPropDescTransforms(sourcePropDesc, unwrapFromGlobalThis, unwrapToGlobalThis) {
     const wrappedPropDesc = { ...sourcePropDesc }
     if (sourcePropDesc.get) {
       wrappedPropDesc.get = function () {
@@ -221,7 +222,7 @@ function makeGetEndowmentsForConfig ({ createFunctionWrapper }) {
     return wrappedPropDesc
   }
 
-  function applyFunctionPropDescTransform (propDesc, unwrapFromCompartment, unwrapToGlobalThis) {
+  function applyFunctionPropDescTransform(propDesc, unwrapFromCompartmentGlobalThis, unwrapToGlobalThis) {
     if (!('value' in propDesc && typeof propDesc.value === 'function')) {
       return propDesc
     }
@@ -229,34 +230,116 @@ function makeGetEndowmentsForConfig ({ createFunctionWrapper }) {
       // unwrap function calls this-value to unwrapToGlobalThis when:
       // this value is globalThis ex. globalThis.abc()
       // scope proxy leak workaround ex. abc()
-      return thisValue === unwrapFromCompartment.globalThis
+      return thisValue === unwrapFromCompartmentGlobalThis
     }
     const newFn = createFunctionWrapper(propDesc.value, unwrapTest, unwrapToGlobalThis)
     return { ...propDesc, value: newFn }
   }
-}
 
-function getPropertyDescriptorDeep (target, key) {
-  let receiver = target
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    // abort if this is the end of the prototype chain.
-    if (!receiver) {
-      return { prop: null, receiver: null }
-    }
-    // support lookup on objects and primitives
-    const typeofReceiver = typeof receiver
-    if (typeofReceiver === 'object' || typeofReceiver === 'function') {
-      const prop = Reflect.getOwnPropertyDescriptor(receiver, key)
-      if (prop) {
-        return { receiver, prop }
+
+  function getPropertyDescriptorDeep(target, key) {
+    let receiver = target
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      // abort if this is the end of the prototype chain.
+      if (!receiver) {
+        return { prop: null, receiver: null }
       }
-      // try next in the prototype chain
-      receiver = Reflect.getPrototypeOf(receiver)
-    } else {
-      // prototype lookup for primitives
-      // eslint-disable-next-line no-proto
-      receiver = receiver.__proto__
+      // support lookup on objects and primitives
+      const typeofReceiver = typeof receiver
+      if (typeofReceiver === 'object' || typeofReceiver === 'function') {
+        const prop = Reflect.getOwnPropertyDescriptor(receiver, key)
+        if (prop) {
+          return { receiver, prop }
+        }
+        // try next in the prototype chain
+        receiver = Reflect.getPrototypeOf(receiver)
+      } else {
+        // prototype lookup for primitives
+        // eslint-disable-next-line no-proto
+        receiver = receiver.__proto__
+      }
     }
   }
+
+  function copyWrappedGlobals(globalRef, target, globalThisRefs = ['globalThis']) {
+    // find the relevant endowment sources
+    const globalProtoChain = getPrototypeChain(globalRef)
+    // the index for the common prototypal ancestor, Object.prototype
+    // this should always be the last index, but we check just in case
+    const commonPrototypeIndex = globalProtoChain.findIndex(globalProtoChainEntry => globalProtoChainEntry === Object.prototype)
+    if (commonPrototypeIndex === -1) {
+      // TODO: fix this error message
+      throw new Error('Lavamoat - unable to find common prototype between Compartment and globalRef')
+    }
+    // we will copy endowments from all entries in the prototype chain, excluding Object.prototype
+    const endowmentSources = globalProtoChain.slice(0, commonPrototypeIndex)
+
+    // call all getters, in case of behavior change (such as with FireFox lazy getters)
+    // call on contents of endowmentsSources directly instead of in new array instances. If there is a lazy getter it only changes the original prop desc.
+    endowmentSources.forEach(source => {
+      const descriptors = Object.getOwnPropertyDescriptors(source)
+      Object.values(descriptors).forEach(desc => {
+        if ('get' in desc) {
+          try {
+            // calling getters can potentially throw (e.g. localStorage inside a sandboxed iframe)
+            Reflect.apply(desc.get, globalRef, [])
+          } catch { }
+        }
+      })
+    })
+
+    const endowmentSourceDescriptors = endowmentSources.map(globalProtoChainEntry => Object.getOwnPropertyDescriptors(globalProtoChainEntry))
+    // flatten propDesc collections with precedence for globalThis-end of the prototype chain
+    const endowmentDescriptorsFlat = Object.assign(Object.create(null), ...endowmentSourceDescriptors.reverse())
+    // expose all own properties of globalRef, including non-enumerable
+    Object.entries(endowmentDescriptorsFlat)
+      // ignore properties already defined on compartment global
+      .filter(([key]) => !(key in target))
+      // ignore circular globalThis refs
+      .filter(([key]) => !(globalThisRefs.includes(key)))
+      // define property on compartment global
+      .forEach(([key, desc]) => {
+        // unwrap functions, setters/getters & apply scope proxy workaround
+        const wrappedPropDesc = applyEndowmentPropDescTransforms(desc, target, globalRef)
+        Reflect.defineProperty(target, key, wrappedPropDesc)
+      })
+    // global circular references otherwise added by prepareCompartmentGlobalFromConfig
+    // Add all circular refs to root package compartment globalThis
+    for (const ref of globalThisRefs) {
+      if (ref in target) {
+        continue
+      }
+      target[ref] = target
+    }
+    return target
+  }
+
+  // util for getting the prototype chain as an array
+  // includes the provided value in the result
+  function getPrototypeChain(value) {
+    const protoChain = []
+    let current = value
+    while (current && (typeof current === 'object' || typeof current === 'function')) {
+      protoChain.push(current)
+      current = Reflect.getPrototypeOf(current)
+    }
+    return protoChain
+  }
+}
+
+function defaultCreateFunctionWrapper(sourceValue, unwrapTest, unwrapTo) {
+  const newValue = function (...args) {
+    if (new.target) {
+      // handle constructor calls
+      return Reflect.construct(sourceValue, args, new.target)
+    } else {
+      // handle function calls
+      // unwrap to target value if this value is the source package compartment's globalThis
+      const thisRef = unwrapTest(this) ? unwrapTo : this
+      return Reflect.apply(sourceValue, thisRef, args)
+    }
+  }
+  Object.defineProperties(newValue, Object.getOwnPropertyDescriptors(sourceValue))
+  return newValue
 }
