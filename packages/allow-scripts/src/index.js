@@ -165,10 +165,7 @@ async function runAllowedPackages({ rootDir }) {
  */
 async function setDefaultConfiguration({ rootDir }) {
   const conf = await loadAllPackageConfigurations({ rootDir })
-  const {
-    configs: { lifecycle, bin },
-    somePoliciesAreMissing,
-  } = conf
+  const { configs, somePoliciesAreMissing } = conf
 
   console.log('\n@lavamoat/allow-scripts automatically updating configuration')
 
@@ -179,11 +176,22 @@ async function setDefaultConfiguration({ rootDir }) {
 
   console.log('\nadding configuration:')
 
-  lifecycle.missingPolicies.forEach((pattern) => {
-    console.log(`- lifecycle ${pattern}`)
-    lifecycle.allowConfig[pattern] = false
-  })
+  const lifecycle = {
+    ...configs.lifecycle,
+    allowConfig: {
+      ...Object.fromEntries(
+        configs.lifecycle.missingPolicies.map((pattern) => {
+          console.log(`- lifecycle ${pattern}`)
+          return [pattern, false]
+        })
+      ),
+      ...configs.lifecycle.allowConfig,
+    },
+  }
 
+  const bin = {
+    ...configs.bin,
+  }
   if (FEATURE.bins && bin.somePoliciesAreMissing) {
     bin.allowConfig = prepareBinScriptsPolicy(bin.binCandidates)
     console.log(
@@ -194,7 +202,13 @@ async function setDefaultConfiguration({ rootDir }) {
   // update package json
   await savePackageConfigurations({
     rootDir,
-    conf,
+    conf: {
+      ...conf,
+      configs: {
+        bin,
+        lifecycle,
+      },
+    },
   })
 }
 
