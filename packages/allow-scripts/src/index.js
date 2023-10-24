@@ -412,7 +412,14 @@ async function savePackageConfigurations({
     packageJson.lavamoat = {}
   }
   packageJson.lavamoat.allowScripts = lifecycle.allowConfig
-  packageJson.lavamoat.allowBins = bin.allowConfig
+
+  // sort entries alphabetically
+  packageJson.lavamoat.allowScripts = Object.entries(
+    lifecycle.allowConfig
+  ).sort(([[kx], [ky]]) => (kx < ky ? -1 : kx > ky ? 1 : 0))
+  packageJson.lavamoat.allowBins = Object.entries(bin.allowConfig).sort(
+    ([[kx], [ky]]) => (kx < ky ? -1 : kx > ky ? 1 : 0)
+  )
   const packageJsonPath = path.resolve(rootDir, 'package.json')
   const packageJsonSerialized = JSON.stringify(packageJson, null, 2) + '\n'
   await fs.writeFile(packageJsonPath, packageJsonSerialized)
