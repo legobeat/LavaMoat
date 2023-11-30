@@ -136,6 +136,8 @@ async function writeRcFile () {
     })
     const filepath = path.join(__dirname, 'yarn-berry-plugin.cjs')
 
+    // TODO: Clean this up
+    // eslint-disable-next-line no-inner-declarations
     async function makeDirectory() {
       const projectFolder = join(__dirname, 'test', 'project')
       const dirCreation = await mkdir(projectFolder, { recursive: true })
