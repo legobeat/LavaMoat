@@ -6,7 +6,7 @@ const {
 } = require('fs')
 const { spawnSync } = require('child_process')
 const path = require('path')
-const { FEATURE } = require('./toggles')
+const { FEATURE } = require('./toggles.js')
 
 const NPM = {
   RCFILE: '.npmrc',

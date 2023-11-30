@@ -8,7 +8,7 @@ const {
   printPackagesList,
 } = require('./index.js')
 const { writeRcFile, editPackageJson } = require('./setup.js')
-const { FEATURE } = require('./toggles')
+const { FEATURE } = require('./toggles.js')
 
 start().catch((err) => {
   console.error(err)
