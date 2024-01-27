@@ -292,7 +292,7 @@ async function runScript({ path, event }) {
   })
 }
 
-const bannedBins = new Set(['node', 'npm', 'yarn', 'pnpm'])
+const bannedBins = new Set(['corepack', 'node', 'npm', 'pnpn', 'yarn'])
 
 /**
  * @param {BinCandidates} binCandidates
