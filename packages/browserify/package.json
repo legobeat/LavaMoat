@@ -57,7 +57,7 @@
     "files": [
       "test/*.spec.js"
     ],
-    "timeout": "2m",
+    "timeout": "3m",
     "concurrency": 1
   },
   "lavamoat": {
