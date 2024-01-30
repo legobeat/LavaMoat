@@ -1,5 +1,23 @@
 # Changelog
 
+## [5.0.0](https://github.com/legobeat/LavaMoat/compare/aa-v4.0.1...aa-v5.0.0) (2024-01-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* The minimum supported Node.js version is now v16.20.0.
+
+### Features
+
+* **aa:** ship generated types ([#638](https://github.com/legobeat/LavaMoat/issues/638)) ([d8d5996](https://github.com/legobeat/LavaMoat/commit/d8d5996c82c3bca21bd3091bc1f7b3af8db5f591))
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([4006c1f](https://github.com/legobeat/LavaMoat/commit/4006c1f386c3024e8a8092ded9b98ede20de084e))
+* drop Node.js v14 ([#729](https://github.com/legobeat/LavaMoat/issues/729)) ([10c667b](https://github.com/legobeat/LavaMoat/commit/10c667bd88eaabf60a8fd8e4493cc7676848b201))
+* normalize all package versions ([0800c11](https://github.com/legobeat/LavaMoat/commit/0800c113c3504af312d904c48eb9a6844b10d6b1))
+
 ## [4.0.1](https://github.com/LavaMoat/LavaMoat/compare/aa-v4.0.0...aa-v4.0.1) (2024-01-18)
 
 
