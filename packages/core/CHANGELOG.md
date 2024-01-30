@@ -1,5 +1,41 @@
 # Changelog
 
+## [16.0.0](https://github.com/legobeat/LavaMoat/compare/lavamoat-core-v15.1.1...lavamoat-core-v16.0.0) (2024-01-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* The minimum supported Node.js version is now v16.20.0.
+
+### Features
+
+* **core:** add overrideTaming: 'severe' for improved developer experience under lavamoat ([#730](https://github.com/legobeat/LavaMoat/issues/730)) ([20e4f76](https://github.com/legobeat/LavaMoat/commit/20e4f764dfdabcf21c7e72ad45fcfeaf45fd2b6c))
+* **core:** ship some types ([#732](https://github.com/legobeat/LavaMoat/issues/732)) ([d5de381](https://github.com/legobeat/LavaMoat/commit/d5de381edccb622b81dd02f9bd59cae605e71cdf))
+* node20 ([ef3a0da](https://github.com/legobeat/LavaMoat/commit/ef3a0da9960d7f5734e3d4180ebafdae2432a260))
+
+
+### Bug Fixes
+
+* **core,perf:** bump ses to 0.18.7 and reenable lib:ses script ([986fc1f](https://github.com/legobeat/LavaMoat/commit/986fc1f9c97e083901b1dfda7e7a8ba298aa4c8d))
+* **core,perf:** bump ses to 0.18.8 ([d7a3b4d](https://github.com/legobeat/LavaMoat/commit/d7a3b4dc6ccf019673029c849dc59312c0410692))
+* **core:** add better types to policy loading and merging functions ([db799d1](https://github.com/legobeat/LavaMoat/commit/db799d17633a638a5a76ec52cb788ef705ae6f77))
+* **core:** update LavaMoatPolicy types ([d9292ca](https://github.com/legobeat/LavaMoat/commit/d9292ca7b99a0eedc215670cb1791f6dd0c3ce07))
+* **core:** update SES to v1.1.0 in core ([29ad47d](https://github.com/legobeat/LavaMoat/commit/29ad47d0a80014c2fe37433734a853309d065c69))
+* **deps:** pin dependencies ([4006c1f](https://github.com/legobeat/LavaMoat/commit/4006c1f386c3024e8a8092ded9b98ede20de084e))
+* **deps:** update dependency json-stable-stringify to v1.1.1 ([7d28e79](https://github.com/legobeat/LavaMoat/commit/7d28e79a5430f1f7c3987fc128e800efe590dd2a))
+* **deps:** update dependency type-fest to v4.10.0 ([9f2cf3c](https://github.com/legobeat/LavaMoat/commit/9f2cf3cb3e00fc5184268bedb6967ffc8d29d066))
+* **deps:** update dependency type-fest to v4.10.1 ([36567e7](https://github.com/legobeat/LavaMoat/commit/36567e7f54efab0efd2021b9f82b5e4e4c77fe4d))
+* **deps:** update dependency type-fest to v4.9.0 ([70e9ffd](https://github.com/legobeat/LavaMoat/commit/70e9ffdf740a7d79cee9d583a55188e4ab02617d))
+* drop Node.js v14 ([#729](https://github.com/legobeat/LavaMoat/issues/729)) ([10c667b](https://github.com/legobeat/LavaMoat/commit/10c667bd88eaabf60a8fd8e4493cc7676848b201))
+* normalize all package versions ([0800c11](https://github.com/legobeat/LavaMoat/commit/0800c113c3504af312d904c48eb9a6844b10d6b1))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * lavamoat-tofu bumped from ^7.1.0 to ^8.0.0
+
 ## [15.1.1](https://github.com/LavaMoat/LavaMoat/compare/lavamoat-core-v15.1.0...lavamoat-core-v15.1.1) (2024-01-18)
 
 
