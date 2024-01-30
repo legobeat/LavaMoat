@@ -1,3 +1,4 @@
+const { fileURLToPath } = require('node:url')
 const path = require('path')
 const { promises: fs } = require('fs')
 const { builtinModules } = require('module')
@@ -38,7 +39,8 @@ const builtinPackages = [
 const createRequire = (url) => {
   return {
     resolve: (requestedName) => {
-      const basedir = path.dirname(url.pathname)
+      const localPath = fileURLToPath(url)
+      const basedir = path.dirname(localPath)
       const result = resolve.sync(requestedName, {
         basedir,
         extensions: resolutionOmittedExtensions,
@@ -48,7 +50,7 @@ const createRequire = (url) => {
       const resultMatchesRequest = requestedName === result
       if (resultMatchesRequest) {
         const isBuiltinModule = builtinPackages.includes(result)
-        const looksLikeAPath = requestedName.includes('/')
+        const looksLikeAPath = requestedName.includes(path.sep)
         if (!looksLikeAPath && !isBuiltinModule) {
           const errMsg = `Cannot find module '${requestedName}' from '${basedir}'`
           const err = new Error(errMsg)
