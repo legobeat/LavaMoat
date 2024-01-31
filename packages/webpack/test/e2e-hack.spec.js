@@ -17,7 +17,7 @@ test.before(async (t) => {
 })
 
 test('webpack/hack - dist shape', (t) => {
-  t.snapshot(Object.keys(t.context.build.snapshot))
+  t.snapshot(Object.keys(t.context.build.snapshot).sort())
 })
 
 test('webpack/hack/loader - bundle runs without reaching the FLAG', (t) => {

@@ -11,7 +11,7 @@ test.before(async (t) => {
 })
 
 test('webpack/main - dist shape', (t) => {
-  t.snapshot(Object.keys(t.context.build.snapshot))
+  t.snapshot(Object.keys(t.context.build.snapshot).sort())
 })
 
 test('webpack/main - default warning gets printed', (t) => {
