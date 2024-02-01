@@ -71,5 +71,9 @@ jobs:
         with:
           useRollingCache: true
           install-command: npm ci --foreground-scripts
+      # Limit testing to packages supported to run under windows
       - name: Test
-        run: npm test
+        run: |
+          npm run build
+          npm run --if-present --workspace=packages/aa --workspace=packages/allow-scripts --workspace=packages/browserify --workspace=packages/core --workspace=packages/lavapack --workspace=packages/node --workspace=packages/preinstall-always-fail --workspace=packages/tofu --workspace=packages/webpack --workspace=packages/yarn-plugin-allow-scripts test:prep
+          npm run --if-present --workspace=packages/aa --workspace=packages/allow-scripts --workspace=packages/browserify --workspace=packages/core --workspace=packages/lavapack --workspace=packages/node --workspace=packages/preinstall-always-fail --workspace=packages/tofu --workspace=packages/webpack --workspace=packages/yarn-plugin-allow-scripts test
