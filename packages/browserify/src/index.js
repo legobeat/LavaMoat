@@ -178,7 +178,7 @@ function getConfigurationFromPluginOpts(pluginOpts) {
   }
 
   const configuration = {
-    projectRoot: pluginOpts.projectRoot,
+    projectRoot: path.normalize(pluginOpts.projectRoot + '/'),
     includePrelude:
       'includePrelude' in pluginOpts
         ? Boolean(pluginOpts.includePrelude)
