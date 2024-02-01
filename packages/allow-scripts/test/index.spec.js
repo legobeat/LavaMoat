@@ -1,4 +1,5 @@
 const test = require('ava')
+const os = require('node:os')
 const fs = require('node:fs')
 const path = require('node:path')
 const { spawnSync } = require('node:child_process')
@@ -8,6 +9,8 @@ const { pathToFileURL } = require('node:url')
  * Path to the allow-scripts executable
  */
 const ALLOW_SCRIPTS_BIN = require.resolve('../src/cli')
+
+const NPM_CMD = os.platform() === 'win32' ? 'npm.cmd' : 'npm'
 
 /**
  * For fat fingers
@@ -23,7 +26,7 @@ test('cli - auto command', (t) => {
 
   // npm init -y
   let initResult = spawnSync(
-    'npm',
+    NPM_CMD,
     ['init', '-y'],
     realisticEnvOptions(projectRoot)
   )
@@ -94,7 +97,7 @@ test('cli - auto command with experimental bins', (t) => {
   fs.rmSync(path.join(projectRoot, PACKAGE_JSON), { force: true })
 
   // npm init -y
-  spawnSync('npm', ['init', '-y'], realisticEnvOptions(projectRoot))
+  spawnSync(NPM_CMD, ['init', '-y'], realisticEnvOptions(projectRoot))
 
   // run the auto command
   let result = spawnSync(
@@ -268,7 +271,7 @@ test('cli - run command - good dep as a sub dep', (t) => {
   })
 
   // generate the bin link
-  spawnSync('npm', ['rebuild', 'good_dep'], realisticEnvOptions(projectRoot))
+  spawnSync(NPM_CMD, ['rebuild', 'good_dep'], realisticEnvOptions(projectRoot))
 
   // run the "run" command
   let result = spawnSync(
