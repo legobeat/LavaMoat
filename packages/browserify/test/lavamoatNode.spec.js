@@ -22,8 +22,12 @@ test('lavamoat-node compat - bundle works under lavamoat node', (t) => {
       }
     )
   } catch (err) {
-    // eslint-disable-next-line ava/assertion-arguments
-    return t.fail(err.stderr.toString())
+    if (err.stderr) {
+      // eslint-disable-next-line ava/assertion-arguments
+      return t.fail(err.stderr.toString())
+    } else {
+      throw err
+    }
   }
   t.pass('bundling works under lavamoat node')
   const testResult = evalBundle(bundle.toString(), { console })
