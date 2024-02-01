@@ -168,10 +168,8 @@ async function prepareBrowserifyScenarioOnDisk({ scenario, log }) {
         projectDir,
         npmArgs,
         error: installDevDepsResult.stderr?.toString(),
-        result:
-          typeof installDevDepsResult.status === 'number'
-            ? installDevDepsResult
-            : installDevDepsResult.stdout?.toString(),
+        output: installDevDepsResult.stdout?.toString(),
+        result: installDevDepsResult,
       },
       undefined,
       2
