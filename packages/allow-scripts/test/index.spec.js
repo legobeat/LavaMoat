@@ -2,6 +2,7 @@ const test = require('ava')
 const fs = require('node:fs')
 const path = require('node:path')
 const { spawnSync } = require('node:child_process')
+const { pathToFileURL } = require('node:url')
 
 /**
  * Path to the allow-scripts executable
@@ -15,7 +16,7 @@ const PACKAGE_JSON = 'package.json'
 
 test('cli - auto command', (t) => {
   // set up the directories
-  let projectRoot = path.normalize(path.join(__dirname, 'projects', '1'))
+  let projectRoot = path.join(__dirname, 'projects', '1')
 
   // delete any existing package.json
   fs.rmSync(path.join(projectRoot, PACKAGE_JSON), { force: true })
@@ -37,7 +38,12 @@ test('cli - auto command', (t) => {
 
   // get the package.json
   const packageJsonContents = JSON.parse(
-    fs.readFileSync(path.join(projectRoot, PACKAGE_JSON), 'utf8')
+    fs.readFileSync(
+      pathToFileURL(
+        path.join(projectRoot.replace(path.sep, '/'), PACKAGE_JSON),
+        'utf8'
+      )
+    )
   )
 
   // assert its contents
