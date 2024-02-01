@@ -15,7 +15,7 @@ const PACKAGE_JSON = 'package.json'
 
 test('cli - auto command', (t) => {
   // set up the directories
-  let projectRoot = path.join(__dirname, 'projects', '1')
+  let projectRoot = path.normalize(path.join(__dirname, 'projects', '1'))
 
   // delete any existing package.json
   fs.rmSync(path.join(projectRoot, PACKAGE_JSON), { force: true })
