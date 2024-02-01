@@ -163,6 +163,12 @@ async function prepareBrowserifyScenarioOnDisk({ scenario, log }) {
 
   if (installDevDepsResult.status !== 0) {
     const msg = `Error while installing devDeps:\n${installDevDepsResult.stderr}\npackages: ${depsToInstall}`
+    console.error({
+      projectDir,
+      depsToInstall,
+      stderr: installDevDepsResult.stderr?.toString(),
+      stdout: installDevDepsResult.stdout?.toString(),
+    })
     throw new Error(msg)
   }
   log(`installed ${depsToInstall.join(', ')}`)
