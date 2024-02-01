@@ -155,20 +155,27 @@ async function prepareBrowserifyScenarioOnDisk({ scenario, log }) {
   }
 
   // install must happen before link, otherwise npm will remove any linked packages upon install
-  const installDevDepsResult = spawnSync(
-    'npm',
-    ['install', '--ignore-scripts', ...depsToInstall],
-    { cwd: projectDir, encoding: 'utf8' }
-  )
+  const npmArgs = ['install', '--ignore-scripts', ...depsToInstall]
+  const installDevDepsResult = spawnSync('npm', npmArgs, {
+    cwd: projectDir,
+    encoding: 'utf8',
+  })
 
   if (installDevDepsResult.status !== 0) {
-    const msg = `Error while installing devDeps:\n${installDevDepsResult.stderr}\npackages: ${depsToInstall}`
-    console.error({
-      projectDir,
-      depsToInstall,
-      stderr: installDevDepsResult.stderr?.toString(),
-      stdout: installDevDepsResult.stdout?.toString(),
-    })
+    const msg = `Error while installing devDeps:\n${JSON.stringify(
+      {
+        depsToInstall,
+        projectDir,
+        npmArgs,
+        error: installDevDepsResult.stderr?.toString(),
+        result:
+          typeof installDevDepsResult.status === 'number'
+            ? installDevDepsResult
+            : installDevDepsResult.stdout?.toString(),
+      },
+      undefined,
+      2
+    )}`
     throw new Error(msg)
   }
   log(`installed ${depsToInstall.join(', ')}`)
