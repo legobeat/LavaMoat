@@ -77,7 +77,12 @@ test('cli - auto command with experimental bins', (t) => {
 
   // get the package.json
   const packageJsonContents = JSON.parse(
-    fs.readFileSync(path.join(projectRoot, PACKAGE_JSON), 'utf8')
+    fs.readFileSync(
+      pathToFileURL(
+        path.join(projectRoot.replace(path.sep, '/'), PACKAGE_JSON),
+        'utf8'
+      )
+    )
   )
 
   // assert its contents
