@@ -22,7 +22,16 @@ test('cli - auto command', (t) => {
   fs.rmSync(path.join(projectRoot, PACKAGE_JSON), { force: true })
 
   // npm init -y
-  spawnSync('npm', ['init', '-y'], realisticEnvOptions(projectRoot))
+  let initResult = spawnSync(
+    'npm',
+    ['init', '-y'],
+    realisticEnvOptions(projectRoot)
+  )
+
+  // forward error output for debugging
+  if (initResult.stderr) {
+    t.log(initResult.stderr.toString('utf-8'))
+  }
 
   // run the auto command
   let result = spawnSync(
