@@ -29,8 +29,20 @@ test('cli - auto command', (t) => {
   )
 
   // forward error output for debugging
-  if (initResult.stderr) {
+  if (typeof initResult.stderr !== 'undefined') {
     t.log(initResult.stderr.toString('utf-8'))
+  } else {
+    t.fail(
+      `Failed calling 'npm init -y': ${JSON.stringify(
+        {
+          projectRoot,
+          options: realisticEnvOptions(projectRoot),
+          initResult,
+        },
+        undefined,
+        2
+      )}`
+    )
   }
 
   // run the auto command
@@ -41,8 +53,20 @@ test('cli - auto command', (t) => {
   )
 
   // forward error output for debugging
-  if (result.stderr) {
+  if (typeof result.stderr !== 'undefined') {
     t.log(result.stderr.toString('utf-8'))
+  } else {
+    t.fail(
+      `Failed calling '${ALLOW_SCRIPTS_BIN} auto': ${JSON.stringify(
+        {
+          projectRoot,
+          options: realisticEnvOptions(projectRoot),
+          result,
+        },
+        undefined,
+        2
+      )}`
+    )
   }
 
   // get the package.json
@@ -80,8 +104,20 @@ test('cli - auto command with experimental bins', (t) => {
   )
 
   // forward error output for debugging
-  if (result.stderr) {
+  if (typeof result.stderr !== 'undefined') {
     t.log(result.stderr.toString('utf-8'))
+  } else {
+    t.fail(
+      `Failed calling '${ALLOW_SCRIPTS_BIN} auto --experimental-bins': ${JSON.stringify(
+        {
+          projectRoot,
+          options: realisticEnvOptions(projectRoot),
+          result,
+        },
+        undefined,
+        2
+      )}`
+    )
   }
 
   // get the package.json
@@ -125,7 +161,21 @@ test('cli - run command - good dep at the root', (t) => {
   )
 
   // forward error output for debugging
-  t.log(result.stderr.toString('utf-8'))
+  if (typeof result.stderr !== 'undefined') {
+    t.log(result.stderr.toString('utf-8'))
+  } else {
+    t.fail(
+      `Failed calling '${ALLOW_SCRIPTS_BIN} run': ${JSON.stringify(
+        {
+          projectRoot,
+          options: realisticEnvOptions(projectRoot),
+          result,
+        },
+        undefined,
+        2
+      )}`
+    )
+  }
 
   // assert the output
   t.deepEqual(result.stdout.toString().split('\n'), [
@@ -162,8 +212,20 @@ test('cli - run command - good dep at the root with experimental bins', (t) => {
   )
 
   // forward error output for debugging
-  if (result.stderr) {
+  if (typeof result.stderr !== 'undefined') {
     t.log(result.stderr.toString('utf-8'))
+  } else {
+    t.fail(
+      `Failed calling '${ALLOW_SCRIPTS_BIN} run --experimental-bins': ${JSON.stringify(
+        {
+          projectRoot,
+          options: realisticEnvOptions(projectRoot),
+          result,
+        },
+        undefined,
+        2
+      )}`
+    )
   }
 
   // assert the output
