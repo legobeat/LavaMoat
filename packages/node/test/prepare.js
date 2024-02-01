@@ -16,7 +16,7 @@ const { promisify } = require('node:util')
 const { rm, readdir } = require('node:fs/promises')
 const os = require('node:os')
 
-const exec = promisify(execFile)
+const execFileAsync = promisify(execFile)
 
 /**
  * @todo Change this to `npm@latest` when Node.js v16 support is dropped
@@ -39,6 +39,7 @@ const COREPACK_BIN = path.resolve(
 
 /**
  * Blast `node_modules` in `cwd`
+ *
  * @param {string} cwd - Project dir
  * @returns {Promise<void>}
  */
@@ -48,7 +49,8 @@ async function clean(cwd) {
 }
 
 /**
- * Resolves a module's installation path (_not_ entry point) from some other directory.
+ * Resolves a module's installation path (_not_ entry point) from some other
+ * directory.
  *
  * @param {string} cwd - Some other directory
  * @param {string} moduleId - Module to resolve
@@ -65,6 +67,7 @@ function resolveDependencyFrom(cwd, moduleId) {
 /**
  * Some native packages may not ship binaries for Apple silicon, so we have to
  * rebuild them
+ *
  * @param {string} cwd
  */
 async function setupAppleSilicon(cwd) {
@@ -83,8 +86,31 @@ async function setupAppleSilicon(cwd) {
 }
 
 /**
+ * @param {string} cmd
+ * @param {string[]} args
+ * @param {object} opts
+ * @returns {Promise<any>}
+ */
+async function exec(cmd, args, opts) {
+  let result
+  try {
+    result = await execFileAsync(cmd, args, opts)
+  } catch (error) {
+    throw new Error(
+      `Error returned from '${cmd} ${args.join(' ')}' ${JSON.stringify({ opts, error })}`
+    )
+  }
+  if (typeof result.stdout !== 'string') {
+    throw new Error(
+      `Unexpected result from executing '${cmd} ${args.join(' ')}' ${JSON.stringify({ opts, result })}`
+    )
+  }
+}
+
+/**
  * Install a project's deps via a package manager, run the `setup` script, then
  * execute `lavamoat` on the `index.js` file.
+ *
  * @param {string} cwd - Project dir
  * @returns {Promise<void>}
  */
