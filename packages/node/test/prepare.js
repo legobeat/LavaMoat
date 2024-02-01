@@ -16,7 +16,7 @@ const { promisify } = require('node:util')
 const { rm, readdir } = require('node:fs/promises')
 const os = require('node:os')
 
-const exec = promisify(execFile)
+const execFileAsync = promisify(execFile)
 
 /**
  * @todo Change this to `npm@latest` when Node.js v16 support is dropped
@@ -82,6 +82,28 @@ async function setupAppleSilicon(cwd) {
       cwd: keccakPath,
       stdio: 'inherit',
     })
+  }
+}
+
+/**
+ * @param {string} cmd
+ * @param {string[]} args
+ * @param {object} opts
+ * @returns {Promise<any>}
+ */
+async function exec(cmd, args, opts) {
+  let result
+  try {
+    result = await execFileAsync(cmd, args, opts)
+  } catch (error) {
+    throw new Error(
+      `Error returned from '${cmd} ${args.join(' ')}' ${JSON.stringify({ opts, error })}`
+    )
+  }
+  if (typeof result.stdout !== 'string') {
+    throw new Error(
+      `Unexpected result from executing '${cmd} ${args.join(' ')}' ${JSON.stringify({ opts, result })}`
+    )
   }
 }
 
