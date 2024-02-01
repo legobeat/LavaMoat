@@ -6,8 +6,15 @@ const { join } = require('path')
 readdirSync(join(__dirname, '../test/projects/'), { withFileTypes: true })
   .filter((p) => p.isDirectory())
   .forEach((dir) => {
-    execSync('node ../../../src/cli.js auto --experimental-bins', {
-      cwd: join(__dirname, '../test/projects/', dir.name),
-      stdio: 'inherit',
-    })
+    try {
+      execSync('node ../../../src/cli.js auto --experimental-bins', {
+        cwd: join(__dirname, '../test/projects/', dir.name),
+        stdio: 'inherit',
+      })
+    } catch (e) {
+      // ignore expected error
+      if (e.status !== 1) {
+        throw e
+      }
+    }
   })
