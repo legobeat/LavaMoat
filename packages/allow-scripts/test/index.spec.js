@@ -14,25 +14,22 @@ const PACKAGE_JSON = 'package.json'
 
 /**
  * Execute allow-scripts binaries with the given arguments
- * @param {any} t ava test object
+ *
+ * @param {any} t Ava test object
  * @param {string[]} args Arguments to pass
  * @param {string} cwd Working directory to execute command from
- * @returns {{stderr: string, stdout: string, status: number}} Process result
+ * @returns {{ stderr: string; stdout: string; status: number }} Process result
  */
 const run = (t, args, cwd) => {
   // Path to the allow-scripts executable
   const ALLOW_SCRIPTS_BIN = require.resolve('../src/cli')
   const options = realisticEnvOptions(cwd)
-  const result = spawnSync(
-    'node',
-    [
-      ALLOW_SCRIPTS_BIN,
-      ...args,
-    ],
-    options,
-  )
+  const result = spawnSync('node', [ALLOW_SCRIPTS_BIN, ...args], options)
 
-  if (typeof result.stderr === 'undefined' || typeof result.status !== 'number') {
+  if (
+    typeof result.stderr === 'undefined' ||
+    typeof result.status !== 'number'
+  ) {
     t.fail(
       `Failed calling 'node ${ALLOW_SCRIPTS_BIN} ${args.join(' ')}': ${JSON.stringify(
         {
@@ -55,7 +52,6 @@ const run = (t, args, cwd) => {
     stdout: result.stdout,
   }
 }
-
 
 test('cli - auto command', (t) => {
   // set up the directories
@@ -260,6 +256,8 @@ test('cli - run command - good dep as a sub dep with experimental bins', (t) => 
   })
   // run the "run" command
   const result = run(t, ['run', '--experimental-bins'], projectRoot)
+  process.stderr.write(JSON.stringify({ FOO: 'BAR', result }) + '\n')
+  process.stdout.write(JSON.stringify({ FOO: 'BAZ', result }) + '\n')
 
   t.assert(
     fs.existsSync(
