@@ -36,16 +36,12 @@ function parseArgs() {
     console.error(`Error: '${commandName}' is not one of the locally installed commands. Missing: '${binEntry}'
     Possible reasons for this error:
     - node_modules not installed
-    - trying to run a globally installed script or command, 
+    - trying to run a globally installed script or command,
       which is not supported and not recommended`)
     process.exit(4)
   }
 
-  parsedArgs.entryPath = path.resolve(
-    process.cwd(),
-    'node_modules/.bin/',
-    fs.readlinkSync(binEntry)
-  )
+  parsedArgs.entryPath = fs.realpathSync(binEntry)
 
   // patch process.argv so it matches the normal pattern
   // e.g. [runtime path, entrypoint, ...args]
