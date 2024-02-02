@@ -129,7 +129,7 @@ async function runBrowserify({
   }
   const args = [JSON.stringify(lavamoatParams)]
   const browserifyPath = path.join(scenario.dir, 'runBrowserify.js')
-  const output = await execFile(browserifyPath, args, {
+  const output = await execFile('node', [browserifyPath, ...args], {
     cwd: scenario.dir,
     env: {
       ...process.env,
