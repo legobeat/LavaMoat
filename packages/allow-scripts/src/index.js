@@ -120,7 +120,7 @@ async function runAllowedPackages({ rootDir }) {
       await installBinScripts(bin.allowedBins)
       await installBinFirewall(
         bin.firewalledBins,
-        path.join(__dirname, './whichbin.js')
+        path.join(__dirname, 'whichbin.js')
       )
     } else {
       console.log('no bin scripts found in dependencies')
@@ -486,7 +486,11 @@ async function loadAllPackageConfigurations({ rootDir }) {
           bin: name,
           path: filePath,
           link,
-          fullLinkPath: path.relative(rootDir, path.join(filePath, link)),
+          // this is used as identifier in configuration
+          // normalize by replacing platform-specific path separator with /
+          fullLinkPath: path
+            .relative(rootDir, path.join(filePath, link))
+            .replaceAll(path.sep, '/'),
           canonicalName,
         })
       })
