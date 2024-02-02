@@ -78,7 +78,7 @@ async function setupAppleSilicon(cwd) {
   if (KECCAK in dependencies) {
     console.debug(`Rebuilding ${KECCAK} for ${os.platform()}/${os.arch()}...`)
     const keccakPath = resolveDependencyFrom(cwd, KECCAK)
-    spawnSync(COREPACK_BIN, [LAVAMOAT_PM, 'exec', 'node-gyp-build'], {
+    spawnSync('node', [COREPACK_BIN, LAVAMOAT_PM, 'exec', 'node-gyp-build'], {
       cwd: keccakPath,
       stdio: 'inherit',
     })
@@ -116,8 +116,8 @@ async function exec(cmd, args, opts) {
  */
 async function setup(cwd) {
   // assume 'install' is the subcommand on any package manager
-  await exec(COREPACK_BIN, [LAVAMOAT_PM, 'install'], { cwd })
-  await exec(COREPACK_BIN, [LAVAMOAT_PM, 'run', 'setup'], { cwd })
+  await exec('node', [COREPACK_BIN, LAVAMOAT_PM, 'install'], { cwd })
+  await exec('node', [COREPACK_BIN, LAVAMOAT_PM, 'run', 'setup'], { cwd })
 
   if (os.platform() === 'darwin' && os.arch() === 'arm64') {
     await setupAppleSilicon(cwd)
