@@ -12,6 +12,7 @@ module.exports = {
  * Add one or more CLI options to an array of args
  *
  * Mutates `args`
+ *
  * @param {string[]} args - Array of args
  * @param {string} key - Option name
  * @param {any} value - Value; if array, `key` will be set multiple times
@@ -48,7 +49,7 @@ function convertOptsToArgs({ scenario }) {
 
 async function runLavamoat({ args = [], cwd = process.cwd() } = {}) {
   const lavamoatPath = require.resolve('../src/cli')
-  const output = await execFile(lavamoatPath, args, { cwd })
+  const output = await execFile('node', [lavamoatPath, ...args], { cwd })
   return { output }
 }
 
