@@ -284,7 +284,7 @@ test('cli - run command - good dep as a sub dep with experimental bins', (t) => 
     'Expected to see instructions on how to enable a bin script1'
   )
   t.assert(
-    errarr.some((line) => line.includes('node_modules/good_dep/cli.sh')),
+    errarr.some((line) => line.includes('node_modules/good_dep/cli.js')),
     'Expected to see instructions on how to enable a bin script2'
   )
   t.assert(
