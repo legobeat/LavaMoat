@@ -2,6 +2,7 @@ const { runInNewContext } = require('vm')
 const browserify = require('browserify')
 const pify = require('pify')
 const { promises: fs } = require('fs')
+const os = require('os')
 const path = require('path')
 const watchify = require('watchify')
 const lavamoatPlugin = require('../src/index')
@@ -17,6 +18,7 @@ const tmp = require('tmp-promise')
 const { spawnSync } = require('child_process')
 const execFile = util.promisify(require('child_process').execFile)
 
+const NPM_CMD = os.platform() === 'win32' ? 'npm.cmd' : 'npm'
 const WORKSPACE_ROOT = path.resolve(__dirname, '..', '..', '..')
 
 const localLavaMoatDeps = {
@@ -34,7 +36,7 @@ function overrideDepsWithLocalPackages(projectDir, log) {
   // link all of the workspaces to the temp dir project. no need to unlink
   // first; this will overwrite any already-present links
   const res = spawnSync(
-    'npm',
+    NPM_CMD,
     ['install', '--ignore-scripts', ...Object.values(localPkgPaths)],
     { cwd: projectDir, encoding: 'utf8' }
   )
@@ -156,7 +158,7 @@ async function prepareBrowserifyScenarioOnDisk({ scenario, log }) {
 
   // install must happen before link, otherwise npm will remove any linked packages upon install
   const npmArgs = ['install', '--ignore-scripts', ...depsToInstall]
-  const installDevDepsResult = spawnSync('npm', npmArgs, {
+  const installDevDepsResult = spawnSync(NPM_CMD, npmArgs, {
     cwd: projectDir,
     encoding: 'utf8',
   })
