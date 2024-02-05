@@ -1,4 +1,4 @@
-const { fileURLToPath } = require('node:url')
+const { fileURLToPath, pathToFileURL } = require('node:url')
 const path = require('path')
 const { promises: fs } = require('fs')
 const { builtinModules } = require('module')
@@ -137,7 +137,7 @@ function makeResolveHook({ projectRoot, resolutions = {}, canonicalNameMap }) {
       }
     }
     // utilize node's internal resolution algo
-    const { resolve } = createRequire(new URL(`file://${referrer}`))
+    const { resolve } = createRequire(pathToFileURL(referrer))
     /* eslint-disable no-useless-catch */
     let resolved
     try {
