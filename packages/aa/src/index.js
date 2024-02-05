@@ -233,7 +233,7 @@ function getPackageNameForModulePath(canonicalNameMap, modulePath) {
     return `external:${relativeToRoot}`
   }
   const packageName = /** @type {string} */ (canonicalNameMap.get(packageDir))
-  const relativeToPackageDir = path.relative(packageDir, modulePath)
+  const relativeToPackageDir = path.relative(packageDir, realpathSync(modulePath))
   // files should never be associated with a package directory across a package boundary (as tested via the presense of "node_modules" in the path)
   if (relativeToPackageDir.includes('node_modules')) {
     throw new Error(
