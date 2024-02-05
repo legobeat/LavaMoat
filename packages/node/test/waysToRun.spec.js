@@ -1,7 +1,6 @@
 const os = require('node:os')
 const test = require('ava')
-const util = require('util')
-const execFile = util.promisify(require('child_process').execFile)
+const { execFileSync } = require('child_process')
 
 const { runLava } = require('../src/index')
 
@@ -12,15 +11,16 @@ const skipOnWindows =
         test.skip(description + ' (not supported on Windows)', ...args)
     : test
 
-skipOnWindows('use lavamoat cli', async (t) => {
+skipOnWindows('use lavamoat cli', (t) => {
   const projectRoot = `${__dirname}/projects/2`
   const entryPath = './index.js'
   const lavamoatPath = `${__dirname}/../src/cli.js`
-  const output = await execFile(lavamoatPath, [entryPath], {
+  const output = execFileSync(lavamoatPath, [entryPath], {
     cwd: projectRoot,
+    encoding: 'utf8',
   })
   t.deepEqual(
-    output.stdout.split('\n'),
+    output.split('\n'),
     [
       'keccak256: 5cad7cf49f610ec53189e06d3c8668789441235613408f8fabcb4ad8dad94db5',
       '',
@@ -29,15 +29,16 @@ skipOnWindows('use lavamoat cli', async (t) => {
   )
 })
 
-test('call lavamoat cli via node', async (t) => {
+test('call lavamoat cli via node', (t) => {
   const projectRoot = `${__dirname}/projects/2`
   const entryPath = './index.js'
   const lavamoatPath = `${__dirname}/../src/cli.js`
-  const output = await execFile('node', [lavamoatPath, entryPath], {
+  const output = execFileSync('node', [lavamoatPath, entryPath], {
     cwd: projectRoot,
+    encoding: 'utf8',
   })
   t.deepEqual(
-    output.stdout.split('\n'),
+    output.split('\n'),
     [
       'keccak256: 5cad7cf49f610ec53189e06d3c8668789441235613408f8fabcb4ad8dad94db5',
       '',
@@ -61,10 +62,10 @@ test('use lavamoat programmatically', async (t) => {
   t.pass()
 })
 
-skipOnWindows('use lavamoat-run-command', async (t) => {
+skipOnWindows('use lavamoat-run-command', (t) => {
   const projectRoot = `${__dirname}/projects/2`
   const lavamoatPath = `${__dirname}/../src/run-command.js`
-  const output = await execFile(
+  const output = execFileSync(
     lavamoatPath,
     [
       '--autorun',
@@ -74,19 +75,15 @@ skipOnWindows('use lavamoat-run-command', async (t) => {
       'atob',
       'MTIzNDU2Cg==',
     ],
-    { cwd: projectRoot }
+    { cwd: projectRoot, encoding: 'utf8' }
   )
-  t.is(
-    output.stdout.split('\n')[0],
-    '123456',
-    'should return expected output'
-  )
+  t.is(output.split('\n')[0], '123456', 'should return expected output')
 })
 
-test('call lavamoat-run-command via node', async (t) => {
+test('call lavamoat-run-command via node', (t) => {
   const projectRoot = `${__dirname}/projects/2`
   const lavamoatPath = `${__dirname}/../src/run-command.js`
-  const output = await execFile(
+  const output = execFileSync(
     'node',
     [
       lavamoatPath,
@@ -97,7 +94,7 @@ test('call lavamoat-run-command via node', async (t) => {
       'atob',
       'MTIzNDU2Cg==',
     ],
-    { cwd: projectRoot }
+    { cwd: projectRoot, encoding: 'utf8' }
   )
-  t.is(output.stdout.split('\n')[0], '123456', 'should return expected output')
+  t.is(output.split('\n')[0], '123456', 'should return expected output')
 })
