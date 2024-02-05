@@ -16,15 +16,31 @@ async function readPolicyFile({ debugMode, policyPath }) {
   if (debugMode) {
     console.warn(`Lavamoat looking for policy at '${policyPath}'`)
   }
+  /** @type string */
+  let rawPolicy
   try {
-    const rawPolicy = await fs.readFile(policyPath, 'utf8')
-    return JSON.parse(rawPolicy)
+    rawPolicy = await fs.readFile(policyPath, 'utf8')
   } catch (err) {
     if (/** @type {NodeJS.ErrnoException} */ (err).code !== 'ENOENT') {
       throw err
     } else if (debugMode) {
       console.warn(`Lavamoat could not find policy at '${policyPath}'`)
     }
+    return
+  }
+  try {
+    return JSON.parse(rawPolicy)
+  } catch (/** @type any */ error) {
+    if (debugMode) {
+      console.warn({
+        error: error?.message || error,
+        policyPath,
+        rawPolicy,
+      })
+    }
+    throw new Error(
+      `Lavamoat could not parse policy at '${policyPath}': ${/** @type {NodeJS.ErrnoException} */ (error).message}`
+    )
   }
 }
 
