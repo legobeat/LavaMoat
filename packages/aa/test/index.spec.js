@@ -60,3 +60,22 @@ test('project 3', async (t) => {
     ['projects/3/node_modules/evil_dep', 'evil_dep'],
   ])
 })
+
+test('project 4 - workspace symlink', async (t) => {
+  const canonicalNameMap = await loadCanonicalNameMap({
+    rootDir: path.join(__dirname, 'projects', '4', 'packages', 'stuff'),
+  })
+  // normalize results to be relative
+  const normalizedMapEntries = Array.from(canonicalNameMap.entries())
+    .sort()
+    .map(([packagePath, canonicalName]) => [
+      path.relative(__dirname, packagePath),
+      canonicalName,
+    ])
+  t.deepEqual(normalizedMapEntries, [
+    ['projects/4/node_modules/aaa', 'aaa'],
+    ['projects/4/node_modules/bbb', 'bbb'],
+    ['projects/4/packages/aaa', 'aaa'], // symlink resolved
+    ['projects/4/packages/stuff', '$root$'],
+  ])
+})
