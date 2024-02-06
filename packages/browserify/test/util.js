@@ -2,6 +2,7 @@ const { runInNewContext } = require('vm')
 const browserify = require('browserify')
 const pify = require('pify')
 const { promises: fs } = require('fs')
+const os = require('os')
 const path = require('path')
 const watchify = require('watchify')
 const lavamoatPlugin = require('../src/index')
@@ -17,6 +18,7 @@ const tmp = require('tmp-promise')
 const { spawnSync } = require('child_process')
 const execFile = util.promisify(require('child_process').execFile)
 
+const NPM_CMD = os.platform() === 'win32' ? 'npm.cmd' : 'npm'
 const WORKSPACE_ROOT = path.resolve(__dirname, '..', '..', '..')
 
 const localLavaMoatDeps = {
@@ -34,7 +36,7 @@ function overrideDepsWithLocalPackages(projectDir, log) {
   // link all of the workspaces to the temp dir project. no need to unlink
   // first; this will overwrite any already-present links
   const res = spawnSync(
-    'npm',
+    NPM_CMD,
     ['install', '--ignore-scripts', ...Object.values(localPkgPaths)],
     { cwd: projectDir, encoding: 'utf8' }
   )
@@ -127,7 +129,7 @@ async function runBrowserify({
   }
   const args = [JSON.stringify(lavamoatParams)]
   const browserifyPath = path.join(scenario.dir, 'runBrowserify.js')
-  const output = await execFile(browserifyPath, args, {
+  const output = await execFile('node', [browserifyPath, ...args], {
     cwd: scenario.dir,
     env: {
       ...process.env,
@@ -155,14 +157,25 @@ async function prepareBrowserifyScenarioOnDisk({ scenario, log }) {
   }
 
   // install must happen before link, otherwise npm will remove any linked packages upon install
-  const installDevDepsResult = spawnSync(
-    'npm',
-    ['install', '--ignore-scripts', ...depsToInstall],
-    { cwd: projectDir, encoding: 'utf8' }
-  )
+  const npmArgs = ['install', '--ignore-scripts', ...depsToInstall]
+  const installDevDepsResult = spawnSync(NPM_CMD, npmArgs, {
+    cwd: projectDir,
+    encoding: 'utf8',
+  })
 
   if (installDevDepsResult.status !== 0) {
-    const msg = `Error while installing devDeps:\n${installDevDepsResult.stderr}\npackages: ${depsToInstall}`
+    const msg = `Error while installing devDeps:\n${JSON.stringify(
+      {
+        depsToInstall,
+        projectDir,
+        npmArgs,
+        error: installDevDepsResult.stderr?.toString(),
+        output: installDevDepsResult.stdout?.toString(),
+        result: installDevDepsResult,
+      },
+      undefined,
+      2
+    )}`
     throw new Error(msg)
   }
   log(`installed ${depsToInstall.join(', ')}`)

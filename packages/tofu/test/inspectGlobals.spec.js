@@ -1,3 +1,4 @@
+const { EOL } = require('node:os')
 const test = require('ava')
 const deepEqual = require('deep-equal')
 const { inspectGlobals } = require('../src/index')
@@ -7,7 +8,7 @@ test('fnToCodeBlock utility works', (t) => {
     1 + 2 + 3
   })
 
-  t.is(src, '(() => {\n    1 + 2 + 3\n  })()')
+  t.is(src, `(() => {${EOL}    1 + 2 + 3${EOL}  })()`)
 })
 
 testInspect(

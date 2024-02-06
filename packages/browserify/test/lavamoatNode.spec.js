@@ -6,13 +6,28 @@ const { evalBundle } = require('./util')
 test('lavamoat-node compat - bundle works under lavamoat node', (t) => {
   let bundle
   try {
-    bundle = execSync('./test/fixtures/secureBundling/run.sh', {
-      cwd: path.resolve(__dirname, '../'),
-      maxBuffer: 8192 * 10000,
-    })
+    bundle = execSync(
+      [
+        'node',
+        '../node/src/cli.js',
+        'test/fixtures/secureBundling/build.js',
+        '--projectRoot',
+        '.',
+        '--policyPath',
+        'test/fixtures/secureBundling/lavamoat/node/policy.json',
+      ].join(' '),
+      {
+        cwd: path.resolve(__dirname, '../'),
+        maxBuffer: 8192 * 10000,
+      }
+    )
   } catch (err) {
-    // eslint-disable-next-line ava/assertion-arguments
-    return t.fail(err.stderr.toString())
+    if (err.stderr) {
+      // eslint-disable-next-line ava/assertion-arguments
+      return t.fail(err.stderr.toString())
+    } else {
+      throw err
+    }
   }
   t.pass('bundling works under lavamoat node')
   const testResult = evalBundle(bundle.toString(), { console })

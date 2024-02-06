@@ -10,20 +10,23 @@ test('project 1', async (t) => {
   const normalizedMapEntries = Array.from(canonicalNameMap.entries())
     .sort()
     .map(([packagePath, canonicalName]) => [
-      path.relative(__dirname, packagePath),
+      path.normalize(path.relative(__dirname, packagePath)),
       canonicalName,
     ])
   t.deepEqual(normalizedMapEntries, [
-    ['projects/1', '$root$'],
-    ['projects/1/node_modules/aaa', 'aaa'],
-    ['projects/1/node_modules/bbb', 'bbb'],
-    ['projects/1/node_modules/bbb/node_modules/evil_dep', 'bbb>evil_dep'],
+    [path.normalize('projects/1'), '$root$'],
+    [path.normalize('projects/1/node_modules/aaa'), 'aaa'],
+    [path.normalize('projects/1/node_modules/bbb'), 'bbb'],
+    [
+      path.normalize('projects/1/node_modules/bbb/node_modules/evil_dep'),
+      'bbb>evil_dep',
+    ],
   ])
 })
 
 test('project 2', async (t) => {
   const canonicalNameMap = await loadCanonicalNameMap({
-    rootDir: path.join(__dirname, 'projects', '2'),
+    rootDir: path.join(__dirname, path.normalize('projects'), '2'),
   })
   // normalize results to be relative
   const normalizedMapEntries = Array.from(canonicalNameMap.entries())
@@ -33,17 +36,20 @@ test('project 2', async (t) => {
       canonicalName,
     ])
   t.deepEqual(normalizedMapEntries, [
-    ['projects/2', '$root$'],
-    ['projects/2/node_modules/aaa', 'aaa'],
-    ['projects/2/node_modules/bbb', 'bbb'],
-    ['projects/2/node_modules/bbb/node_modules/evil_dep', 'bbb>evil_dep'],
-    ['projects/2/node_modules/good_dep', 'good_dep'],
+    [path.normalize('projects/2'), '$root$'],
+    [path.normalize('projects/2/node_modules/aaa'), 'aaa'],
+    [path.normalize('projects/2/node_modules/bbb'), 'bbb'],
+    [
+      path.normalize('projects/2/node_modules/bbb/node_modules/evil_dep'),
+      'bbb>evil_dep',
+    ],
+    [path.normalize('projects/2/node_modules/good_dep'), 'good_dep'],
   ])
 })
 
 test('project 3', async (t) => {
   const canonicalNameMap = await loadCanonicalNameMap({
-    rootDir: path.join(__dirname, 'projects', '3'),
+    rootDir: path.join(__dirname, path.normalize('projects'), '3'),
   })
   // normalize results to be relative
   const normalizedMapEntries = Array.from(canonicalNameMap.entries())
@@ -53,10 +59,32 @@ test('project 3', async (t) => {
       canonicalName,
     ])
   t.deepEqual(normalizedMapEntries, [
-    ['projects/3', '$root$'],
-    ['projects/3/node_modules/aaa', 'aaa'],
-    ['projects/3/node_modules/bbb', 'bbb'],
-    ['projects/3/node_modules/bbb/node_modules/good_dep', 'bbb>good_dep'],
-    ['projects/3/node_modules/evil_dep', 'evil_dep'],
+    [path.normalize('projects/3'), '$root$'],
+    [path.normalize('projects/3/node_modules/aaa'), 'aaa'],
+    [path.normalize('projects/3/node_modules/bbb'), 'bbb'],
+    [
+      path.normalize('projects/3/node_modules/bbb/node_modules/good_dep'),
+      'bbb>good_dep',
+    ],
+    [path.normalize('projects/3/node_modules/evil_dep'), 'evil_dep'],
+  ])
+})
+
+test('project 4 - workspace symlink', async (t) => {
+  const canonicalNameMap = await loadCanonicalNameMap({
+    rootDir: path.join(__dirname, 'projects', '4', 'packages', 'stuff'),
+  })
+  // normalize results to be relative
+  const normalizedMapEntries = Array.from(canonicalNameMap.entries())
+    .sort()
+    .map(([packagePath, canonicalName]) => [
+      path.relative(__dirname, packagePath),
+      canonicalName,
+    ])
+  t.deepEqual(normalizedMapEntries, [
+    [path.normalize('projects/4/node_modules/aaa'), 'aaa'],
+    [path.normalize('projects/4/node_modules/bbb'), 'bbb'],
+    [path.normalize('projects/4/packages/aaa'), 'aaa'], // symlink resolved
+    [path.normalize('projects/4/packages/stuff'), '$root$'],
   ])
 })

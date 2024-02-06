@@ -2,7 +2,10 @@ const browserify = require('browserify')
 const lavamoatPlugin = require('../../../src/index')
 const path = require('path')
 
-const writeAutoPolicy = Boolean(process.env.WRITE_AUTO_POLICY)
+const writeAutoPolicy =
+  (process.env.WRITE_AUTO_POLICY === '1' ||
+    process.env.WRITE_AUTO_POLICY?.toLowerCase() === 'true') ??
+  lavamoatPlugin.args.writeAutoPolicy
 
 const projectRoot = path.resolve(__dirname, '../exampleApp')
 

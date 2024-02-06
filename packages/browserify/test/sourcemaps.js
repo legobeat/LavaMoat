@@ -1,3 +1,4 @@
+const { EOL } = require('node:os')
 const { SourceMapConsumer } = require('source-map')
 const validate = require('sourcemap-validator')
 const { fromSource: extractSourceMap } = require('convert-source-map')
@@ -42,7 +43,8 @@ async function verifySamples(bundle, log) {
 
   let sampleCount = 0
 
-  const buildLines = bundle.split('\n')
+  const newlineRegex = new RegExp(`[\n${EOL}]`)
+  const buildLines = bundle.split(newlineRegex)
   const targetString = 'module.exports'
   const matchesPerLine = buildLines.map((line) => indicesOf(targetString, line))
   const errors = []
@@ -64,7 +66,7 @@ async function verifySamples(bundle, log) {
         return
       }
       const sourceContent = consumer.sourceContentFor(result.source)
-      const sourceLines = sourceContent.split('\n')
+      const sourceLines = sourceContent.split(newlineRegex)
       const sourceLine = sourceLines[result.line - 1]
       // this sometimes includes the whole line though we tried to match somewhere in the middle
       const portion = sourceLine.slice(result.column)

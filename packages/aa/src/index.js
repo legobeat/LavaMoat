@@ -1,6 +1,6 @@
 'use strict'
 
-const { readFileSync } = require('fs')
+const { readFileSync, realpathSync, lstatSync } = require('fs')
 const path = require('path')
 const nodeResolve = require('resolve')
 
@@ -110,6 +110,14 @@ function getDependencies(packageDir, includeDevDeps) {
   return depsToWalk
 }
 
+/**
+ * @param {string} location
+ */
+function isSymlink(location) {
+  const info = lstatSync(location)
+  return info.isSymbolicLink()
+}
+
 /** @type {WalkDepTreeOpts[]} */
 let currentLevelTodos
 
@@ -144,6 +152,15 @@ function walkDependencyTreeForBestLogicalPaths({
     }
   } while (currentLevelTodos.length > 0)
 
+  for (const [
+    packageDir,
+    logicalPath,
+  ] of preferredPackageLogicalPathMap.entries()) {
+    if (isSymlink(packageDir)) {
+      const realPath = realpathSync(packageDir)
+      preferredPackageLogicalPathMap.set(realPath, logicalPath)
+    }
+  }
   return preferredPackageLogicalPathMap
 }
 
@@ -216,11 +233,11 @@ function getPackageNameForModulePath(canonicalNameMap, modulePath) {
     return `external:${relativeToRoot}`
   }
   const packageName = /** @type {string} */ (canonicalNameMap.get(packageDir))
-  const relativeToPackageDir = path.relative(packageDir, modulePath)
+  const relativeToPackageDir = path.relative(packageDir, realpathSync(modulePath))
   // files should never be associated with a package directory across a package boundary (as tested via the presense of "node_modules" in the path)
   if (relativeToPackageDir.includes('node_modules')) {
     throw new Error(
-      `LavaMoat - Encountered unknown package directory for file "${modulePath}"`
+      `LavaMoat - Encountered unknown package directory "${relativeToPackageDir}" for file "${modulePath}"`
     )
   }
   return packageName
