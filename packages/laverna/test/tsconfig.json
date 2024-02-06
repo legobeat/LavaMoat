@@ -1,0 +1,14 @@
+{
+  "extends": "../../../.config/tsconfig.test.json",
+  "compilerOptions": {
+    "strict": true,
+    "rootDir": "..",
+    "resolveJsonModule": true,
+  },
+  "include": ["**/*.spec.js", "types.d.ts"],
+  "references": [
+    {
+      "path": "../src/tsconfig.json",
+    },
+  ],
+}

@@ -3,26 +3,36 @@
 const { default: traverse } = require('@babel/traverse')
 const { isInFunctionDeclaration, isMemberLikeExpression } = require('./util')
 
-const nonReferenceIdentifiers = [
+/**
+ * Types which are not references to globals
+ */
+const nonReferenceIdentifiers = new Set([
+  'ArrayPatten',
+  'BreakStatement',
+  'CatchClause',
+  'ClassMethod',
+  'ContinueStatement',
+  'ExportDefaultSpecifier',
+  'ExportSpecifier',
   'FunctionDeclaration',
   'FunctionExpression',
-  'ClassMethod',
+  'ImportDefaultSpecifier',
+  'ImportNamespaceSpecifier',
+  'ImportSpecifier',
   'LabeledStatement',
-  'BreakStatement',
-  'ContinueStatement',
-  'CatchClause',
-  'ArrayPatten',
+  'MetaProperty',
   'RestElement',
-]
+])
 
 module.exports = { findGlobals }
 
 /**
- * @typedef {import('@babel/traverse').NodePath<import('@babel/types').Identifier|import('@babel/types').ThisExpression>} IdentifierOrThisExpressionNodePath
+ * @typedef {import('@babel/traverse').NodePath<
+ *   import('@babel/types').Identifier | import('@babel/types').ThisExpression
+ * >} IdentifierOrThisExpressionNodePath
  */
 
 /**
- *
  * @param {import('@babel/types').Node} ast
  * @returns {Map<string, IdentifierOrThisExpressionNodePath[]>}
  */
@@ -34,9 +44,10 @@ function findGlobals(ast) {
     Identifier: (path) => {
       // skip if not being used as reference
       const parentType = path.parent.type
-      if (nonReferenceIdentifiers.includes(parentType)) {
+      if (nonReferenceIdentifiers.has(parentType)) {
         return
       }
+
       if (parentType === 'VariableDeclarator' && path.parent.id === path.node) {
         return
       }
@@ -87,7 +98,6 @@ function findGlobals(ast) {
   return globals
 
   /**
-   *
    * @param {IdentifierOrThisExpressionNodePath} path
    * @param {string} [name]
    */

@@ -16,9 +16,4 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@db8f2c60ee802b3748b512940dde88eabd7b7e01 # v3
-        with:
-          release-type: node
-          command: manifest
-          # see https://github.com/google-github-actions/release-please-action#github-credentials
-          # in case we want to run more workflows
+      - uses: google-github-actions/release-please-action@cc61a07e2da466bebbc19b3a7dd01d6aecb20d1e # v4

@@ -1,5 +1,4 @@
 const test = require('ava')
-const deepEqual = require('deep-equal')
 const { parse, inspectEsmImports } = require('../src/index')
 
 testInspect(
@@ -8,9 +7,7 @@ testInspect(
   `
   import fs from 'fs'
 `,
-  {
-    esmImports: ['fs'],
-  }
+  ['fs']
 )
 
 // from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
@@ -29,56 +26,38 @@ testInspect(
   import defaultExport3, * as name2 from "package09";
   import "package10";
   var promise = import("package11");
+  export * as name3 from "package12";
+  export { name4 } from "package13";
+  export { default as name5 } from "package14";
+  export const foo = "bar";
 `,
-  {
-    esmImports: [
-      'package01',
-      'package02',
-      'package03.export1',
-      'package04.export2',
-      'package05.export3',
-      'package05.export4',
-      'package06/path/to/specific/un-exported/file.export5',
-      'package06/path/to/specific/un-exported/file.export6',
-      'package07.export7',
-      'package07.export8',
-      'package08',
-      'package09',
-      'package09',
-    ],
-  }
+  [
+    'package01',
+    'package02',
+    'package03',
+    'package04',
+    'package05',
+    'package06/path/to/specific/un-exported/file',
+    'package07',
+    'package08',
+    'package09',
+    'package10',
+    'package12',
+    'package13',
+    'package14',
+  ]
 )
 
-function testInspect(label, opts, fn, expectedResultObj) {
+function testInspect(label, opts, fn, expected) {
   test(label, (t) => {
     const source = fnToCodeBlock(fn)
     const ast = parse(source, { sourceType: 'module' })
-    const result = inspectEsmImports(ast)
-    const resultSorted = [...Object.entries(result)].sort(sortBy(0))
-    const expectedSorted = Object.entries(expectedResultObj).sort(sortBy(0))
+    const actual = inspectEsmImports(ast)
+    const sortedActual = [...actual].sort()
+    const sortedExpected = [...expected].sort()
 
-    // for debugging
-    if (!deepEqual(resultSorted, expectedSorted)) {
-      label, opts, ast, source
-      t.log(resultSorted)
-      t.log(expectedSorted)
-      // eslint-disable-next-line no-debugger
-      debugger
-    }
-
-    t.deepEqual(resultSorted, expectedSorted)
+    t.deepEqual(sortedActual, sortedExpected)
   })
-}
-
-function sortBy(key) {
-  return (a, b) => {
-    const vA = a[key]
-    const vB = b[key]
-    if (vA === vB) {
-      return 0
-    }
-    return vA > vB ? 1 : -1
-  }
 }
 
 function fnToCodeBlock(fn) {
