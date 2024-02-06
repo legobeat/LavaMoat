@@ -72,6 +72,7 @@ jobs:
         --workspace=packages/allow-scripts
         --workspace=packages/lavapack
         --workspace=packages/preinstall-always-fail
+        --workspace=packages/yarn-plugin-allow-scripts
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
