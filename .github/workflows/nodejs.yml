@@ -56,6 +56,23 @@ jobs:
       fail-fast: false
     env:
       FORCE_COLOR: 1
+      TEST_WORKSPACES: |
+        --workspace=packages/${{
+          join(
+            fromJson('
+              [
+                "aa",
+                "allow-scripts",
+                "core",
+                "lavapack",
+                "preinstall-always-fail",
+                "tofu",
+                "webpack",
+                "yarn-plugin-allow-scripts"
+              ]'
+            ), ' --workspace=packages/'
+          )
+        }}
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
@@ -73,8 +90,8 @@ jobs:
       - name: Test
         run: |
           npm run build
-          npm run --if-present --workspace=packages/aa --workspace=packages/allow-scripts --workspace=packages/browserify --workspace=packages/core --workspace=packages/lavapack --workspace=packages/node --workspace=packages/preinstall-always-fail --workspace=packages/tofu --workspace=packages/webpack --workspace=packages/yarn-plugin-allow-scripts test:prep
-          npm run --if-present --workspace=packages/aa --workspace=packages/allow-scripts --workspace=packages/browserify --workspace=packages/core --workspace=packages/lavapack --workspace=packages/node --workspace=packages/preinstall-always-fail --workspace=packages/tofu --workspace=packages/webpack --workspace=packages/yarn-plugin-allow-scripts test
+          npm run --if-present ${TEST_WORKSPACES} test:prep
+          npm run --if-present ${TEST_WORKSPACES} test
 
   compatibility-test-macos:
     name: Test macOS compatibility
