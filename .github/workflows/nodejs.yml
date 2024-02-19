@@ -69,6 +69,7 @@ jobs:
       FORCE_COLOR: 1
       TEST_WORKSPACES: >-
         --workspace=packages/lavapack
+        --workspace=packages/node
         --workspace=packages/preinstall-always-fail
     steps:
       - name: Checkout
