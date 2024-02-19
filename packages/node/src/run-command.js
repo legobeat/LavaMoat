@@ -7,6 +7,7 @@ const os = require('os')
 const yargs = require('yargs')
 const yargsFlags = require('./yargsFlags')
 const { runLava } = require('./index')
+const readCmdShim = require('read-cmd-shim')
 
 const defaults = require('./defaults')
 
@@ -19,27 +20,8 @@ runLava(parseArgs()).catch((err) => {
 function getActualBinPath(binEntry) {
   // npm places wrapping scripts in node_modules/.bin on windows...
   if (os.platform() === 'win32') {
-    const WINDOWS_BIN_PATH_REGEX =
-      /(?:^|\n)\s*exec\s*node\s*"\$basedir\/(.*)" "\$@"(?:$|\n)/gu
-
     // on windows, this is a .sh file, alongside a .cmd and .ps1
-    const binContent = fs.readFileSync(binEntry, 'utf8')
-    const matches = Array.from(binContent.matchAll(WINDOWS_BIN_PATH_REGEX))
-    if (matches.length !== 1) {
-      throw new Error(
-        `Lavamoat - Unexpected contents (numMatches) of bin entrypoint '${binEntry}'. This error may be specific to Windows.`
-      )
-    }
-    if (matches[0].length !== 2) {
-      throw new Error(
-        `Lavamoat - Unexpected contents (numGroups) of bin entrypoint '${binEntry}'. This error may be specific to Windows.`
-      )
-    }
-    const actualPath = path.resolve(
-      process.cwd(),
-      './node_modules/.bin/',
-      matches[0][1]
-    )
+    const actualPath = readCmdShim.sync(binEntry)
     return fs.realpathSync(actualPath)
   }
   // ...symlinks on other platforms
