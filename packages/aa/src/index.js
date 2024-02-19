@@ -213,8 +213,8 @@ function processOnePackageInLogicalTree(
   } = /** @type {WalkDepTreeOpts} */ (currentLevelTodos.pop())
 
   // deps are already sorted by preference for paths
-  for (const dep of moduleTree.edgesOut.values()) {
-    if (!includeDevDeps && dep.type === 'dev') {
+  for (const dep of moduleTree.children.values()) {
+    if (!includeDevDeps && dep.dev) {
       console.error('skipping dev dep')
       continue
     }
@@ -233,10 +233,7 @@ function processOnePackageInLogicalTree(
     if (!depPackageJsonPath) {
       continue
     }
-    if (dep.error === 'MISSING') {
-      continue
-    }
-    const childPackageDir = dep.to.path
+    const childPackageDir = dep.realpath || dep.path
     // avoid cycles, but still visit the same package
     // on disk multiple times through different logical paths
     if (visited.has(childPackageDir)) {
@@ -256,7 +253,7 @@ function processOnePackageInLogicalTree(
       preferredPackageLogicalPathMap.set(childPackageDir, childLogicalPath)
       // continue walking children, adding them to the end of the queue
       nextLevelTodos.push({
-        moduleTree: dep.to,
+        moduleTree: dep.target || dep,
         logicalPath: childLogicalPath,
         includeDevDeps: false,
         visited: childVisited,
