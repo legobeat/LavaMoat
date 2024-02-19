@@ -2,6 +2,13 @@
 
 const { realpathSync, lstatSync } = require('node:fs')
 const Arborist = require('@npmcli/arborist')
+const NpmConfig = require('@npmcli/config')
+// @ts-expect-error missing declaration
+const {
+  shorthands,
+  definitions,
+  flatten,
+} = require('@npmcli/config/lib/definitions')
 const path = require('node:path')
 const nodeResolve = require('resolve')
 
@@ -72,6 +79,26 @@ function createPerformantResolve() {
 }
 
 /**
+ * @param {string} workspaceRootDir Workspace root directory path
+ * @returns {Promise<string>} Path to root directory of workspace root project
+ */
+async function getWorkspaceRootDir(workspaceRootDir) {
+  const npmConf = new NpmConfig({
+    definitions,
+    flatten,
+    npmPath: workspaceRootDir,
+    cwd: workspaceRootDir,
+    execPath: workspaceRootDir,
+    shorthands,
+  })
+  // @ts-expect-error function missing in typedef
+  await npmConf.loadLocalPrefix()
+  //console.error('NPMCONF', {workspaceRootDir, npmConf})
+  return npmConf.localPrefix || workspaceRootDir
+  // return npmConf.npmPath || workspaceRootDir
+}
+
+/**
  * @param {LoadCanonicalNameMapOpts} options
  * @returns {Promise<CanonicalNameMap>}
  */
@@ -80,12 +107,15 @@ async function loadCanonicalNameMap({
   includeDevDeps,
   resolve = performantResolve,
 }) {
+  const localPrefix = await getWorkspaceRootDir(rootDir)
   const canonicalNameMap = /** @type {CanonicalNameMap} */ (new Map())
   // walk tree
   const arboristTree = new Arborist({
-    path: rootDir,
+    //path: path.resolve(rootDir, '../../'),
+    path: localPrefix,
   })
   const moduleTree = await arboristTree.loadActual()
+  console.error('OHAI', { rootDir, localPrefix, moduleTree })
   const logicalPathMap = await walkDependencyTreeForBestLogicalPaths({
     moduleTree,
     includeDevDeps,
@@ -133,7 +163,7 @@ function wrappedResolveSync(resolve, depName, basedir) {
 /**
  * @param {string} packageDir
  * @param {boolean} includeDevDeps
- * @returns {string[]} function getDependencies(packageDir, includeDevDeps) {
+ * @returns {string[]} Function getDependencies(packageDir, includeDevDeps) {
  *   const packageJsonPath = path.join(packageDir, 'package.json') const
  *   rawPackageJson = readFileSync(packageJsonPath, 'utf8') const packageJson =
  *   JSON.parse(rawPackageJson) const depsToWalk = [
@@ -176,6 +206,7 @@ async function walkDependencyTreeForBestLogicalPaths({
     { logicalPath, includeDevDeps, visited, resolve, moduleTree },
   ]
   nextLevelTodos = []
+  // console.error('HELLO', {ti: moduleTree.inventory, tfs: moduleTree.fsChildren, te: moduleTree.errors, tk: Object.keys(moduleTree), tj: JSON.stringify(moduleTree, undefined, 2), moduleTree, edgesOut: moduleTree.edgesOut, children: moduleTree.children})
   // drain work queue until empty, avoid going depth-first by prioritizing the current depth level
   do {
     processOnePackageInLogicalTree(preferredPackageLogicalPathMap, resolve)
@@ -214,6 +245,7 @@ function processOnePackageInLogicalTree(
 
   // deps are already sorted by preference for paths
   for (const dep of moduleTree.children.values()) {
+    // console.error('DERP', {moduleTree, dep});
     if (!includeDevDeps && dep.dev) {
       console.error('skipping dev dep')
       continue
