@@ -3,11 +3,11 @@
 const { realpathSync, lstatSync } = require('node:fs')
 const Arborist = require('@npmcli/arborist')
 const NpmConfig = require('@npmcli/config')
-// @ts-expect-error missing declaration
 const {
   shorthands,
   definitions,
   flatten,
+// @ts-expect-error missing declaration
 } = require('@npmcli/config/lib/definitions')
 const path = require('node:path')
 const nodeResolve = require('resolve')
@@ -93,9 +93,7 @@ async function getWorkspaceRootDir(workspaceRootDir) {
   })
   // @ts-expect-error function missing in typedef
   await npmConf.loadLocalPrefix()
-  //console.error('NPMCONF', {workspaceRootDir, npmConf})
   return npmConf.localPrefix || workspaceRootDir
-  // return npmConf.npmPath || workspaceRootDir
 }
 
 /**
@@ -114,8 +112,14 @@ async function loadCanonicalNameMap({
     //path: path.resolve(rootDir, '../../'),
     path: localPrefix,
   })
-  const moduleTree = await arboristTree.loadActual()
-  console.error('OHAI', { rootDir, localPrefix, moduleTree })
+  let moduleTree = await arboristTree.loadActual()
+  if (path.normalize(localPrefix) !== path.normalize(rootDir)) {
+    const subModuleTree = Array.from(moduleTree.fsChildren).find(c => c.path === rootDir)
+    if (!subModuleTree) {
+      throw new Error(`Couldn't locate root module`)
+    }
+    moduleTree = subModuleTree
+  }
   const logicalPathMap = await walkDependencyTreeForBestLogicalPaths({
     moduleTree,
     includeDevDeps,
@@ -206,7 +210,6 @@ async function walkDependencyTreeForBestLogicalPaths({
     { logicalPath, includeDevDeps, visited, resolve, moduleTree },
   ]
   nextLevelTodos = []
-  // console.error('HELLO', {ti: moduleTree.inventory, tfs: moduleTree.fsChildren, te: moduleTree.errors, tk: Object.keys(moduleTree), tj: JSON.stringify(moduleTree, undefined, 2), moduleTree, edgesOut: moduleTree.edgesOut, children: moduleTree.children})
   // drain work queue until empty, avoid going depth-first by prioritizing the current depth level
   do {
     processOnePackageInLogicalTree(preferredPackageLogicalPathMap, resolve)
@@ -244,8 +247,13 @@ function processOnePackageInLogicalTree(
   } = /** @type {WalkDepTreeOpts} */ (currentLevelTodos.pop())
 
   // deps are already sorted by preference for paths
-  for (const dep of moduleTree.children.values()) {
-    // console.error('DERP', {moduleTree, dep});
+  const children = new Set([
+    ...moduleTree.children.values(),
+    ...moduleTree.fsChildren.values(),
+    ...[...moduleTree.edgesOut.values()].map(e => e.to),
+  ])
+
+  for (const dep of children) {
     if (!includeDevDeps && dep.dev) {
       console.error('skipping dev dep')
       continue
@@ -265,7 +273,7 @@ function processOnePackageInLogicalTree(
     if (!depPackageJsonPath) {
       continue
     }
-    const childPackageDir = dep.realpath || dep.path
+    const childPackageDir = dep.path
     // avoid cycles, but still visit the same package
     // on disk multiple times through different logical paths
     if (visited.has(childPackageDir)) {
