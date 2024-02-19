@@ -3,9 +3,11 @@
 
 const path = require('path')
 const fs = require('fs')
+const os = require('os')
 const yargs = require('yargs')
 const yargsFlags = require('./yargsFlags')
 const { runLava } = require('./index')
+const readCmdShim = require('read-cmd-shim')
 
 const defaults = require('./defaults')
 
@@ -14,6 +16,17 @@ runLava(parseArgs()).catch((err) => {
   console.error(err.stack || err)
   process.exit(1)
 })
+
+function getActualBinPath(binEntry) {
+  // npm places wrapping scripts in node_modules/.bin on windows...
+  if (os.platform() === 'win32') {
+    // on windows, this is a .sh file, alongside a .cmd and .ps1
+    const actualPath = readCmdShim.sync(binEntry)
+    return fs.realpathSync(actualPath)
+  }
+  // ...symlinks on other platforms
+  return fs.realpathSync(binEntry)
+}
 
 function parseArgs() {
   const argsParser = yargs
@@ -36,16 +49,12 @@ function parseArgs() {
     console.error(`Error: '${commandName}' is not one of the locally installed commands. Missing: '${binEntry}'
     Possible reasons for this error:
     - node_modules not installed
-    - trying to run a globally installed script or command, 
+    - trying to run a globally installed script or command,
       which is not supported and not recommended`)
     process.exit(4)
   }
 
-  parsedArgs.entryPath = path.resolve(
-    process.cwd(),
-    'node_modules/.bin/',
-    fs.readlinkSync(binEntry)
-  )
+  parsedArgs.entryPath = getActualBinPath(binEntry)
 
   // patch process.argv so it matches the normal pattern
   // e.g. [runtime path, entrypoint, ...args]

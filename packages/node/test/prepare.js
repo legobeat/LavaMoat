@@ -16,7 +16,7 @@ const { promisify } = require('node:util')
 const { rm, readdir } = require('node:fs/promises')
 const os = require('node:os')
 
-const exec = promisify(execFile)
+const execFileAsync = promisify(execFile)
 
 /**
  * @todo Change this to `npm@latest` when Node.js v16 support is dropped
@@ -78,10 +78,32 @@ async function setupAppleSilicon(cwd) {
   if (KECCAK in dependencies) {
     console.debug(`Rebuilding ${KECCAK} for ${os.platform()}/${os.arch()}...`)
     const keccakPath = resolveDependencyFrom(cwd, KECCAK)
-    spawnSync(COREPACK_BIN, [LAVAMOAT_PM, 'exec', 'node-gyp-build'], {
+    spawnSync('node', [COREPACK_BIN, LAVAMOAT_PM, 'exec', 'node-gyp-build'], {
       cwd: keccakPath,
       stdio: 'inherit',
     })
+  }
+}
+
+/**
+ * @param {string} cmd
+ * @param {string[]} args
+ * @param {object} opts
+ * @returns {Promise<any>}
+ */
+async function exec(cmd, args, opts) {
+  let result
+  try {
+    result = await execFileAsync(cmd, args, opts)
+  } catch (error) {
+    throw new Error(
+      `Error returned from '${cmd} ${args.join(' ')}' ${JSON.stringify({ opts, error })}`
+    )
+  }
+  if (typeof result.stdout !== 'string') {
+    throw new Error(
+      `Unexpected result from executing '${cmd} ${args.join(' ')}' ${JSON.stringify({ opts, result })}`
+    )
   }
 }
 
@@ -94,8 +116,8 @@ async function setupAppleSilicon(cwd) {
  */
 async function setup(cwd) {
   // assume 'install' is the subcommand on any package manager
-  await exec(COREPACK_BIN, [LAVAMOAT_PM, 'install'], { cwd })
-  await exec(COREPACK_BIN, [LAVAMOAT_PM, 'run', 'setup'], { cwd })
+  await exec('node', [COREPACK_BIN, LAVAMOAT_PM, 'install'], { cwd })
+  await exec('node', [COREPACK_BIN, LAVAMOAT_PM, 'run', 'setup'], { cwd })
 
   if (os.platform() === 'darwin' && os.arch() === 'arm64') {
     await setupAppleSilicon(cwd)
