@@ -109,7 +109,6 @@ async function loadCanonicalNameMap({
   const canonicalNameMap = /** @type {CanonicalNameMap} */ (new Map())
   // walk tree
   const arboristTree = new Arborist({
-    //path: path.resolve(rootDir, '../../'),
     path: localPrefix,
   })
   let moduleTree = await arboristTree.loadActual()
@@ -255,13 +254,11 @@ function processOnePackageInLogicalTree(
 
   for (const dep of children) {
     if (!includeDevDeps && dep.dev) {
-      console.error('skipping dev dep')
       continue
     }
     // @ts-expect-error missing const in type def
     if (dep.type === 'workspace') {
       // TODO: workspace support
-      console.error('skipping workspace dep')
       continue
     }
     let depPackageJsonPath = wrappedResolveSync(
