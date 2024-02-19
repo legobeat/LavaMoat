@@ -1,6 +1,7 @@
 'use strict'
 
-const { readFileSync, realpathSync, lstatSync } = require('node:fs')
+const { realpathSync, lstatSync } = require('node:fs')
+const Arborist = require('@npmcli/arborist')
 const path = require('node:path')
 const nodeResolve = require('resolve')
 
@@ -81,8 +82,12 @@ async function loadCanonicalNameMap({
 }) {
   const canonicalNameMap = /** @type {CanonicalNameMap} */ (new Map())
   // walk tree
-  const logicalPathMap = walkDependencyTreeForBestLogicalPaths({
-    packageDir: rootDir,
+  const arboristTree = new Arborist({
+    path: rootDir,
+  })
+  const moduleTree = await arboristTree.loadActual()
+  const logicalPathMap = await walkDependencyTreeForBestLogicalPaths({
+    moduleTree,
     includeDevDeps,
     resolve,
   })
@@ -128,20 +133,16 @@ function wrappedResolveSync(resolve, depName, basedir) {
 /**
  * @param {string} packageDir
  * @param {boolean} includeDevDeps
- * @returns {string[]}
+ * @returns {string[]} function getDependencies(packageDir, includeDevDeps) {
+ *   const packageJsonPath = path.join(packageDir, 'package.json') const
+ *   rawPackageJson = readFileSync(packageJsonPath, 'utf8') const packageJson =
+ *   JSON.parse(rawPackageJson) const depsToWalk = [
+ *   ...Object.keys(packageJson.dependencies || {}),
+ *   ...Object.keys(packageJson.optionalDependencies || {}),
+ *   ...Object.keys(packageJson.peerDependencies || {}),
+ *   ...Object.keys(includeDevDeps ? packageJson.devDependencies || {} : {}),
+ *   ].sort(comparePreferredPackageName) return depsToWalk }
  */
-function getDependencies(packageDir, includeDevDeps) {
-  const packageJsonPath = path.join(packageDir, 'package.json')
-  const rawPackageJson = readFileSync(packageJsonPath, 'utf8')
-  const packageJson = JSON.parse(rawPackageJson)
-  const depsToWalk = [
-    ...Object.keys(packageJson.dependencies || {}),
-    ...Object.keys(packageJson.optionalDependencies || {}),
-    ...Object.keys(packageJson.peerDependencies || {}),
-    ...Object.keys(includeDevDeps ? packageJson.devDependencies || {} : {}),
-  ].sort(comparePreferredPackageName)
-  return depsToWalk
-}
 
 /**
  * @param {string} location
@@ -159,10 +160,10 @@ let nextLevelTodos
 
 /**
  * @param {WalkDepTreeOpts} options
- * @returns {Map<string, string[]>}
+ * @returns {Promise<Map<string, string[]>>}
  */
-function walkDependencyTreeForBestLogicalPaths({
-  packageDir,
+async function walkDependencyTreeForBestLogicalPaths({
+  moduleTree,
   logicalPath = [],
   includeDevDeps = false,
   visited = new Set(),
@@ -172,7 +173,7 @@ function walkDependencyTreeForBestLogicalPaths({
   const preferredPackageLogicalPathMap = new Map()
   // add the entry package as the first work unit
   currentLevelTodos = [
-    { packageDir, logicalPath, includeDevDeps, visited, resolve },
+    { logicalPath, includeDevDeps, visited, resolve, moduleTree },
   ]
   nextLevelTodos = []
   // drain work queue until empty, avoid going depth-first by prioritizing the current depth level
@@ -205,28 +206,44 @@ function processOnePackageInLogicalTree(
   resolve
 ) {
   const {
-    packageDir,
+    moduleTree,
     logicalPath = [],
     includeDevDeps = false,
     visited = new Set(),
   } = /** @type {WalkDepTreeOpts} */ (currentLevelTodos.pop())
-  const depsToWalk = getDependencies(packageDir, includeDevDeps)
 
   // deps are already sorted by preference for paths
-  for (const depName of depsToWalk) {
-    let depPackageJsonPath = wrappedResolveSync(resolve, depName, packageDir)
+  for (const dep of moduleTree.edgesOut.values()) {
+    if (!includeDevDeps && dep.type === 'dev') {
+      console.error('skipping dev dep')
+      continue
+    }
+    // @ts-expect-error missing const in type def
+    if (dep.type === 'workspace') {
+      // TODO: workspace support
+      console.error('skipping workspace dep')
+      continue
+    }
+    let depPackageJsonPath = wrappedResolveSync(
+      resolve,
+      dep.name,
+      moduleTree.path
+    )
     // ignore unresolved deps
     if (!depPackageJsonPath) {
       continue
     }
-    const childPackageDir = path.dirname(depPackageJsonPath)
+    if (dep.error === 'MISSING') {
+      continue
+    }
+    const childPackageDir = dep.to.path
     // avoid cycles, but still visit the same package
     // on disk multiple times through different logical paths
     if (visited.has(childPackageDir)) {
       continue
     }
     const childVisited = new Set([...visited, childPackageDir])
-    const childLogicalPath = [...logicalPath, depName]
+    const childLogicalPath = [...logicalPath, dep.name]
 
     // compare this path and current best path
     const theCurrentBest = preferredPackageLogicalPathMap.get(childPackageDir)
@@ -239,7 +256,7 @@ function processOnePackageInLogicalTree(
       preferredPackageLogicalPathMap.set(childPackageDir, childLogicalPath)
       // continue walking children, adding them to the end of the queue
       nextLevelTodos.push({
-        packageDir: childPackageDir,
+        moduleTree: dep.to,
         logicalPath: childLogicalPath,
         includeDevDeps: false,
         visited: childVisited,
@@ -384,7 +401,7 @@ function comparePackageLogicalPaths(aPath, bPath) {
 
 /**
  * @typedef WalkDepTreeOpts
- * @property {string} packageDir
+ * @property {Arborist.Node} moduleTree
  * @property {string[]} [logicalPath]
  * @property {boolean} [includeDevDeps]
  * @property {Set<string>} [visited]
