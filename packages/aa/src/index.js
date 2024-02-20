@@ -7,7 +7,7 @@ const {
   shorthands,
   definitions,
   flatten,
-// @ts-expect-error missing declaration
+  // @ts-expect-error missing declaration
 } = require('@npmcli/config/lib/definitions')
 const path = require('node:path')
 const nodeResolve = require('resolve')
@@ -113,7 +113,9 @@ async function loadCanonicalNameMap({
   })
   let moduleTree = await arboristTree.loadActual()
   if (path.normalize(localPrefix) !== path.normalize(rootDir)) {
-    const subModuleTree = Array.from(moduleTree.fsChildren).find(c => c.path === rootDir)
+    const subModuleTree = Array.from(moduleTree.fsChildren).find(
+      (c) => c.path === rootDir
+    )
     if (!subModuleTree) {
       throw new Error(`Couldn't locate root module`)
     }
@@ -249,7 +251,7 @@ function processOnePackageInLogicalTree(
   const children = new Set([
     ...moduleTree.children.values(),
     ...moduleTree.fsChildren.values(),
-    ...[...moduleTree.edgesOut.values()].map(e => e.to),
+    ...[...moduleTree.edgesOut.values()].filter((e) => e.to).map((e) => e.to),
   ])
 
   for (const dep of children) {
