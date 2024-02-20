@@ -2,4 +2,6 @@ ignores:
   # monorepo deps
   - 'ava'
   # types
+  - "@types/npmcli__arborist"
+  - "@types/npmcli__config"
   - "@types/resolve"

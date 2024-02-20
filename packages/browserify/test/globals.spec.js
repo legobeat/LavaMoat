@@ -14,7 +14,7 @@ test('globals - process is properly injected', async (t) => {
       resources: {
         one: {
           packages: {
-            'browserify>process': true,
+            'process': true,
           },
         },
       },

@@ -17,23 +17,28 @@
         "lavamoat-core>@babel/types>@babel/helper-validator-identifier": true
       }
     },
+    "@babel/code-frame>@babel/highlight>ansi-styles": {
+      "packages": {
+        "@babel/code-frame>ansi-styles>color-convert": true
+      }
+    },
     "@babel/code-frame>@babel/highlight>chalk": {
       "globals": {
         "process.env.TERM": true,
         "process.platform": true
       },
       "packages": {
-        "@babel/code-frame>@babel/highlight>chalk>ansi-styles": true,
-        "@babel/code-frame>@babel/highlight>chalk>escape-string-regexp": true,
-        "@babel/code-frame>@babel/highlight>chalk>supports-color": true
+        "@babel/code-frame>@babel/highlight>ansi-styles": true,
+        "@babel/code-frame>@babel/highlight>escape-string-regexp": true,
+        "@babel/code-frame>@babel/highlight>supports-color": true
       }
     },
-    "@babel/code-frame>@babel/highlight>chalk>ansi-styles": {
-      "packages": {
-        "@babel/code-frame>chalk>ansi-styles>color-convert": true
+    "@babel/code-frame>@babel/highlight>has-flag": {
+      "globals": {
+        "process.argv": true
       }
     },
-    "@babel/code-frame>@babel/highlight>chalk>supports-color": {
+    "@babel/code-frame>@babel/highlight>supports-color": {
       "builtin": {
         "os.release": true
       },
@@ -45,12 +50,17 @@
         "process.versions.node.split": true
       },
       "packages": {
-        "@babel/code-frame>@babel/highlight>chalk>supports-color>has-flag": true
+        "@babel/code-frame>@babel/highlight>has-flag": true
       }
     },
-    "@babel/code-frame>@babel/highlight>chalk>supports-color>has-flag": {
-      "globals": {
-        "process.argv": true
+    "@babel/code-frame>ansi-styles": {
+      "packages": {
+        "@babel/code-frame>ansi-styles>color-convert": true
+      }
+    },
+    "@babel/code-frame>ansi-styles>color-convert": {
+      "packages": {
+        "@babel/code-frame>ansi-styles>color-convert>color-name": true
       }
     },
     "@babel/code-frame>chalk": {
@@ -59,22 +69,17 @@
         "process.platform": true
       },
       "packages": {
-        "@babel/code-frame>chalk>ansi-styles": true,
-        "@babel/code-frame>chalk>escape-string-regexp": true,
-        "@babel/code-frame>chalk>supports-color": true
+        "@babel/code-frame>ansi-styles": true,
+        "@babel/code-frame>escape-string-regexp": true,
+        "@babel/code-frame>supports-color": true
       }
     },
-    "@babel/code-frame>chalk>ansi-styles": {
-      "packages": {
-        "@babel/code-frame>chalk>ansi-styles>color-convert": true
+    "@babel/code-frame>has-flag": {
+      "globals": {
+        "process.argv": true
       }
     },
-    "@babel/code-frame>chalk>ansi-styles>color-convert": {
-      "packages": {
-        "@babel/code-frame>chalk>ansi-styles>color-convert>color-name": true
-      }
-    },
-    "@babel/code-frame>chalk>supports-color": {
+    "@babel/code-frame>supports-color": {
       "builtin": {
         "os.release": true
       },
@@ -86,25 +91,2113 @@
         "process.versions.node.split": true
       },
       "packages": {
-        "@babel/code-frame>chalk>supports-color>has-flag": true
-      }
-    },
-    "@babel/code-frame>chalk>supports-color>has-flag": {
-      "globals": {
-        "process.argv": true
+        "@babel/code-frame>has-flag": true
       }
     },
     "@lavamoat/aa": {
       "builtin": {
         "node:fs.lstatSync": true,
-        "node:fs.readFileSync": true,
         "node:fs.realpathSync": true,
-        "node:path.dirname": true,
         "node:path.join": true,
+        "node:path.normalize": true,
         "node:path.relative": true
       },
       "packages": {
+        "@lavamoat/aa>@npmcli/arborist": true,
+        "@lavamoat/aa>@npmcli/config": true,
         "browserify>resolve": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist": {
+      "builtin": {
+        "crypto.createHash": true,
+        "events": true,
+        "fs.existsSync": true,
+        "fs.mkdirSync": true,
+        "fs/promises.lstat": true,
+        "fs/promises.mkdir": true,
+        "fs/promises.readFile": true,
+        "fs/promises.readdir": true,
+        "fs/promises.readlink": true,
+        "fs/promises.rm": true,
+        "fs/promises.stat": true,
+        "fs/promises.symlink": true,
+        "fs/promises.writeFile": true,
+        "os.homedir": true,
+        "path.basename": true,
+        "path.dirname": true,
+        "path.join": true,
+        "path.normalize": true,
+        "path.relative": true,
+        "path.resolve": true,
+        "url.parse": true,
+        "util.format": true,
+        "util.inspect.custom": true
+      },
+      "globals": {
+        "__ARBORIST_FAKE_PLATFORM__": true,
+        "__dirname": true,
+        "console.error": true,
+        "errors": true,
+        "process": true,
+        "setTimeout": true,
+        "types": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@isaacs/string-locale-compare": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/fs": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/installed-package-contents": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/metavuln-calculator": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/name-from-folder": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/node-gyp": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/query": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/run-script": true,
+        "@lavamoat/aa>@npmcli/arborist>bin-links": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache": true,
+        "@lavamoat/aa>@npmcli/arborist>common-ancestor-path": true,
+        "@lavamoat/aa>@npmcli/arborist>hosted-git-info": true,
+        "@lavamoat/aa>@npmcli/arborist>json-stringify-nice": true,
+        "@lavamoat/aa>@npmcli/arborist>minimatch": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-install-checks": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-package-arg": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-pick-manifest": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote": true,
+        "@lavamoat/aa>@npmcli/arborist>parse-conflict-json": true,
+        "@lavamoat/aa>@npmcli/arborist>promise-all-reject-late": true,
+        "@lavamoat/aa>@npmcli/arborist>promise-call-limit": true,
+        "@lavamoat/aa>@npmcli/arborist>ssri": true,
+        "@lavamoat/aa>@npmcli/arborist>treeverse": true,
+        "@lavamoat/aa>@npmcli/config>@npmcli/map-workspaces": true,
+        "@lavamoat/aa>@npmcli/config>proc-log": true,
+        "@lavamoat/aa>@npmcli/config>read-package-json-fast": true,
+        "@lavamoat/aa>@npmcli/config>semver": true,
+        "@lavamoat/aa>@npmcli/config>walk-up-path": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@isaacs/string-locale-compare": {
+      "globals": {
+        "Intl": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/fs": {
+      "builtin": {
+        "fs/promises.access": true,
+        "fs/promises.chmod": true,
+        "fs/promises.copyFile": true,
+        "fs/promises.cp": true,
+        "fs/promises.lstat": true,
+        "fs/promises.mkdir": true,
+        "fs/promises.mkdtemp": true,
+        "fs/promises.readdir": true,
+        "fs/promises.readlink": true,
+        "fs/promises.rename": true,
+        "fs/promises.rm": true,
+        "fs/promises.stat": true,
+        "fs/promises.symlink": true,
+        "fs/promises.unlink": true,
+        "fs/promises.utimes": true,
+        "os.constants.errno.EEXIST": true,
+        "os.constants.errno.EINVAL": true,
+        "os.constants.errno.EISDIR": true,
+        "os.constants.errno.ENOTDIR": true,
+        "path.dirname": true,
+        "path.isAbsolute": true,
+        "path.join": true,
+        "path.parse": true,
+        "path.relative": true,
+        "path.resolve": true,
+        "path.sep": true,
+        "path.toNamespacedPath": true,
+        "url.fileURLToPath": true,
+        "util.inspect": true
+      },
+      "globals": {
+        "process.arch": true,
+        "process.emitWarning": true,
+        "process.version": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/config>semver": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/installed-package-contents": {
+      "builtin": {
+        "fs.lstat": true,
+        "fs.readFile": true,
+        "fs.readdir": true,
+        "fs.stat": true,
+        "path.basename": true,
+        "path.dirname": true,
+        "path.relative": true,
+        "path.resolve": true,
+        "util.promisify": true
+      },
+      "globals": {
+        "console.error": true,
+        "console.log": true,
+        "process.argv.slice": true,
+        "process.cwd": true,
+        "process.exit": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/installed-package-contents>npm-bundled": true,
+        "@lavamoat/aa>@npmcli/config>read-package-json-fast>npm-normalize-package-bin": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/installed-package-contents>npm-bundled": {
+      "builtin": {
+        "events.EventEmitter": true,
+        "fs.readFile": true,
+        "fs.readFileSync": true,
+        "fs.readdir": true,
+        "fs.readdirSync": true,
+        "path.basename": true,
+        "path.dirname": true,
+        "path.resolve": true
+      },
+      "globals": {
+        "process.cwd": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/config>read-package-json-fast>npm-normalize-package-bin": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/metavuln-calculator": {
+      "builtin": {
+        "crypto.createHash": true,
+        "os.homedir": true
+      },
+      "globals": {
+        "process.emit": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/metavuln-calculator>json-parse-even-better-errors": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote": true,
+        "@lavamoat/aa>@npmcli/config>semver": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/metavuln-calculator>json-parse-even-better-errors": {
+      "globals": {
+        "Buffer.isBuffer": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/name-from-folder": {
+      "builtin": {
+        "path.basename": true,
+        "path.dirname": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/node-gyp": {
+      "builtin": {
+        "fs.promises": true,
+        "fs.stat": true,
+        "util.promisify": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json": {
+      "builtin": {
+        "fs/promises.access": true,
+        "fs/promises.readFile": true,
+        "fs/promises.writeFile": true,
+        "path.basename": true,
+        "path.dirname": true,
+        "path.extname": true,
+        "path.join": true,
+        "path.relative": true,
+        "path.resolve": true,
+        "path.sep": true
+      },
+      "globals": {
+        "fixSteps": true,
+        "normalizeSteps": true,
+        "prepareSteps": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>hosted-git-info": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>json-parse-even-better-errors": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/git": true,
+        "@lavamoat/aa>@npmcli/config>@npmcli/map-workspaces>glob": true,
+        "@lavamoat/aa>@npmcli/config>proc-log": true,
+        "@lavamoat/aa>@npmcli/config>semver": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>hosted-git-info": {
+      "builtin": {
+        "url.URL": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>lru-cache": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>json-parse-even-better-errors": {
+      "globals": {
+        "Buffer.isBuffer": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>lru-cache": {
+      "globals": {
+        "AbortController": true,
+        "AbortSignal": true,
+        "_onabort": true,
+        "aborted": true,
+        "allowStale": true,
+        "allowStaleOnFetchAbort": true,
+        "allowStaleOnFetchRejection": true,
+        "console.error": true,
+        "heap": true,
+        "ignoreFetchAbort": true,
+        "length": true,
+        "maxEntrySize": true,
+        "noDeleteOnFetchRejection": true,
+        "noDeleteOnStaleGet": true,
+        "noDisposeOnSet": true,
+        "noUpdateTTL": true,
+        "onabort": true,
+        "performance": true,
+        "process": true,
+        "reason": true,
+        "setTimeout": true,
+        "signal": true,
+        "sizeCalculation": true,
+        "ttl": true,
+        "ttlAutopurge": true,
+        "ttlResolution": true,
+        "updateAgeOnGet": true,
+        "updateAgeOnHas": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data": {
+      "builtin": {
+        "url.parse": true,
+        "util.format": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>hosted-git-info": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data>validate-npm-package-license": true,
+        "@lavamoat/aa>@npmcli/config>semver": true,
+        "browserify>resolve>is-core-module": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data>validate-npm-package-license": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data>validate-npm-package-license>spdx-correct": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data>validate-npm-package-license>spdx-expression-parse": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data>validate-npm-package-license>spdx-correct": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data>validate-npm-package-license>spdx-correct>spdx-license-ids": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data>validate-npm-package-license>spdx-expression-parse": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data>validate-npm-package-license>spdx-expression-parse": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data>validate-npm-package-license>spdx-correct>spdx-license-ids": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data>validate-npm-package-license>spdx-expression-parse>spdx-exceptions": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/query": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/query>postcss-selector-parser": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/query>postcss-selector-parser": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/query>postcss-selector-parser>cssesc": true,
+        "readable-stream>util-deprecate": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>@npmcli/run-script": {
+      "builtin": {
+        "node:fs/promises.stat": true,
+        "node:path.resolve": true,
+        "path.delimiter": true,
+        "path.dirname": true,
+        "path.resolve": true
+      },
+      "globals": {
+        "__dirname": true,
+        "console.log": true,
+        "process.env": true,
+        "process.kill": true,
+        "process.on": true,
+        "process.pid": true,
+        "process.removeListener": true,
+        "setTimeout": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/node-gyp": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/promise-spawn": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>bin-links": {
+      "builtin": {
+        "fs/promises.chmod": true,
+        "fs/promises.lstat": true,
+        "fs/promises.mkdir": true,
+        "fs/promises.open": true,
+        "fs/promises.readFile": true,
+        "fs/promises.readlink": true,
+        "fs/promises.rm": true,
+        "fs/promises.symlink": true,
+        "path.basename": true,
+        "path.dirname": true,
+        "path.extname": true,
+        "path.join": true,
+        "path.relative": true,
+        "path.resolve": true
+      },
+      "globals": {
+        "Buffer.alloc": true,
+        "process.env.__TESTING_BIN_LINKS_PLATFORM__": true,
+        "process.platform": true,
+        "process.umask": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>bin-links>cmd-shim": true,
+        "@lavamoat/aa>@npmcli/arborist>bin-links>read-cmd-shim": true,
+        "@lavamoat/aa>@npmcli/arborist>bin-links>write-file-atomic": true,
+        "@lavamoat/aa>@npmcli/config>read-package-json-fast>npm-normalize-package-bin": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>bin-links>cmd-shim": {
+      "builtin": {
+        "fs/promises.chmod": true,
+        "fs/promises.mkdir": true,
+        "fs/promises.readFile": true,
+        "fs/promises.stat": true,
+        "fs/promises.unlink": true,
+        "fs/promises.writeFile": true,
+        "path.dirname": true,
+        "path.relative": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>bin-links>read-cmd-shim": {
+      "builtin": {
+        "fs": true,
+        "util.promisify": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>bin-links>write-file-atomic": {
+      "builtin": {
+        "fs.chmod": true,
+        "fs.chmodSync": true,
+        "fs.chown": true,
+        "fs.chownSync": true,
+        "fs.close": true,
+        "fs.closeSync": true,
+        "fs.fsync": true,
+        "fs.fsyncSync": true,
+        "fs.open": true,
+        "fs.openSync": true,
+        "fs.realpath": true,
+        "fs.realpathSync": true,
+        "fs.rename": true,
+        "fs.renameSync": true,
+        "fs.stat": true,
+        "fs.statSync": true,
+        "fs.unlink": true,
+        "fs.unlinkSync": true,
+        "fs.write": true,
+        "fs.writeSync": true,
+        "path.resolve": true,
+        "util.promisify": true,
+        "worker_threads.threadId": true
+      },
+      "globals": {
+        "__filename": true,
+        "process.getuid": true,
+        "process.pid": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>bin-links>write-file-atomic>imurmurhash": true,
+        "@lavamoat/aa>@npmcli/arborist>bin-links>write-file-atomic>signal-exit": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>bin-links>write-file-atomic>signal-exit": {
+      "globals": {
+        "count": true,
+        "emitted": true,
+        "id": true,
+        "listeners": true,
+        "process": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache": {
+      "builtin": {
+        "crypto.createHash": true,
+        "events.once": true,
+        "fs/promises.appendFile": true,
+        "fs/promises.copyFile": true,
+        "fs/promises.mkdir": true,
+        "fs/promises.mkdtemp": true,
+        "fs/promises.readFile": true,
+        "fs/promises.readdir": true,
+        "fs/promises.rm": true,
+        "fs/promises.stat": true,
+        "fs/promises.truncate": true,
+        "fs/promises.writeFile": true,
+        "path": true
+      },
+      "globals": {
+        "process.platform": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/fs": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache>lru-cache": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache>minipass-collect": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache>minipass-flush": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache>minipass-pipeline": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache>p-map": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache>ssri": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache>unique-filename": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>fs-minipass": true,
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true,
+        "@lavamoat/aa>@npmcli/config>@npmcli/map-workspaces>glob": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache>aggregate-error": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>cacache>clean-stack": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache>indent-string": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache>clean-stack": {
+      "builtin": {
+        "os.homedir": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache>lru-cache": {
+      "globals": {
+        "AbortController": true,
+        "AbortSignal": true,
+        "_onabort": true,
+        "aborted": true,
+        "allowStale": true,
+        "allowStaleOnFetchAbort": true,
+        "allowStaleOnFetchRejection": true,
+        "console.error": true,
+        "heap": true,
+        "ignoreFetchAbort": true,
+        "length": true,
+        "maxEntrySize": true,
+        "noDeleteOnFetchRejection": true,
+        "noDeleteOnStaleGet": true,
+        "noDisposeOnSet": true,
+        "noUpdateTTL": true,
+        "onabort": true,
+        "performance": true,
+        "process": true,
+        "reason": true,
+        "setTimeout": true,
+        "signal": true,
+        "sizeCalculation": true,
+        "ttl": true,
+        "ttlAutopurge": true,
+        "ttlResolution": true,
+        "updateAgeOnGet": true,
+        "updateAgeOnHas": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache>minipass-collect": {
+      "globals": {
+        "Buffer.concat": true,
+        "Buffer.from": true,
+        "Buffer.isBuffer": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache>minipass-flush": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>cacache>minipass-flush>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache>minipass-flush>minipass": {
+      "builtin": {
+        "events": true,
+        "stream": true,
+        "string_decoder.StringDecoder": true
+      },
+      "globals": {
+        "Buffer.concat": true,
+        "Buffer.from": true,
+        "Buffer.isBuffer": true,
+        "_MP_NO_ITERATOR_SYMBOLS_": true,
+        "process": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache>minipass-pipeline": {
+      "builtin": {
+        "events": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>cacache>minipass-pipeline>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache>minipass-pipeline>minipass": {
+      "builtin": {
+        "events": true,
+        "stream": true,
+        "string_decoder.StringDecoder": true
+      },
+      "globals": {
+        "Buffer.concat": true,
+        "Buffer.from": true,
+        "Buffer.isBuffer": true,
+        "_MP_NO_ITERATOR_SYMBOLS_": true,
+        "process": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache>p-map": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>cacache>aggregate-error": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache>ssri": {
+      "builtin": {
+        "crypto.createHash": true,
+        "crypto.getHashes": true
+      },
+      "globals": {
+        "Buffer.from": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache>unique-filename": {
+      "builtin": {
+        "path.join": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>cacache>unique-filename>unique-slug": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>cacache>unique-filename>unique-slug": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>bin-links>write-file-atomic>imurmurhash": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>common-ancestor-path": {
+      "builtin": {
+        "path.normalize": true,
+        "path.parse": true,
+        "path.sep": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>hosted-git-info": {
+      "builtin": {
+        "url.URL": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>lru-cache": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>lru-cache": {
+      "globals": {
+        "AbortController": true,
+        "AbortSignal": true,
+        "_onabort": true,
+        "aborted": true,
+        "allowStale": true,
+        "allowStaleOnFetchAbort": true,
+        "allowStaleOnFetchRejection": true,
+        "console.error": true,
+        "heap": true,
+        "ignoreFetchAbort": true,
+        "length": true,
+        "maxEntrySize": true,
+        "noDeleteOnFetchRejection": true,
+        "noDeleteOnStaleGet": true,
+        "noDisposeOnSet": true,
+        "noUpdateTTL": true,
+        "onabort": true,
+        "performance": true,
+        "process": true,
+        "reason": true,
+        "setTimeout": true,
+        "signal": true,
+        "sizeCalculation": true,
+        "ttl": true,
+        "ttlAutopurge": true,
+        "ttlResolution": true,
+        "updateAgeOnGet": true,
+        "updateAgeOnHas": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>minimatch": {
+      "globals": {
+        "comment": true,
+        "console.error": true,
+        "empty": true,
+        "globParts": true,
+        "globSet": true,
+        "isWindows": true,
+        "negate": true,
+        "nocase": true,
+        "nonegate": true,
+        "options": true,
+        "partial": true,
+        "pattern": true,
+        "platform": true,
+        "preserveMultipleSlashes": true,
+        "process": true,
+        "regexp": true,
+        "set": true,
+        "type": true,
+        "windowsNoMagicRoot": true,
+        "windowsPathsNoEscape": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>minimatch>brace-expansion": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>minimatch>brace-expansion": {
+      "packages": {
+        "browserify>brace-expansion>balanced-match": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-install-checks": {
+      "globals": {
+        "process.arch": true,
+        "process.platform": true,
+        "process.report.getReport": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/config>semver": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-package-arg": {
+      "builtin": {
+        "os.homedir": true,
+        "path": true,
+        "url.URL": true
+      },
+      "globals": {
+        "FAKE_WINDOWS": true,
+        "process.cwd": true,
+        "process.platform": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-package-arg>hosted-git-info": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-package-arg>validate-npm-package-name": true,
+        "@lavamoat/aa>@npmcli/config>proc-log": true,
+        "@lavamoat/aa>@npmcli/config>semver": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-package-arg>hosted-git-info": {
+      "builtin": {
+        "url.URL": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-package-arg>lru-cache": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-package-arg>lru-cache": {
+      "globals": {
+        "AbortController": true,
+        "AbortSignal": true,
+        "_onabort": true,
+        "aborted": true,
+        "allowStale": true,
+        "allowStaleOnFetchAbort": true,
+        "allowStaleOnFetchRejection": true,
+        "console.error": true,
+        "heap": true,
+        "ignoreFetchAbort": true,
+        "length": true,
+        "maxEntrySize": true,
+        "noDeleteOnFetchRejection": true,
+        "noDeleteOnStaleGet": true,
+        "noDisposeOnSet": true,
+        "noUpdateTTL": true,
+        "onabort": true,
+        "performance": true,
+        "process": true,
+        "reason": true,
+        "setTimeout": true,
+        "signal": true,
+        "sizeCalculation": true,
+        "ttl": true,
+        "ttlAutopurge": true,
+        "ttlResolution": true,
+        "updateAgeOnGet": true,
+        "updateAgeOnHas": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-package-arg>validate-npm-package-name": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-package-arg>validate-npm-package-name>builtins": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-package-arg>validate-npm-package-name>builtins": {
+      "globals": {
+        "process.version": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/config>semver": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-pick-manifest": {
+      "globals": {
+        "process.version": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-install-checks": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-package-arg": true,
+        "@lavamoat/aa>@npmcli/config>read-package-json-fast>npm-normalize-package-bin": true,
+        "@lavamoat/aa>@npmcli/config>semver": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch": {
+      "builtin": {
+        "fs.readFileSync": true,
+        "querystring.parse": true,
+        "url.URL": true,
+        "url.format": true
+      },
+      "globals": {
+        "Buffer.from": true,
+        "Buffer.isBuffer": true,
+        "process.arch": true,
+        "process.env.NOPROXY": true,
+        "process.platform": true,
+        "process.version": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-package-arg": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-fetch": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-json-stream": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minizlib": true,
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true,
+        "@lavamoat/aa>@npmcli/config>proc-log": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen": {
+      "builtin": {
+        "dns.lookup": true,
+        "url.URL": true,
+        "url.format": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>cacache": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache>minipass-flush": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache>minipass-pipeline": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>http-cache-semantics": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>negotiator": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>ssri": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-fetch": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>promise-retry": true,
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent": {
+      "builtin": {
+        "dns.ADDRCONFIG": true,
+        "dns.lookup": true,
+        "events.once": true,
+        "net": true,
+        "timers/promises.setTimeout": true,
+        "tls": true
+      },
+      "globals": {
+        "AbortController": true,
+        "URL": true,
+        "clearTimeout": true,
+        "process.env": true,
+        "process.nextTick": true,
+        "setTimeout": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>agent-base": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>http-proxy-agent": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>https-proxy-agent": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>lru-cache": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>socks-proxy-agent": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>agent-base": {
+      "builtin": {
+        "http": true,
+        "https": true
+      },
+      "globals": {
+        "Buffer.concat": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>http-proxy-agent": {
+      "builtin": {
+        "events.once": true,
+        "net": true,
+        "tls": true
+      },
+      "globals": {
+        "Buffer.from": true,
+        "URL": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>agent-base": true,
+        "lavamoat-core>lavamoat-tofu>@babel/traverse>debug": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>https-proxy-agent": {
+      "builtin": {
+        "assert": true,
+        "net": true,
+        "tls": true
+      },
+      "globals": {
+        "Buffer.concat": true,
+        "Buffer.from": true,
+        "URL": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>agent-base": true,
+        "lavamoat-core>lavamoat-tofu>@babel/traverse>debug": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>lru-cache": {
+      "globals": {
+        "AbortController": true,
+        "AbortSignal": true,
+        "_onabort": true,
+        "aborted": true,
+        "allowStale": true,
+        "allowStaleOnFetchAbort": true,
+        "allowStaleOnFetchRejection": true,
+        "console.error": true,
+        "heap": true,
+        "ignoreFetchAbort": true,
+        "length": true,
+        "maxEntrySize": true,
+        "noDeleteOnFetchRejection": true,
+        "noDeleteOnStaleGet": true,
+        "noDisposeOnSet": true,
+        "noUpdateTTL": true,
+        "onabort": true,
+        "performance": true,
+        "process": true,
+        "reason": true,
+        "setTimeout": true,
+        "signal": true,
+        "sizeCalculation": true,
+        "ttl": true,
+        "ttlAutopurge": true,
+        "ttlResolution": true,
+        "updateAgeOnGet": true,
+        "updateAgeOnHas": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>socks-proxy-agent": {
+      "builtin": {
+        "dns": true,
+        "net": true,
+        "tls": true,
+        "url.URL": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>agent-base": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>socks-proxy-agent>socks": true,
+        "lavamoat-core>lavamoat-tofu>@babel/traverse>debug": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>socks-proxy-agent>socks": {
+      "builtin": {
+        "events.EventEmitter": true,
+        "net.Socket": true,
+        "net.isIPv4": true,
+        "net.isIPv6": true,
+        "stream.Duplex": true
+      },
+      "globals": {
+        "Buffer.allocUnsafe": true,
+        "Buffer.byteLength": true,
+        "Buffer.isBuffer": true,
+        "setImmediate": true,
+        "setTimeout": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>socks-proxy-agent>socks>ip": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>socks-proxy-agent>socks>smart-buffer": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>socks-proxy-agent>socks>ip": {
+      "builtin": {
+        "buffer.Buffer.alloc": true,
+        "os.networkInterfaces": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>@npmcli/agent>socks-proxy-agent>socks>smart-buffer": {
+      "builtin": {
+        "buffer.Buffer.isEncoding": true,
+        "buffer.Buffer.prototype": true
+      },
+      "globals": {
+        "Buffer.allocUnsafe": true,
+        "Buffer.byteLength": true,
+        "Buffer.isBuffer": true,
+        "Buffer.prototype.readBigInt64BE": true,
+        "Buffer.prototype.readBigInt64LE": true,
+        "Buffer.prototype.readBigUInt64BE": true,
+        "Buffer.prototype.readBigUInt64LE": true,
+        "Buffer.prototype.readDoubleBE": true,
+        "Buffer.prototype.readDoubleLE": true,
+        "Buffer.prototype.readFloatBE": true,
+        "Buffer.prototype.readFloatLE": true,
+        "Buffer.prototype.readInt16BE": true,
+        "Buffer.prototype.readInt16LE": true,
+        "Buffer.prototype.readInt32BE": true,
+        "Buffer.prototype.readInt32LE": true,
+        "Buffer.prototype.readInt8": true,
+        "Buffer.prototype.readUInt16BE": true,
+        "Buffer.prototype.readUInt16LE": true,
+        "Buffer.prototype.readUInt32BE": true,
+        "Buffer.prototype.readUInt32LE": true,
+        "Buffer.prototype.readUInt8": true,
+        "Buffer.prototype.writeBigInt64BE": true,
+        "Buffer.prototype.writeBigInt64LE": true,
+        "Buffer.prototype.writeBigUInt64BE": true,
+        "Buffer.prototype.writeBigUInt64LE": true,
+        "Buffer.prototype.writeDoubleBE": true,
+        "Buffer.prototype.writeDoubleLE": true,
+        "Buffer.prototype.writeFloatBE": true,
+        "Buffer.prototype.writeFloatLE": true,
+        "Buffer.prototype.writeInt16BE": true,
+        "Buffer.prototype.writeInt16LE": true,
+        "Buffer.prototype.writeInt32BE": true,
+        "Buffer.prototype.writeInt32LE": true,
+        "Buffer.prototype.writeInt8": true,
+        "Buffer.prototype.writeUInt16BE": true,
+        "Buffer.prototype.writeUInt16LE": true,
+        "Buffer.prototype.writeUInt32BE": true,
+        "Buffer.prototype.writeUInt32LE": true,
+        "Buffer.prototype.writeUInt8": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen>ssri": {
+      "builtin": {
+        "crypto.createHash": true,
+        "crypto.getHashes": true
+      },
+      "globals": {
+        "Buffer.from": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-fetch": {
+      "builtin": {
+        "http": true,
+        "https": true,
+        "url.URL": true
+      },
+      "globals": {
+        "Buffer": true,
+        "clearTimeout": true,
+        "process.env.NODE_TLS_REJECT_UNAUTHORIZED": true,
+        "setTimeout": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-fetch>encoding": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-fetch>minipass-sized": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minizlib": true,
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-fetch>encoding": {
+      "globals": {
+        "Buffer.from": true,
+        "console.error": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-fetch>encoding>iconv-lite": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-fetch>encoding>iconv-lite": {
+      "builtin": {
+        "stream": true,
+        "string_decoder.StringDecoder": true
+      },
+      "globals": {
+        "console.error": true
+      },
+      "packages": {
+        "browserify>crypto-browserify>public-encrypt>parse-asn1>asn1.js>safer-buffer": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-fetch>minipass-sized": {
+      "globals": {
+        "Buffer.from": true,
+        "Buffer.isBuffer": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-fetch>minipass-sized>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-fetch>minipass-sized>minipass": {
+      "builtin": {
+        "events": true,
+        "stream": true,
+        "string_decoder.StringDecoder": true
+      },
+      "globals": {
+        "Buffer.concat": true,
+        "Buffer.from": true,
+        "Buffer.isBuffer": true,
+        "_MP_NO_ITERATOR_SYMBOLS_": true,
+        "process": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-json-stream": {
+      "globals": {
+        "Buffer.from": true,
+        "Buffer.isBuffer": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-json-stream>minipass": true,
+        "browserify>JSONStream>jsonparse": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minipass-json-stream>minipass": {
+      "builtin": {
+        "events": true,
+        "stream": true,
+        "string_decoder.StringDecoder": true
+      },
+      "globals": {
+        "Buffer.concat": true,
+        "Buffer.from": true,
+        "Buffer.isBuffer": true,
+        "_MP_NO_ITERATOR_SYMBOLS_": true,
+        "process": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minizlib": {
+      "builtin": {
+        "assert": true,
+        "buffer.Buffer.alloc": true,
+        "buffer.Buffer.concat": true,
+        "buffer.Buffer.from": true,
+        "zlib": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minizlib>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minizlib>minipass": {
+      "builtin": {
+        "events": true,
+        "stream": true,
+        "string_decoder.StringDecoder": true
+      },
+      "globals": {
+        "Buffer.concat": true,
+        "Buffer.from": true,
+        "Buffer.isBuffer": true,
+        "_MP_NO_ITERATOR_SYMBOLS_": true,
+        "process": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npmlog": {
+      "builtin": {
+        "events.EventEmitter": true,
+        "util": true
+      },
+      "globals": {
+        "process.nextTick": true,
+        "process.stderr": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npmlog>are-we-there-yet": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>console-control-strings": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>set-blocking": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npmlog>are-we-there-yet": {
+      "builtin": {
+        "events": true,
+        "stream.Transform": true
+      },
+      "globals": {
+        "completion": true,
+        "finished": true,
+        "parentGroup": true,
+        "totalWeight": true,
+        "trackers": true,
+        "weight": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npmlog>gauge": {
+      "builtin": {
+        "util.format": true
+      },
+      "globals": {
+        "clearInterval": true,
+        "process": true,
+        "setImmediate": true,
+        "setInterval": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npmlog>console-control-strings": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>aproba": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>color-support": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>has-unicode": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>signal-exit": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>string-width": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>strip-ansi": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>wide-align": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>color-support": {
+      "globals": {
+        "process": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>has-unicode": {
+      "builtin": {
+        "os.type": true
+      },
+      "globals": {
+        "process.env.LANG": true,
+        "process.env.LC_ALL": true,
+        "process.env.LC_CTYPE": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>signal-exit": {
+      "globals": {
+        "count": true,
+        "emitted": true,
+        "id": true,
+        "listeners": true,
+        "process": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>string-width": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>emoji-regex": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>is-fullwidth-code-point": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>strip-ansi": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>strip-ansi": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>ansi-regex": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>wide-align": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>wide-align>string-width": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>wide-align>string-width": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>wide-align>emoji-regex": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>wide-align>is-fullwidth-code-point": true,
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>wide-align>strip-ansi": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>wide-align>strip-ansi": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npmlog>gauge>wide-align>ansi-regex": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>npmlog>set-blocking": {
+      "globals": {
+        "process.stderr": true,
+        "process.stdout": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote": {
+      "builtin": {
+        "crypto.createVerify": true,
+        "fs.chmod": true,
+        "fs.stat": true,
+        "fs/promises.mkdir": true,
+        "fs/promises.rm": true,
+        "os.homedir": true,
+        "os.tmpdir": true,
+        "path.basename": true,
+        "path.dirname": true,
+        "path.resolve": true,
+        "util.promisify": true
+      },
+      "globals": {
+        "Buffer.from": true,
+        "URL": true,
+        "process.env": true,
+        "process.execPath": true,
+        "process.getuid": true,
+        "process.pid": true,
+        "process.platform": true,
+        "process.version": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/installed-package-contents": true,
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/run-script": true,
+        "@lavamoat/aa>@npmcli/arborist>cacache": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-package-arg": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-pick-manifest": true,
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/git": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/promise-spawn": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>fs-minipass": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>npm-packlist": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>promise-retry": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>read-package-json": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>ssri": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>tar": true,
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true,
+        "@lavamoat/aa>@npmcli/config>proc-log": true,
+        "@lavamoat/aa>@npmcli/config>read-package-json-fast": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/git": {
+      "builtin": {
+        "fs.stat": true,
+        "fs/promises.mkdir": true,
+        "fs/promises.stat": true,
+        "path.basename": true,
+        "path.dirname": true,
+        "path.resolve": true,
+        "url.parse": true,
+        "util.promisify": true
+      },
+      "globals": {
+        "process.cwd": true,
+        "process.env": true,
+        "process.platform": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-pick-manifest": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/git>lru-cache": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/git>promise-inflight": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/git>which": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/promise-spawn": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>promise-retry": true,
+        "@lavamoat/aa>@npmcli/config>proc-log": true,
+        "@lavamoat/aa>@npmcli/config>semver": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/git>isexe": {
+      "builtin": {
+        "fs.statSync": true,
+        "fs/promises.stat": true
+      },
+      "globals": {
+        "process.env.PATHEXT": true,
+        "process.env._ISEXE_TEST_PLATFORM_": true,
+        "process.getgid": true,
+        "process.getgroups": true,
+        "process.getuid": true,
+        "process.platform": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/git>lru-cache": {
+      "globals": {
+        "AbortController": true,
+        "AbortSignal": true,
+        "_onabort": true,
+        "aborted": true,
+        "allowStale": true,
+        "allowStaleOnFetchAbort": true,
+        "allowStaleOnFetchRejection": true,
+        "console.error": true,
+        "heap": true,
+        "ignoreFetchAbort": true,
+        "length": true,
+        "maxEntrySize": true,
+        "noDeleteOnFetchRejection": true,
+        "noDeleteOnStaleGet": true,
+        "noDisposeOnSet": true,
+        "noUpdateTTL": true,
+        "onabort": true,
+        "performance": true,
+        "process": true,
+        "reason": true,
+        "setTimeout": true,
+        "signal": true,
+        "sizeCalculation": true,
+        "ttl": true,
+        "ttlAutopurge": true,
+        "ttlResolution": true,
+        "updateAgeOnGet": true,
+        "updateAgeOnHas": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/git>which": {
+      "builtin": {
+        "path.delimiter": true,
+        "path.join": true,
+        "path.posix.sep": true,
+        "path.sep": true
+      },
+      "globals": {
+        "process.cwd": true,
+        "process.env.PATH": true,
+        "process.env.PATHEXT": true,
+        "process.platform": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/git>isexe": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/promise-spawn": {
+      "builtin": {
+        "child_process.spawn": true,
+        "os.release": true
+      },
+      "globals": {
+        "Buffer.concat": true,
+        "process.env.ComSpec": true,
+        "process.env.PATH": true,
+        "process.env.PATHEXT": true,
+        "process.platform": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/promise-spawn>which": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/promise-spawn>isexe": {
+      "builtin": {
+        "fs.statSync": true,
+        "fs/promises.stat": true
+      },
+      "globals": {
+        "process.env.PATHEXT": true,
+        "process.env._ISEXE_TEST_PLATFORM_": true,
+        "process.getgid": true,
+        "process.getgroups": true,
+        "process.getuid": true,
+        "process.platform": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/promise-spawn>which": {
+      "builtin": {
+        "path.delimiter": true,
+        "path.join": true,
+        "path.posix.sep": true,
+        "path.sep": true
+      },
+      "globals": {
+        "process.cwd": true,
+        "process.env.PATH": true,
+        "process.env.PATHEXT": true,
+        "process.platform": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>pacote>@npmcli/promise-spawn>isexe": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>fs-minipass": {
+      "builtin": {
+        "events.EventEmitter": true,
+        "fs.close": true,
+        "fs.closeSync": true,
+        "fs.open": true,
+        "fs.openSync": true,
+        "fs.read": true,
+        "fs.readSync": true,
+        "fs.write": true,
+        "fs.writeSync": true,
+        "fs.writev": true
+      },
+      "globals": {
+        "Buffer.allocUnsafe": true,
+        "Buffer.from": true,
+        "process.nextTick": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>npm-packlist": {
+      "builtin": {
+        "fs.lstatSync": true,
+        "fs.readFileSync": true,
+        "path.basename": true,
+        "path.dirname": true,
+        "path.extname": true,
+        "path.join": true,
+        "path.relative": true,
+        "path.resolve": true,
+        "path.sep": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>pacote>npm-packlist>ignore-walk": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>npm-packlist>ignore-walk": {
+      "builtin": {
+        "events.EventEmitter": true,
+        "fs.lstat": true,
+        "fs.lstatSync": true,
+        "fs.readFile": true,
+        "fs.readFileSync": true,
+        "fs.readdir": true,
+        "fs.readdirSync": true,
+        "fs.stat": true,
+        "fs.statSync": true,
+        "path.basename": true,
+        "path.resolve": true
+      },
+      "globals": {
+        "process.cwd": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>minimatch": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>promise-retry": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>pacote>promise-retry>err-code": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>promise-retry>retry": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>promise-retry>retry": {
+      "globals": {
+        "clearTimeout": true,
+        "console.log": true,
+        "setTimeout": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>read-package-json": {
+      "builtin": {
+        "fs.access": true,
+        "fs.existsSync": true,
+        "fs.readFile": true,
+        "fs.stat": true,
+        "path.basename": true,
+        "path.dirname": true,
+        "path.extname": true,
+        "path.join": true,
+        "path.relative": true,
+        "path.resolve": true,
+        "path.sep": true,
+        "util.inspect": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>pacote>read-package-json>json-parse-even-better-errors": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>read-package-json>normalize-package-data": true,
+        "@lavamoat/aa>@npmcli/config>@npmcli/map-workspaces>glob": true,
+        "@lavamoat/aa>@npmcli/config>read-package-json-fast>npm-normalize-package-bin": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>read-package-json>hosted-git-info": {
+      "builtin": {
+        "url.URL": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>pacote>read-package-json>lru-cache": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>read-package-json>json-parse-even-better-errors": {
+      "globals": {
+        "Buffer.isBuffer": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>read-package-json>lru-cache": {
+      "globals": {
+        "AbortController": true,
+        "AbortSignal": true,
+        "_onabort": true,
+        "aborted": true,
+        "allowStale": true,
+        "allowStaleOnFetchAbort": true,
+        "allowStaleOnFetchRejection": true,
+        "console.error": true,
+        "heap": true,
+        "ignoreFetchAbort": true,
+        "length": true,
+        "maxEntrySize": true,
+        "noDeleteOnFetchRejection": true,
+        "noDeleteOnStaleGet": true,
+        "noDisposeOnSet": true,
+        "noUpdateTTL": true,
+        "onabort": true,
+        "performance": true,
+        "process": true,
+        "reason": true,
+        "setTimeout": true,
+        "signal": true,
+        "sizeCalculation": true,
+        "ttl": true,
+        "ttlAutopurge": true,
+        "ttlResolution": true,
+        "updateAgeOnGet": true,
+        "updateAgeOnHas": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>read-package-json>normalize-package-data": {
+      "builtin": {
+        "url.parse": true,
+        "util.format": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/package-json>normalize-package-data>validate-npm-package-license": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>read-package-json>hosted-git-info": true,
+        "@lavamoat/aa>@npmcli/config>semver": true,
+        "browserify>resolve>is-core-module": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>sigstore": {
+      "globals": {
+        "Buffer.isBuffer": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/bundle": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/core": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/sign": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/tuf": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/verify": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/bundle": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/protobuf-specs": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/core": {
+      "builtin": {
+        "crypto": true
+      },
+      "globals": {
+        "Buffer.alloc": true,
+        "Buffer.concat": true,
+        "Buffer.from": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/protobuf-specs": {
+      "globals": {
+        "Buffer.alloc": true,
+        "Buffer.from": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/sign": {
+      "builtin": {
+        "crypto": true,
+        "os": true
+      },
+      "globals": {
+        "Buffer.from": true,
+        "URL": true,
+        "process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN": true,
+        "process.env.ACTIONS_ID_TOKEN_REQUEST_URL": true,
+        "process.env.SIGSTORE_ID_TOKEN": true,
+        "process.version": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/bundle": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/core": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/tuf": {
+      "builtin": {
+        "fs": true,
+        "os": true,
+        "path": true
+      },
+      "globals": {
+        "Buffer.from": true,
+        "URL": true,
+        "process.env.LOCALAPPDATA": true,
+        "process.env.XDG_DATA_HOME": true,
+        "process.platform": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/protobuf-specs": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/tuf>tuf-js": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/tuf>tuf-js": {
+      "builtin": {
+        "fs": true,
+        "fs/promises": true,
+        "os": true,
+        "path": true,
+        "url.URL": true,
+        "util": true
+      },
+      "globals": {
+        "Buffer.concat": true,
+        "Buffer.from": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>make-fetch-happen": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/tuf>tuf-js>@tufjs/models": true,
+        "lavamoat-core>lavamoat-tofu>@babel/traverse>debug": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/tuf>tuf-js>@tufjs/models": {
+      "builtin": {
+        "crypto": true,
+        "util": true
+      },
+      "globals": {
+        "Buffer.concat": true,
+        "Buffer.from": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>minimatch": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/tuf>tuf-js>@tufjs/models>@tufjs/canonical-json": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/verify": {
+      "builtin": {
+        "util.isDeepStrictEqual": true
+      },
+      "globals": {
+        "Buffer.from": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>pacote>sigstore>@sigstore/core": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>ssri": {
+      "builtin": {
+        "crypto.createHash": true,
+        "crypto.getHashes": true
+      },
+      "globals": {
+        "Buffer.from": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>tar": {
+      "builtin": {
+        "assert": true,
+        "crypto.randomBytes": true,
+        "events": true,
+        "fs": true,
+        "path.basename": true,
+        "path.dirname": true,
+        "path.isAbsolute": true,
+        "path.join": true,
+        "path.parse": true,
+        "path.posix.basename": true,
+        "path.posix.dirname": true,
+        "path.posix.join": true,
+        "path.posix.parse": true,
+        "path.relative": true,
+        "path.resolve": true,
+        "path.win32.isAbsolute": true,
+        "path.win32.parse": true,
+        "process.nextTick": true
+      },
+      "globals": {
+        "Buffer.alloc": true,
+        "Buffer.allocUnsafe": true,
+        "Buffer.byteLength": true,
+        "Buffer.concat": true,
+        "Buffer.from": true,
+        "Buffer.isBuffer": true,
+        "__FAKE_TESTING_FS__": true,
+        "process.cwd": true,
+        "process.env.TESTING_TAR_FAKE_PLATFORM": true,
+        "process.env.USER": true,
+        "process.env.__FAKE_PLATFORM__": true,
+        "process.getgid": true,
+        "process.getuid": true,
+        "process.platform": true,
+        "process.umask": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>npm-registry-fetch>minizlib": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>tar>chownr": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>tar>fs-minipass": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>tar>minipass": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>tar>mkdirp": true,
+        "@lavamoat/aa>@npmcli/arborist>pacote>tar>yallist": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>tar>chownr": {
+      "builtin": {
+        "fs": true,
+        "path.resolve": true
+      },
+      "globals": {
+        "process.version": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>tar>fs-minipass": {
+      "builtin": {
+        "events.EventEmitter": true,
+        "fs.close": true,
+        "fs.closeSync": true,
+        "fs.open": true,
+        "fs.openSync": true,
+        "fs.read": true,
+        "fs.readSync": true,
+        "fs.write": true,
+        "fs.writeSync": true,
+        "fs.writev": true
+      },
+      "globals": {
+        "Buffer.allocUnsafe": true,
+        "Buffer.from": true,
+        "process.binding": true,
+        "process.nextTick": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>pacote>tar>fs-minipass>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>tar>fs-minipass>minipass": {
+      "builtin": {
+        "events": true,
+        "stream": true,
+        "string_decoder.StringDecoder": true
+      },
+      "globals": {
+        "Buffer.concat": true,
+        "Buffer.from": true,
+        "Buffer.isBuffer": true,
+        "_MP_NO_ITERATOR_SYMBOLS_": true,
+        "process": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>tar>minipass": {
+      "builtin": {
+        "events": true,
+        "stream": true,
+        "string_decoder.StringDecoder": true
+      },
+      "globals": {
+        "Buffer.concat": true,
+        "Buffer.from": true,
+        "Buffer.isBuffer": true,
+        "_MP_NO_ITERATOR_SYMBOLS_": true,
+        "process": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>pacote>tar>mkdirp": {
+      "builtin": {
+        "fs": true,
+        "path.dirname": true,
+        "path.parse": true,
+        "path.resolve": true,
+        "util.promisify": true
+      },
+      "globals": {
+        "process.env.__TESTING_MKDIRP_NODE_VERSION__": true,
+        "process.env.__TESTING_MKDIRP_PLATFORM__": true,
+        "process.platform": true,
+        "process.version": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>parse-conflict-json": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>parse-conflict-json>json-parse-even-better-errors": true,
+        "@lavamoat/aa>@npmcli/arborist>parse-conflict-json>just-diff": true,
+        "@lavamoat/aa>@npmcli/arborist>parse-conflict-json>just-diff-apply": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>parse-conflict-json>json-parse-even-better-errors": {
+      "globals": {
+        "Buffer.isBuffer": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>promise-call-limit": {
+      "builtin": {
+        "node:os": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>ssri": {
+      "builtin": {
+        "crypto.createHash": true,
+        "crypto.getHashes": true
+      },
+      "globals": {
+        "Buffer.from": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/arborist>ssri>minipass": {
+      "builtin": {
+        "events.EventEmitter": true,
+        "stream": true,
+        "string_decoder.StringDecoder": true
+      },
+      "globals": {
+        "Buffer.concat": true,
+        "Buffer.from": true,
+        "Buffer.isBuffer": true,
+        "dest": true,
+        "ondrain": true,
+        "opts": true,
+        "process": true,
+        "readable": true,
+        "src": true,
+        "writable": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config": {
+      "builtin": {
+        "fs.readFileSync": true,
+        "fs/promises.chmod": true,
+        "fs/promises.mkdir": true,
+        "fs/promises.readFile": true,
+        "fs/promises.stat": true,
+        "fs/promises.unlink": true,
+        "fs/promises.writeFile": true,
+        "os.homedir": true,
+        "os.networkInterfaces": true,
+        "path.dirname": true,
+        "path.join": true,
+        "path.resolve": true,
+        "querystring.parse": true,
+        "url.URL": true
+      },
+      "globals": {
+        "Buffer.from": true,
+        "process.arch": true,
+        "process.argv": true,
+        "process.cwd": true,
+        "process.emit": true,
+        "process.env": true,
+        "process.execPath": true,
+        "process.platform": true,
+        "process.stderr.isTTY": true,
+        "process.stdout.columns": true,
+        "process.stdout.isTTY": true,
+        "process.version": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/config>@npmcli/map-workspaces": true,
+        "@lavamoat/aa>@npmcli/config>ci-info": true,
+        "@lavamoat/aa>@npmcli/config>ini": true,
+        "@lavamoat/aa>@npmcli/config>nopt": true,
+        "@lavamoat/aa>@npmcli/config>proc-log": true,
+        "@lavamoat/aa>@npmcli/config>read-package-json-fast": true,
+        "@lavamoat/aa>@npmcli/config>semver": true,
+        "@lavamoat/aa>@npmcli/config>walk-up-path": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>@npmcli/map-workspaces": {
+      "builtin": {
+        "path.dirname": true,
+        "path.join.apply": true
+      },
+      "globals": {
+        "process.cwd": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>@npmcli/name-from-folder": true,
+        "@lavamoat/aa>@npmcli/arborist>minimatch": true,
+        "@lavamoat/aa>@npmcli/config>@npmcli/map-workspaces>glob": true,
+        "@lavamoat/aa>@npmcli/config>read-package-json-fast": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>@npmcli/map-workspaces>glob": {
+      "builtin": {
+        "url.fileURLToPath": true
+      },
+      "globals": {
+        "URL": true,
+        "aborted": true,
+        "absolute": true,
+        "absoluteChildren": true,
+        "cwd": true,
+        "dot": true,
+        "dotRelative": true,
+        "follow": true,
+        "hasWalkedCache": true,
+        "ignore": true,
+        "length": true,
+        "magicalBraces": true,
+        "mark": true,
+        "matchBase": true,
+        "matches": true,
+        "maxDepth": true,
+        "nobrace": true,
+        "nocase": true,
+        "nodir": true,
+        "noext": true,
+        "noglobstar": true,
+        "opts": true,
+        "path": true,
+        "pattern": true,
+        "patterns": true,
+        "paused": true,
+        "platform": true,
+        "process": true,
+        "realpath": true,
+        "relative": true,
+        "relativeChildren": true,
+        "results": true,
+        "root": true,
+        "scurry": true,
+        "seen": true,
+        "signal": true,
+        "stat": true,
+        "store": true,
+        "subwalks": true,
+        "windowsPathsNoEscape": true,
+        "withFileTypes": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>minimatch": true,
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true,
+        "@lavamoat/aa>@npmcli/config>@npmcli/map-workspaces>glob>path-scurry": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>@npmcli/map-workspaces>glob>path-scurry": {
+      "builtin": {
+        "fs": true,
+        "fs/promises.lstat": true,
+        "fs/promises.readdir": true,
+        "fs/promises.readlink": true,
+        "fs/promises.realpath": true,
+        "path.posix": true,
+        "path.win32": true,
+        "url.fileURLToPath": true
+      },
+      "globals": {
+        "URL": true,
+        "cwd": true,
+        "name": true,
+        "nocase": true,
+        "parent": true,
+        "process.cwd": true,
+        "process.platform": true,
+        "queueMicrotask": true,
+        "root": true,
+        "rootPath": true,
+        "roots": true,
+        "sep": true,
+        "splitSep": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/arborist>ssri>minipass": true,
+        "@lavamoat/aa>@npmcli/config>@npmcli/map-workspaces>glob>path-scurry>lru-cache": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>@npmcli/map-workspaces>glob>path-scurry>lru-cache": {
+      "globals": {
+        "AbortController": true,
+        "AbortSignal": true,
+        "_onabort": true,
+        "aborted": true,
+        "allowStale": true,
+        "allowStaleOnFetchAbort": true,
+        "allowStaleOnFetchRejection": true,
+        "console.error": true,
+        "heap": true,
+        "ignoreFetchAbort": true,
+        "length": true,
+        "maxEntrySize": true,
+        "noDeleteOnFetchRejection": true,
+        "noDeleteOnStaleGet": true,
+        "noDisposeOnSet": true,
+        "noUpdateTTL": true,
+        "onabort": true,
+        "performance": true,
+        "process": true,
+        "reason": true,
+        "setTimeout": true,
+        "signal": true,
+        "sizeCalculation": true,
+        "ttl": true,
+        "ttlAutopurge": true,
+        "ttlResolution": true,
+        "updateAgeOnGet": true,
+        "updateAgeOnHas": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>ci-info": {
+      "globals": {
+        "process.env": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>ini": {
+      "globals": {
+        "process": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>nopt": {
+      "builtin": {
+        "os.homedir": true,
+        "path": true,
+        "stream.Stream": true,
+        "url": true
+      },
+      "globals": {
+        "console.error": true,
+        "process.argv": true,
+        "process.env.DEBUG_NOPT": true,
+        "process.env.NOPT_DEBUG": true,
+        "process.platform": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/config>nopt>abbrev": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>proc-log": {
+      "globals": {
+        "process.emit": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>read-package-json-fast": {
+      "builtin": {
+        "fs/promises.lstat": true,
+        "fs/promises.readFile": true,
+        "fs/promises.readdir": true,
+        "path.dirname": true,
+        "path.join": true,
+        "path.relative": true,
+        "path.resolve": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/config>read-package-json-fast>json-parse-even-better-errors": true,
+        "@lavamoat/aa>@npmcli/config>read-package-json-fast>npm-normalize-package-bin": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>read-package-json-fast>json-parse-even-better-errors": {
+      "globals": {
+        "Buffer.isBuffer": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>read-package-json-fast>npm-normalize-package-bin": {
+      "builtin": {
+        "path.basename": true,
+        "path.join": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>semver": {
+      "globals": {
+        "console.error": true,
+        "process": true
+      },
+      "packages": {
+        "@lavamoat/aa>@npmcli/config>semver>lru-cache": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>semver>lru-cache": {
+      "packages": {
+        "@lavamoat/aa>@npmcli/config>semver>yallist": true
+      }
+    },
+    "@lavamoat/aa>@npmcli/config>walk-up-path": {
+      "builtin": {
+        "path.dirname": true,
+        "path.resolve": true
       }
     },
     "@lavamoat/lavapack": {
@@ -279,24 +2372,7 @@
         "watchify>defined": true
       }
     },
-    "browserify>browser-pack>safe-buffer": {
-      "builtin": {
-        "buffer": true
-      }
-    },
-    "browserify>browser-pack>through2": {
-      "builtin": {
-        "util.inherits": true
-      },
-      "globals": {
-        "process.nextTick": true
-      },
-      "packages": {
-        "browserify>browser-pack>through2>readable-stream": true,
-        "watchify>xtend": true
-      }
-    },
-    "browserify>browser-pack>through2>readable-stream": {
+    "browserify>browser-pack>readable-stream": {
       "builtin": {
         "events.EventEmitter": true,
         "stream": true,
@@ -311,18 +2387,35 @@
         "setImmediate": true
       },
       "packages": {
+        "browserify>browser-pack>isarray": true,
         "browserify>browser-pack>safe-buffer": true,
-        "browserify>browser-pack>through2>readable-stream>isarray": true,
-        "browserify>browser-pack>through2>readable-stream>string_decoder": true,
+        "browserify>browser-pack>string_decoder": true,
         "browserify>readable-stream>core-util-is": true,
         "browserify>readable-stream>process-nextick-args": true,
         "duplexify>inherits": true,
         "readable-stream>util-deprecate": true
       }
     },
-    "browserify>browser-pack>through2>readable-stream>string_decoder": {
+    "browserify>browser-pack>safe-buffer": {
+      "builtin": {
+        "buffer": true
+      }
+    },
+    "browserify>browser-pack>string_decoder": {
       "packages": {
         "browserify>browser-pack>safe-buffer": true
+      }
+    },
+    "browserify>browser-pack>through2": {
+      "builtin": {
+        "util.inherits": true
+      },
+      "globals": {
+        "process.nextTick": true
+      },
+      "packages": {
+        "browserify>browser-pack>readable-stream": true,
+        "watchify>xtend": true
       }
     },
     "browserify>cached-path-relative": {
@@ -345,25 +2438,21 @@
         "duplexify>inherits": true
       }
     },
+    "browserify>crypto-browserify>public-encrypt>parse-asn1>asn1.js>safer-buffer": {
+      "builtin": {
+        "buffer": true
+      },
+      "globals": {
+        "process.binding": true
+      }
+    },
     "browserify>deps-sort": {
       "packages": {
         "browserify>deps-sort>through2": true,
         "browserify>shasum-object": true
       }
     },
-    "browserify>deps-sort>through2": {
-      "builtin": {
-        "util.inherits": true
-      },
-      "globals": {
-        "process.nextTick": true
-      },
-      "packages": {
-        "browserify>deps-sort>through2>readable-stream": true,
-        "watchify>xtend": true
-      }
-    },
-    "browserify>deps-sort>through2>readable-stream": {
+    "browserify>deps-sort>readable-stream": {
       "builtin": {
         "events.EventEmitter": true,
         "stream": true,
@@ -378,23 +2467,35 @@
         "setImmediate": true
       },
       "packages": {
-        "browserify>deps-sort>through2>readable-stream>isarray": true,
-        "browserify>deps-sort>through2>readable-stream>safe-buffer": true,
-        "browserify>deps-sort>through2>readable-stream>string_decoder": true,
+        "browserify>deps-sort>isarray": true,
+        "browserify>deps-sort>safe-buffer": true,
+        "browserify>deps-sort>string_decoder": true,
         "browserify>readable-stream>core-util-is": true,
         "browserify>readable-stream>process-nextick-args": true,
         "duplexify>inherits": true,
         "readable-stream>util-deprecate": true
       }
     },
-    "browserify>deps-sort>through2>readable-stream>safe-buffer": {
+    "browserify>deps-sort>safe-buffer": {
       "builtin": {
         "buffer": true
       }
     },
-    "browserify>deps-sort>through2>readable-stream>string_decoder": {
+    "browserify>deps-sort>string_decoder": {
       "packages": {
-        "browserify>deps-sort>through2>readable-stream>safe-buffer": true
+        "browserify>deps-sort>safe-buffer": true
+      }
+    },
+    "browserify>deps-sort>through2": {
+      "builtin": {
+        "util.inherits": true
+      },
+      "globals": {
+        "process.nextTick": true
+      },
+      "packages": {
+        "browserify>deps-sort>readable-stream": true,
+        "watchify>xtend": true
       }
     },
     "browserify>duplexer2": {
@@ -417,28 +2518,33 @@
         "setImmediate": true
       },
       "packages": {
-        "browserify>duplexer2>readable-stream>isarray": true,
-        "browserify>duplexer2>readable-stream>safe-buffer": true,
-        "browserify>duplexer2>readable-stream>string_decoder": true,
+        "browserify>duplexer2>isarray": true,
+        "browserify>duplexer2>safe-buffer": true,
+        "browserify>duplexer2>string_decoder": true,
         "browserify>readable-stream>core-util-is": true,
         "browserify>readable-stream>process-nextick-args": true,
         "duplexify>inherits": true,
         "readable-stream>util-deprecate": true
       }
     },
-    "browserify>duplexer2>readable-stream>safe-buffer": {
+    "browserify>duplexer2>safe-buffer": {
       "builtin": {
         "buffer": true
       }
     },
-    "browserify>duplexer2>readable-stream>string_decoder": {
+    "browserify>duplexer2>string_decoder": {
       "packages": {
-        "browserify>duplexer2>readable-stream>safe-buffer": true
+        "browserify>duplexer2>safe-buffer": true
       }
     },
     "browserify>glob>path-is-absolute": {
       "globals": {
         "process.platform": true
+      }
+    },
+    "browserify>has": {
+      "globals": {
+        "process.argv": true
       }
     },
     "browserify>insert-module-globals": {
@@ -461,19 +2567,7 @@
         "watchify>xtend": true
       }
     },
-    "browserify>insert-module-globals>through2": {
-      "builtin": {
-        "util.inherits": true
-      },
-      "globals": {
-        "process.nextTick": true
-      },
-      "packages": {
-        "browserify>insert-module-globals>through2>readable-stream": true,
-        "watchify>xtend": true
-      }
-    },
-    "browserify>insert-module-globals>through2>readable-stream": {
+    "browserify>insert-module-globals>readable-stream": {
       "builtin": {
         "events.EventEmitter": true,
         "stream": true,
@@ -488,23 +2582,35 @@
         "setImmediate": true
       },
       "packages": {
-        "browserify>insert-module-globals>through2>readable-stream>isarray": true,
-        "browserify>insert-module-globals>through2>readable-stream>safe-buffer": true,
-        "browserify>insert-module-globals>through2>readable-stream>string_decoder": true,
+        "browserify>insert-module-globals>isarray": true,
+        "browserify>insert-module-globals>safe-buffer": true,
+        "browserify>insert-module-globals>string_decoder": true,
         "browserify>readable-stream>core-util-is": true,
         "browserify>readable-stream>process-nextick-args": true,
         "duplexify>inherits": true,
         "readable-stream>util-deprecate": true
       }
     },
-    "browserify>insert-module-globals>through2>readable-stream>safe-buffer": {
+    "browserify>insert-module-globals>safe-buffer": {
       "builtin": {
         "buffer": true
       }
     },
-    "browserify>insert-module-globals>through2>readable-stream>string_decoder": {
+    "browserify>insert-module-globals>string_decoder": {
       "packages": {
-        "browserify>insert-module-globals>through2>readable-stream>safe-buffer": true
+        "browserify>insert-module-globals>safe-buffer": true
+      }
+    },
+    "browserify>insert-module-globals>through2": {
+      "builtin": {
+        "util.inherits": true
+      },
+      "globals": {
+        "process.nextTick": true
+      },
+      "packages": {
+        "browserify>insert-module-globals>readable-stream": true,
+        "watchify>xtend": true
       }
     },
     "browserify>insert-module-globals>undeclared-identifiers": {
@@ -556,23 +2662,23 @@
         "setImmediate": true
       },
       "packages": {
-        "browserify>labeled-stream-splicer>stream-splicer>readable-stream>isarray": true,
-        "browserify>labeled-stream-splicer>stream-splicer>readable-stream>safe-buffer": true,
-        "browserify>labeled-stream-splicer>stream-splicer>readable-stream>string_decoder": true,
+        "browserify>labeled-stream-splicer>stream-splicer>isarray": true,
+        "browserify>labeled-stream-splicer>stream-splicer>safe-buffer": true,
+        "browserify>labeled-stream-splicer>stream-splicer>string_decoder": true,
         "browserify>readable-stream>core-util-is": true,
         "browserify>readable-stream>process-nextick-args": true,
         "duplexify>inherits": true,
         "readable-stream>util-deprecate": true
       }
     },
-    "browserify>labeled-stream-splicer>stream-splicer>readable-stream>safe-buffer": {
+    "browserify>labeled-stream-splicer>stream-splicer>safe-buffer": {
       "builtin": {
         "buffer": true
       }
     },
-    "browserify>labeled-stream-splicer>stream-splicer>readable-stream>string_decoder": {
+    "browserify>labeled-stream-splicer>stream-splicer>string_decoder": {
       "packages": {
-        "browserify>labeled-stream-splicer>stream-splicer>readable-stream>safe-buffer": true
+        "browserify>labeled-stream-splicer>stream-splicer>safe-buffer": true
       }
     },
     "browserify>module-deps": {
@@ -641,23 +2747,18 @@
         "setImmediate": true
       },
       "packages": {
-        "browserify>module-deps>readable-stream>isarray": true,
-        "browserify>module-deps>readable-stream>safe-buffer": true,
-        "browserify>module-deps>readable-stream>string_decoder": true,
+        "browserify>module-deps>isarray": true,
+        "browserify>module-deps>safe-buffer": true,
+        "browserify>module-deps>string_decoder": true,
         "browserify>readable-stream>core-util-is": true,
         "browserify>readable-stream>process-nextick-args": true,
         "duplexify>inherits": true,
         "readable-stream>util-deprecate": true
       }
     },
-    "browserify>module-deps>readable-stream>safe-buffer": {
+    "browserify>module-deps>safe-buffer": {
       "builtin": {
         "buffer": true
-      }
-    },
-    "browserify>module-deps>readable-stream>string_decoder": {
-      "packages": {
-        "browserify>module-deps>readable-stream>safe-buffer": true
       }
     },
     "browserify>module-deps>stream-combiner2": {
@@ -681,23 +2782,28 @@
         "setImmediate": true
       },
       "packages": {
-        "browserify>module-deps>stream-combiner2>readable-stream>isarray": true,
-        "browserify>module-deps>stream-combiner2>readable-stream>safe-buffer": true,
-        "browserify>module-deps>stream-combiner2>readable-stream>string_decoder": true,
+        "browserify>module-deps>stream-combiner2>isarray": true,
+        "browserify>module-deps>stream-combiner2>safe-buffer": true,
+        "browserify>module-deps>stream-combiner2>string_decoder": true,
         "browserify>readable-stream>core-util-is": true,
         "browserify>readable-stream>process-nextick-args": true,
         "duplexify>inherits": true,
         "readable-stream>util-deprecate": true
       }
     },
-    "browserify>module-deps>stream-combiner2>readable-stream>safe-buffer": {
+    "browserify>module-deps>stream-combiner2>safe-buffer": {
       "builtin": {
         "buffer": true
       }
     },
-    "browserify>module-deps>stream-combiner2>readable-stream>string_decoder": {
+    "browserify>module-deps>stream-combiner2>string_decoder": {
       "packages": {
-        "browserify>module-deps>stream-combiner2>readable-stream>safe-buffer": true
+        "browserify>module-deps>stream-combiner2>safe-buffer": true
+      }
+    },
+    "browserify>module-deps>string_decoder": {
+      "packages": {
+        "browserify>module-deps>safe-buffer": true
       }
     },
     "browserify>module-deps>through2": {
@@ -753,23 +2859,23 @@
         "setImmediate": true
       },
       "packages": {
-        "browserify>read-only-stream>readable-stream>isarray": true,
-        "browserify>read-only-stream>readable-stream>safe-buffer": true,
-        "browserify>read-only-stream>readable-stream>string_decoder": true,
+        "browserify>read-only-stream>isarray": true,
+        "browserify>read-only-stream>safe-buffer": true,
+        "browserify>read-only-stream>string_decoder": true,
         "browserify>readable-stream>core-util-is": true,
         "browserify>readable-stream>process-nextick-args": true,
         "duplexify>inherits": true,
         "readable-stream>util-deprecate": true
       }
     },
-    "browserify>read-only-stream>readable-stream>safe-buffer": {
+    "browserify>read-only-stream>safe-buffer": {
       "builtin": {
         "buffer": true
       }
     },
-    "browserify>read-only-stream>readable-stream>string_decoder": {
+    "browserify>read-only-stream>string_decoder": {
       "packages": {
-        "browserify>read-only-stream>readable-stream>safe-buffer": true
+        "browserify>read-only-stream>safe-buffer": true
       }
     },
     "browserify>readable-stream": {
@@ -787,11 +2893,11 @@
         "setImmediate": true
       },
       "packages": {
+        "browserify>isarray": true,
         "browserify>readable-stream>core-util-is": true,
-        "browserify>readable-stream>isarray": true,
         "browserify>readable-stream>process-nextick-args": true,
+        "browserify>safe-buffer": true,
         "browserify>string_decoder": true,
-        "browserify>string_decoder>safe-buffer": true,
         "duplexify>inherits": true,
         "readable-stream>util-deprecate": true
       }
@@ -857,6 +2963,11 @@
         "process.platform": true
       }
     },
+    "browserify>safe-buffer": {
+      "builtin": {
+        "buffer": true
+      }
+    },
     "browserify>shasum-object": {
       "builtin": {
         "crypto.createHash": true
@@ -870,12 +2981,7 @@
     },
     "browserify>string_decoder": {
       "packages": {
-        "browserify>string_decoder>safe-buffer": true
-      }
-    },
-    "browserify>string_decoder>safe-buffer": {
-      "builtin": {
-        "buffer": true
+        "browserify>safe-buffer": true
       }
     },
     "browserify>syntax-error": {
@@ -970,6 +3076,19 @@
     "duplexify>inherits": {
       "builtin": {
         "util.inherits": true
+      }
+    },
+    "external:../../node_modules/supports-color/index.js": {
+      "builtin": {
+        "os.release": true,
+        "tty.isatty": true
+      },
+      "globals": {
+        "process.env": true,
+        "process.platform": true
+      },
+      "packages": {
+        "browserify>has": true
       }
     },
     "json-stable-stringify": {
@@ -1177,8 +3296,8 @@
         "process": true
       },
       "packages": {
-        "lavamoat-core>lavamoat-tofu>@babel/traverse>debug>ms": true,
-        "source-map-explorer>chalk>supports-color": true
+        "external:../../node_modules/supports-color/index.js": true,
+        "lavamoat-core>lavamoat-tofu>@babel/traverse>debug>ms": true
       }
     },
     "lavamoat-core>merge-deep": {
@@ -1191,20 +3310,15 @@
     "lavamoat-core>merge-deep>clone-deep": {
       "packages": {
         "lavamoat-core>merge-deep>clone-deep>for-own": true,
-        "lavamoat-core>merge-deep>clone-deep>is-plain-object": true,
         "lavamoat-core>merge-deep>clone-deep>lazy-cache": true,
-        "lavamoat-core>merge-deep>clone-deep>shallow-clone": true,
-        "lavamoat-core>merge-deep>kind-of": true
+        "lavamoat-core>merge-deep>is-plain-object": true,
+        "lavamoat-core>merge-deep>kind-of": true,
+        "lavamoat-core>merge-deep>shallow-clone": true
       }
     },
     "lavamoat-core>merge-deep>clone-deep>for-own": {
       "packages": {
         "lavamoat-core>merge-deep>clone-deep>for-own>for-in": true
-      }
-    },
-    "lavamoat-core>merge-deep>clone-deep>is-plain-object": {
-      "packages": {
-        "lavamoat-core>merge-deep>clone-deep>is-plain-object>isobject": true
       }
     },
     "lavamoat-core>merge-deep>clone-deep>lazy-cache": {
@@ -1213,15 +3327,25 @@
         "process.env.UNLAZY": true
       }
     },
-    "lavamoat-core>merge-deep>clone-deep>shallow-clone": {
+    "lavamoat-core>merge-deep>is-plain-object": {
       "packages": {
-        "lavamoat-core>merge-deep>clone-deep>shallow-clone>is-extendable": true,
-        "lavamoat-core>merge-deep>clone-deep>shallow-clone>kind-of": true,
-        "lavamoat-core>merge-deep>clone-deep>shallow-clone>lazy-cache": true,
-        "lavamoat-core>merge-deep>clone-deep>shallow-clone>mixin-object": true
+        "lavamoat-core>merge-deep>is-plain-object>isobject": true
       }
     },
-    "lavamoat-core>merge-deep>clone-deep>shallow-clone>kind-of": {
+    "lavamoat-core>merge-deep>kind-of": {
+      "packages": {
+        "browserify>insert-module-globals>is-buffer": true
+      }
+    },
+    "lavamoat-core>merge-deep>shallow-clone": {
+      "packages": {
+        "lavamoat-core>merge-deep>shallow-clone>is-extendable": true,
+        "lavamoat-core>merge-deep>shallow-clone>kind-of": true,
+        "lavamoat-core>merge-deep>shallow-clone>lazy-cache": true,
+        "lavamoat-core>merge-deep>shallow-clone>mixin-object": true
+      }
+    },
+    "lavamoat-core>merge-deep>shallow-clone>kind-of": {
       "globals": {
         "Buffer": true
       },
@@ -1229,20 +3353,15 @@
         "browserify>insert-module-globals>is-buffer": true
       }
     },
-    "lavamoat-core>merge-deep>clone-deep>shallow-clone>lazy-cache": {
+    "lavamoat-core>merge-deep>shallow-clone>lazy-cache": {
       "globals": {
         "process.env.UNLAZY": true
       }
     },
-    "lavamoat-core>merge-deep>clone-deep>shallow-clone>mixin-object": {
+    "lavamoat-core>merge-deep>shallow-clone>mixin-object": {
       "packages": {
-        "lavamoat-core>merge-deep>clone-deep>shallow-clone>is-extendable": true,
-        "lavamoat-core>merge-deep>clone-deep>shallow-clone>mixin-object>for-in": true
-      }
-    },
-    "lavamoat-core>merge-deep>kind-of": {
-      "packages": {
-        "browserify>insert-module-globals>is-buffer": true
+        "lavamoat-core>merge-deep>shallow-clone>is-extendable": true,
+        "lavamoat-core>merge-deep>shallow-clone>mixin-object>for-in": true
       }
     },
     "readable-stream": {
@@ -1277,24 +3396,6 @@
     "readable-stream>util-deprecate": {
       "builtin": {
         "util.deprecate": true
-      }
-    },
-    "source-map-explorer>chalk>supports-color": {
-      "builtin": {
-        "os.release": true,
-        "tty.isatty": true
-      },
-      "globals": {
-        "process.env": true,
-        "process.platform": true
-      },
-      "packages": {
-        "source-map-explorer>chalk>supports-color>has-flag": true
-      }
-    },
-    "source-map-explorer>chalk>supports-color>has-flag": {
-      "globals": {
-        "process.argv": true
       }
     },
     "through2": {
