@@ -4,54 +4,168 @@
       "packages": {
       }
     },
-    "browserify>buffer": {
+    "external:../../../../../node_modules/buffer/index.js": {
       "globals": {
         "console": true
       },
       "packages": {
-        "browserify>buffer>base64-js": true,
-        "browserify>buffer>ieee754": true
+        "external:../../../../../node_modules/base64-js/index.js": true,
+        "external:../../../../../node_modules/ieee754/index.js": true
       }
     },
-    "browserify>events": {
+    "external:../../../../../node_modules/events/events.js": {
       "globals": {
         "console": true
       }
     },
-    "browserify>process": {
+    "external:../../../../../node_modules/keccak/js.js": {
+      "packages": {
+        "external:../../../../../node_modules/keccak/lib/api/index.js": true,
+        "external:../../../../../node_modules/keccak/lib/keccak.js": true
+      }
+    },
+    "external:../../../../../node_modules/keccak/lib/api/index.js": {
+      "packages": {
+        "external:../../../../../node_modules/keccak/lib/api/keccak.js": true,
+        "external:../../../../../node_modules/keccak/lib/api/shake.js": true
+      }
+    },
+    "external:../../../../../node_modules/keccak/lib/api/keccak.js": {
+      "packages": {
+        "external:../../../../../node_modules/buffer/index.js": true,
+        "external:../../../../../node_modules/readable-stream/readable-browser.js": true
+      }
+    },
+    "external:../../../../../node_modules/keccak/lib/api/shake.js": {
+      "packages": {
+        "external:../../../../../node_modules/buffer/index.js": true,
+        "external:../../../../../node_modules/readable-stream/readable-browser.js": true
+      }
+    },
+    "external:../../../../../node_modules/keccak/lib/keccak.js": {
+      "packages": {
+        "external:../../../../../node_modules/buffer/index.js": true,
+        "external:../../../../../node_modules/keccak/lib/keccak-state-unroll.js": true
+      }
+    },
+    "external:../../../../../node_modules/process/browser.js": {
       "globals": {
         "clearTimeout": true,
         "setTimeout": true
       }
     },
-    "keccak": {
+    "external:../../../../../node_modules/readable-stream/lib/_stream_duplex.js": {
       "packages": {
-        "browserify>buffer": true,
-        "keccak>readable-stream": true
+        "external:../../../../../node_modules/inherits/inherits_browser.js": true,
+        "external:../../../../../node_modules/process/browser.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/_stream_readable.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/_stream_writable.js": true
       }
     },
-    "keccak>readable-stream": {
+    "external:../../../../../node_modules/readable-stream/lib/_stream_passthrough.js": {
       "packages": {
-        "browserify>browser-resolve": true,
-        "browserify>buffer": true,
-        "browserify>events": true,
-        "browserify>inherits": true,
-        "browserify>process": true,
-        "keccak>readable-stream>string_decoder": true,
-        "keccak>readable-stream>util-deprecate": true
+        "external:../../../../../node_modules/inherits/inherits_browser.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/_stream_transform.js": true
       }
     },
-    "keccak>readable-stream>string_decoder": {
+    "external:../../../../../node_modules/readable-stream/lib/_stream_readable.js": {
       "packages": {
-        "keccak>readable-stream>string_decoder>safe-buffer": true
+        "external:../../../../../node_modules/browser-resolve/empty.js": true,
+        "external:../../../../../node_modules/buffer/index.js": true,
+        "external:../../../../../node_modules/events/events.js": true,
+        "external:../../../../../node_modules/inherits/inherits_browser.js": true,
+        "external:../../../../../node_modules/process/browser.js": true,
+        "external:../../../../../node_modules/readable-stream/errors-browser.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/_stream_duplex.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/async_iterator.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/buffer_list.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/destroy.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/from-browser.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/state.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/stream-browser.js": true,
+        "external:../../../../../node_modules/string_decoder/lib/string_decoder.js": true
       }
     },
-    "keccak>readable-stream>string_decoder>safe-buffer": {
+    "external:../../../../../node_modules/readable-stream/lib/_stream_transform.js": {
       "packages": {
-        "browserify>buffer": true
+        "external:../../../../../node_modules/inherits/inherits_browser.js": true,
+        "external:../../../../../node_modules/readable-stream/errors-browser.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/_stream_duplex.js": true
       }
     },
-    "keccak>readable-stream>util-deprecate": {
+    "external:../../../../../node_modules/readable-stream/lib/_stream_writable.js": {
+      "packages": {
+        "external:../../../../../node_modules/buffer/index.js": true,
+        "external:../../../../../node_modules/inherits/inherits_browser.js": true,
+        "external:../../../../../node_modules/process/browser.js": true,
+        "external:../../../../../node_modules/readable-stream/errors-browser.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/_stream_duplex.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/destroy.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/state.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/stream-browser.js": true,
+        "external:../../../../../node_modules/util-deprecate/browser.js": true
+      }
+    },
+    "external:../../../../../node_modules/readable-stream/lib/internal/streams/async_iterator.js": {
+      "packages": {
+        "external:../../../../../node_modules/process/browser.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/end-of-stream.js": true
+      }
+    },
+    "external:../../../../../node_modules/readable-stream/lib/internal/streams/buffer_list.js": {
+      "packages": {
+        "external:../../../../../node_modules/browser-resolve/empty.js": true,
+        "external:../../../../../node_modules/buffer/index.js": true
+      }
+    },
+    "external:../../../../../node_modules/readable-stream/lib/internal/streams/destroy.js": {
+      "packages": {
+        "external:../../../../../node_modules/process/browser.js": true
+      }
+    },
+    "external:../../../../../node_modules/readable-stream/lib/internal/streams/end-of-stream.js": {
+      "packages": {
+        "external:../../../../../node_modules/readable-stream/errors-browser.js": true
+      }
+    },
+    "external:../../../../../node_modules/readable-stream/lib/internal/streams/pipeline.js": {
+      "packages": {
+        "external:../../../../../node_modules/readable-stream/errors-browser.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/end-of-stream.js": true
+      }
+    },
+    "external:../../../../../node_modules/readable-stream/lib/internal/streams/state.js": {
+      "packages": {
+        "external:../../../../../node_modules/readable-stream/errors-browser.js": true
+      }
+    },
+    "external:../../../../../node_modules/readable-stream/lib/internal/streams/stream-browser.js": {
+      "packages": {
+        "external:../../../../../node_modules/events/events.js": true
+      }
+    },
+    "external:../../../../../node_modules/readable-stream/readable-browser.js": {
+      "packages": {
+        "external:../../../../../node_modules/readable-stream/lib/_stream_duplex.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/_stream_passthrough.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/_stream_readable.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/_stream_transform.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/_stream_writable.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/end-of-stream.js": true,
+        "external:../../../../../node_modules/readable-stream/lib/internal/streams/pipeline.js": true
+      }
+    },
+    "external:../../../../../node_modules/safe-buffer/index.js": {
+      "packages": {
+        "external:../../../../../node_modules/buffer/index.js": true
+      }
+    },
+    "external:../../../../../node_modules/string_decoder/lib/string_decoder.js": {
+      "packages": {
+        "external:../../../../../node_modules/safe-buffer/index.js": true
+      }
+    },
+    "external:../../../../../node_modules/util-deprecate/browser.js": {
       "globals": {
         "console.trace": true,
         "console.warn": true,
