@@ -135,10 +135,10 @@ test('generatePolicy - policy endows "process" properly', async (t) => {
     resources: {
       one: {
         packages: {
-          'browserify>process': true,
+          'process': true,
         },
       },
-      'browserify>process': {
+      'process': {
         globals: {
           clearTimeout: true,
           setTimeout: true,
