@@ -9,8 +9,11 @@ const { createSesWorkaroundsTransform } = require('./sesTransforms')
 const { loadCanonicalNameMap } = require('@lavamoat/aa')
 const browserResolve = require('browser-resolve')
 
+const POLICY_OPTIONS_ALLOWLIST = ['globals', 'packages']
+const POLICY_VALUES_ALLOWLIST = [true, 'write']
+
 // these are the reccomended arguments for lavaMoat to work well with browserify
-const reccomendedArgs = {
+const recommendedArgs = {
   // this option helps with parsing global usage
   insertGlobalVars: {
     global: false,
@@ -26,7 +29,7 @@ const reccomendedArgs = {
 module.exports = plugin
 module.exports.createLavamoatPacker = createLavamoatPacker
 module.exports.loadPolicy = loadPolicyFromPluginOpts
-module.exports.args = reccomendedArgs
+module.exports.args = recommendedArgs
 
 function plugin(browserify, pluginOpts) {
   // pluginOpts.policy is policy path
@@ -321,27 +324,25 @@ function validatePolicy(policy) {
   Object.entries(policy.resources).forEach(([, packageOpts]) => {
     const packageOptions = Object.keys(packageOpts)
     const packageEntries = Object.values(packageOpts)
-    const optionsWhitelist = ['globals', 'packages']
-    const valuesWhitelist = [true, 'write']
 
-    if (
-      !packageOptions.every((packageOpt) =>
-        optionsWhitelist.includes(packageOpt)
-      )
-    ) {
+    const unrecognizedOptions = packageOptions.filter(
+      (packageOpt) => !POLICY_OPTIONS_ALLOWLIST.includes(packageOpt)
+    )
+    if (unrecognizedOptions.length) {
       throw new Error(
-        "LavaMoat - Unrecognized package options. Expected 'globals' or 'packages'"
+        `LavaMoat - Unrecognized package option(s): ${JSON.stringify(unrecognizedOptions)}. Expected any of: ${JSON.stringify(POLICY_OPTIONS_ALLOWLIST)}`
       )
     }
 
     packageEntries.forEach((entry) => {
-      Object.values(entry).forEach((value) => {
-        if (!valuesWhitelist.includes(value)) {
-          throw new Error(
-            "LavaMoat - Globals or packages endowments must be equal to 'true'"
-          )
-        }
-      })
+      const unrecognizedValues = Object.entries(entry).filter(
+        ([, value]) => !POLICY_VALUES_ALLOWLIST.includes(value)
+      )
+      if (unrecognizedValues.length) {
+        throw new Error(
+          `LavaMoat - Unrecognized endowment value(s) for: ${JSON.stringify(unrecognizedValues.map(([key]) => key))}. Expected any of: ${JSON.stringify(POLICY_VALUES_ALLOWLIST)}`
+        )
+      }
     })
   })
 }
