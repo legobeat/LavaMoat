@@ -18,21 +18,11 @@ const skipOnWindows = isWindows
  */
 const PACKAGE_JSON = 'package.json'
 
-/**
- * Execute allow-scripts binaries with the given arguments
- *
- * @param {any} t Ava test object
- * @param {string[]} args Arguments to pass
- * @param {string} cwd Working directory to execute command from
- * @returns {{ stderr: string; stdout: string; status: number }} Process result
- */
-const run = (t, args, cwd) => {
-  // Path to the allow-scripts executable
-  const ALLOW_SCRIPTS_BIN = require.resolve('../src/cli')
+const runCmd = (t, cmd, args, cwd) => {
   const options = realisticEnvOptions(cwd)
   const result = spawnSync(
-    process.execPath,
-    [ALLOW_SCRIPTS_BIN, ...args],
+    cmd,
+    args,
     options
   )
 
@@ -61,6 +51,20 @@ const run = (t, args, cwd) => {
     stderr: result.stderr,
     stdout: result.stdout,
   }
+}
+
+/**
+ * Execute allow-scripts binaries with the given arguments
+ *
+ * @param {any} t Ava test object
+ * @param {string[]} args Arguments to pass
+ * @param {string} cwd Working directory to execute command from
+ * @returns {{ stderr: string; stdout: string; status: number }} Process result
+ */
+const run = (t, args, cwd) => {
+  // Path to the allow-scripts executable
+  const ALLOW_SCRIPTS_BIN = require.resolve('../src/cli')
+  return runCmd(t, process.execPath, [ALLOW_SCRIPTS_BIN, ...args], cwd)
 }
 
 test('cli - auto command', (t) => {
