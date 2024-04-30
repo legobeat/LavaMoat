@@ -6,7 +6,10 @@ const { spawnSync } = require('node:child_process')
 const { pathToFileURL } = require('node:url')
 
 const isWindows = os.platform() === 'win32'
+const COREPACK_CMD = isWindows ? 'corepack.cmd' : 'corepack'
 const NPM_CMD = isWindows ? 'npm.cmd' : 'npm'
+const YARN_CMD = isWindows ? 'yarn.cmd' : 'yarn'
+
 /* eslint-disable ava/no-skip-test */
 const skipOnWindows = isWindows
   ? (description, ...args) =>
@@ -18,21 +21,11 @@ const skipOnWindows = isWindows
  */
 const PACKAGE_JSON = 'package.json'
 
-/**
- * Execute allow-scripts binaries with the given arguments
- *
- * @param {any} t Ava test object
- * @param {string[]} args Arguments to pass
- * @param {string} cwd Working directory to execute command from
- * @returns {{ stderr: string; stdout: string; status: number }} Process result
- */
-const run = (t, args, cwd) => {
-  // Path to the allow-scripts executable
-  const ALLOW_SCRIPTS_BIN = require.resolve('../src/cli')
+const runCmd = (t, cmd, args, cwd) => {
   const options = realisticEnvOptions(cwd)
   const result = spawnSync(
-    process.execPath,
-    [ALLOW_SCRIPTS_BIN, ...args],
+    cmd,
+    args,
     options
   )
 
@@ -61,6 +54,20 @@ const run = (t, args, cwd) => {
     stderr: result.stderr,
     stdout: result.stdout,
   }
+}
+
+/**
+ * Execute allow-scripts binaries with the given arguments
+ *
+ * @param {any} t Ava test object
+ * @param {string[]} args Arguments to pass
+ * @param {string} cwd Working directory to execute command from
+ * @returns {{ stderr: string; stdout: string; status: number }} Process result
+ */
+const run = (t, args, cwd) => {
+  // Path to the allow-scripts executable
+  const ALLOW_SCRIPTS_BIN = require.resolve('../src/cli')
+  return runCmd(t, process.execPath, [ALLOW_SCRIPTS_BIN, ...args], cwd)
 }
 
 test('cli - auto command', (t) => {
@@ -179,6 +186,53 @@ test('cli - run command - good dep at the root', (t) => {
   // with
   // "preinstall": "touch /tmp/$( date '+%Y-%m-%d_%H-%M-%S' )"
 })
+
+test('cli - yarn v1 install - good dep at the root', (t) => {
+  // set up the directories
+  const projectRoot = path.join(__dirname, 'projects', '6')
+
+  // clean up from a previous run
+  fs.rmSync(path.join(projectRoot, 'node_modules'), {
+    recursive: true,
+    force: true,
+  })
+
+  // run package installation
+  runCmd(t, COREPACK_CMD, ['install'], projectRoot)
+  runCmd(t, COREPACK_CMD, ['enable'], projectRoot)
+  const result = runCmd(t, YARN_CMD, ['install', '--prefer-offline'], projectRoot)
+  t.deepEqual(result.stderr.toString().split('\n'), [''])
+
+  t.true(
+    fs.existsSync(path.join(projectRoot, 'node_modules', 'good_dep', 'good-executed'))
+  )
+  t.false(
+    fs.existsSync(path.join(projectRoot, 'node_modules', 'evil_dep', 'evil-executed'))
+  )
+})
+
+test('cli - npm v10 install - good dep at the root', (t) => {
+  // set up the directories
+  const projectRoot = path.join(__dirname, 'projects', '7')
+
+  // clean up from a previous run
+  fs.rmSync(path.join(projectRoot, 'node_modules'), {
+    recursive: true,
+    force: true,
+  })
+
+  // run package installation
+  const result = runCmd(t, NPM_CMD, ['ci'], projectRoot)
+  t.deepEqual(result.stderr.toString().split('\n'), [''])
+
+  t.true(
+    fs.existsSync(path.join(projectRoot, 'deps', 'good_dep', 'good-executed'))
+  )
+  t.false(
+    fs.existsSync(path.join(projectRoot, 'deps', 'evil_dep', 'evil-executed'))
+  )
+})
+
 skipOnWindows(
   'cli - run command - good dep at the root with experimental bins',
   (t) => {
