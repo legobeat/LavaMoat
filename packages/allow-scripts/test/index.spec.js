@@ -211,6 +211,28 @@ test('cli - yarn v1 install - good dep at the root', (t) => {
   )
 })
 
+test('cli - npm v10 install - good dep at the root', (t) => {
+  // set up the directories
+  const projectRoot = path.join(__dirname, 'projects', '7')
+
+  // clean up from a previous run
+  fs.rmSync(path.join(projectRoot, 'node_modules'), {
+    recursive: true,
+    force: true,
+  })
+
+  // run package installation
+  const result = runCmd(t, NPM_CMD, ['ci'], projectRoot)
+  t.deepEqual(result.stderr.toString().split('\n'), [''])
+
+  t.true(
+    fs.existsSync(path.join(projectRoot, 'deps', 'good_dep', 'good-executed'))
+  )
+  t.false(
+    fs.existsSync(path.join(projectRoot, 'deps', 'evil_dep', 'evil-executed'))
+  )
+})
+
 skipOnWindows(
   'cli - run command - good dep at the root with experimental bins',
   (t) => {
