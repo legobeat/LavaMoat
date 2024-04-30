@@ -6,7 +6,10 @@ const { spawnSync } = require('node:child_process')
 const { pathToFileURL } = require('node:url')
 
 const isWindows = os.platform() === 'win32'
+const COREPACK_CMD = isWindows ? 'corepack.cmd' : 'corepack'
 const NPM_CMD = isWindows ? 'npm.cmd' : 'npm'
+const YARN_CMD = isWindows ? 'yarn.cmd' : 'yarn'
+
 /* eslint-disable ava/no-skip-test */
 const skipOnWindows = isWindows
   ? (description, ...args) =>
@@ -183,6 +186,31 @@ test('cli - run command - good dep at the root', (t) => {
   // with
   // "preinstall": "touch /tmp/$( date '+%Y-%m-%d_%H-%M-%S' )"
 })
+
+test('cli - yarn v1 install - good dep at the root', (t) => {
+  // set up the directories
+  const projectRoot = path.join(__dirname, 'projects', '6')
+
+  // clean up from a previous run
+  fs.rmSync(path.join(projectRoot, 'node_modules'), {
+    recursive: true,
+    force: true,
+  })
+
+  // run package installation
+  runCmd(t, COREPACK_CMD, ['install'], projectRoot)
+  runCmd(t, COREPACK_CMD, ['enable'], projectRoot)
+  const result = runCmd(t, YARN_CMD, ['install', '--prefer-offline'], projectRoot)
+  t.deepEqual(result.stderr.toString().split('\n'), [''])
+
+  t.true(
+    fs.existsSync(path.join(projectRoot, 'node_modules', 'good_dep', 'good-executed'))
+  )
+  t.false(
+    fs.existsSync(path.join(projectRoot, 'node_modules', 'evil_dep', 'evil-executed'))
+  )
+})
+
 skipOnWindows(
   'cli - run command - good dep at the root with experimental bins',
   (t) => {

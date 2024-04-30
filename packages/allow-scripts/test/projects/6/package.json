@@ -1,0 +1,31 @@
+{
+  "name": "2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "aaa": "file:./deps/aaa",
+    "bbb": "file:./deps/bbb",
+    "good_dep": "file:./deps/good_dep"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "yarn@1.22.22",
+  "engines": {
+    "yarn": "1.22.22"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "good_dep": true,
+      "bbb>evil_dep": false
+    },
+    "allowBins": {
+      "good": "node_modules/good_dep/index.js"
+    }
+  }
+}

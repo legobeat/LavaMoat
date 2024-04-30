@@ -1,0 +1,13 @@
+{
+	"name": "evil_dep",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "touch evil-executed"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
