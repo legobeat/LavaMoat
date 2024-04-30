@@ -33,6 +33,47 @@
     * @lavamoat/lavapack bumped from ^6.1.1 to ^6.1.2
     * lavamoat-core bumped from ^15.2.0 to ^15.2.1
 
+## [18.0.0](https://github.com/legobeat/LavaMoat/compare/lavamoat-browserify-v17.0.7...lavamoat-browserify-v18.0.0) (2024-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* The minimum supported Node.js version is now v16.20.0.
+
+### Features
+
+* **core:** add overrideTaming: 'severe' for improved developer experience under lavamoat ([#730](https://github.com/legobeat/LavaMoat/issues/730)) ([20e4f76](https://github.com/legobeat/LavaMoat/commit/20e4f764dfdabcf21c7e72ad45fcfeaf45fd2b6c))
+* node20 ([ef3a0da](https://github.com/legobeat/LavaMoat/commit/ef3a0da9960d7f5734e3d4180ebafdae2432a260))
+
+
+### Bug Fixes
+
+* **browserify,node,tofu,viz:** bump babel packages ([4e12040](https://github.com/legobeat/LavaMoat/commit/4e12040945897983456dce9b83a174e116c99f66))
+* **browserify/test:** result output references in error handling ([791a6af](https://github.com/legobeat/LavaMoat/commit/791a6af4f8bdbf02f4415dce643e6f7991578dcf))
+* **deps/browserify,viz:** pify@4.0.1-&gt;5.0.0 ([0feeeb2](https://github.com/legobeat/LavaMoat/commit/0feeeb2725e9fbba9bebb54e50c2a9d135870c60))
+* **deps:** pin dependencies ([4006c1f](https://github.com/legobeat/LavaMoat/commit/4006c1f386c3024e8a8092ded9b98ede20de084e))
+* **deps:** update babel monorepo ([246ec25](https://github.com/legobeat/LavaMoat/commit/246ec256790a0a2cb993d5895ae13a0b716da1c6))
+* **deps:** update babel monorepo ([e30facc](https://github.com/legobeat/LavaMoat/commit/e30facc83fd9506310bc66df34970b599243eb47))
+* **deps:** update dependency concat-stream to v2 ([a7d9279](https://github.com/legobeat/LavaMoat/commit/a7d9279652198db3bf62687459dcce971738206a))
+* **deps:** update dependency convert-source-map to v2.0.0 ([f91b369](https://github.com/legobeat/LavaMoat/commit/f91b36962dc52fd63c824e6428589202d9a5535e))
+* **deps:** update dependency duplexify to v4.1.3 ([c7afaf4](https://github.com/legobeat/LavaMoat/commit/c7afaf4a2eecb16784fb5185ee9d69f696034e4d))
+* **deps:** update dependency json-stable-stringify to v1.1.1 ([7d28e79](https://github.com/legobeat/LavaMoat/commit/7d28e79a5430f1f7c3987fc128e800efe590dd2a))
+* **deps:** update dependency readable-stream to v4 ([2a2c624](https://github.com/legobeat/LavaMoat/commit/2a2c624866cb7699ca3c1cf765f44118d2b88f1f))
+* **deps:** update dependency source-map to v0.7.4 ([1274a56](https://github.com/legobeat/LavaMoat/commit/1274a56021be68fe4cbc19108a18fe7e803205b4))
+* **deps:** update dependency through2 to v4 ([f847a36](https://github.com/legobeat/LavaMoat/commit/f847a368528b8fdbfcac9de845e82bd2c8274ba2))
+* drop Node.js v14 ([#729](https://github.com/legobeat/LavaMoat/issues/729)) ([10c667b](https://github.com/legobeat/LavaMoat/commit/10c667bd88eaabf60a8fd8e4493cc7676848b201))
+* normalize all package versions ([0800c11](https://github.com/legobeat/LavaMoat/commit/0800c113c3504af312d904c48eb9a6844b10d6b1))
+* **webpack:** prevent lockdown from being minified ([aa195e5](https://github.com/legobeat/LavaMoat/commit/aa195e5c0ba663cda67189fd4ecd7aa62b2a1484))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @lavamoat/aa bumped from ^4.2.0 to ^5.0.0
+    * @lavamoat/lavapack bumped from ^6.1.3 to ^7.0.0
+    * lavamoat-core bumped from ^15.3.0 to ^16.0.0
+
 ## [17.0.7](https://github.com/LavaMoat/LavaMoat/compare/lavamoat-browserify-v17.0.6...lavamoat-browserify-v17.0.7) (2024-03-26)
 
 

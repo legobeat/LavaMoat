@@ -19,6 +19,43 @@
     * lavamoat-core bumped from ^15.2.0 to ^15.2.1
     * lavamoat-tofu bumped from ^7.2.1 to ^7.2.2
 
+## [9.0.0](https://github.com/legobeat/LavaMoat/compare/lavamoat-v8.0.6...lavamoat-v9.0.0) (2024-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* The minimum supported Node.js version is now v16.20.0.
+
+### Features
+
+* **core:** add overrideTaming: 'severe' for improved developer experience under lavamoat ([#730](https://github.com/legobeat/LavaMoat/issues/730)) ([20e4f76](https://github.com/legobeat/LavaMoat/commit/20e4f764dfdabcf21c7e72ad45fcfeaf45fd2b6c))
+* node20 ([ef3a0da](https://github.com/legobeat/LavaMoat/commit/ef3a0da9960d7f5734e3d4180ebafdae2432a260))
+
+
+### Bug Fixes
+
+* **browserify,node,tofu,viz:** bump babel packages ([4e12040](https://github.com/legobeat/LavaMoat/commit/4e12040945897983456dce9b83a174e116c99f66))
+* **deps:** pin dependencies ([4006c1f](https://github.com/legobeat/LavaMoat/commit/4006c1f386c3024e8a8092ded9b98ede20de084e))
+* **deps:** update babel monorepo ([246ec25](https://github.com/legobeat/LavaMoat/commit/246ec256790a0a2cb993d5895ae13a0b716da1c6))
+* **deps:** update babel monorepo ([e30facc](https://github.com/legobeat/LavaMoat/commit/e30facc83fd9506310bc66df34970b599243eb47))
+* **deps:** update dependency json-stable-stringify to v1.1.1 ([7d28e79](https://github.com/legobeat/LavaMoat/commit/7d28e79a5430f1f7c3987fc128e800efe590dd2a))
+* **deps:** update dependency node-gyp-build to v4.6.1 ([570e00f](https://github.com/legobeat/LavaMoat/commit/570e00fcf70535e8c1abb9ee117d873130283cca))
+* **deps:** update dependency node-gyp-build to v4.8.0 ([f25d495](https://github.com/legobeat/LavaMoat/commit/f25d4957b1abb522d13697ef2d2323485ec51597))
+* **deps:** update dependency yargs to v17.7.2 ([a1b21d3](https://github.com/legobeat/LavaMoat/commit/a1b21d3db1904d05cd9e82bc62eb56dfafb76be2))
+* drop Node.js v14 ([#729](https://github.com/legobeat/LavaMoat/issues/729)) ([10c667b](https://github.com/legobeat/LavaMoat/commit/10c667bd88eaabf60a8fd8e4493cc7676848b201))
+* **lavamoat:** update for ESM support in policy gen ([612b9f9](https://github.com/legobeat/LavaMoat/commit/612b9f9302dd04d2cd1fbe88c08bd46af5f70775))
+* **node:** remove unused props from LavaMoatOpts type ([7c9ae4a](https://github.com/legobeat/LavaMoat/commit/7c9ae4a2c8e4f65806eb59fe2c56b75212a5ab23))
+* normalize all package versions ([0800c11](https://github.com/legobeat/LavaMoat/commit/0800c113c3504af312d904c48eb9a6844b10d6b1))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @lavamoat/aa bumped from ^4.2.0 to ^5.0.0
+    * lavamoat-core bumped from ^15.3.0 to ^16.0.0
+    * lavamoat-tofu bumped from ^7.2.3 to ^8.0.0
+
 ## [8.0.6](https://github.com/LavaMoat/LavaMoat/compare/lavamoat-v8.0.5...lavamoat-v8.0.6) (2024-03-26)
 
 

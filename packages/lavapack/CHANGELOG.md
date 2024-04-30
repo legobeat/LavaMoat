@@ -24,6 +24,39 @@
   * dependencies
     * lavamoat-core bumped from ^15.2.0 to ^15.2.1
 
+## [7.0.0](https://github.com/legobeat/LavaMoat/compare/lavapack-v6.1.3...lavapack-v7.0.0) (2024-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* The minimum supported Node.js version is now v16.20.0.
+
+### Features
+
+* **lavapack:** check syntax of a module independently of browserify's own check ([9c38cd4](https://github.com/legobeat/LavaMoat/commit/9c38cd47e7875dde53349dd34971c74ce34004d9))
+* node20 ([ef3a0da](https://github.com/legobeat/LavaMoat/commit/ef3a0da9960d7f5734e3d4180ebafdae2432a260))
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([4006c1f](https://github.com/legobeat/LavaMoat/commit/4006c1f386c3024e8a8092ded9b98ede20de084e))
+* **deps:** update dependency convert-source-map to v2.0.0 ([f91b369](https://github.com/legobeat/LavaMoat/commit/f91b36962dc52fd63c824e6428589202d9a5535e))
+* **deps:** update dependency json-stable-stringify to v1.1.1 ([7d28e79](https://github.com/legobeat/LavaMoat/commit/7d28e79a5430f1f7c3987fc128e800efe590dd2a))
+* **deps:** update dependency readable-stream to v4 ([2a2c624](https://github.com/legobeat/LavaMoat/commit/2a2c624866cb7699ca3c1cf765f44118d2b88f1f))
+* **deps:** update dependency through2 to v4 ([f847a36](https://github.com/legobeat/LavaMoat/commit/f847a368528b8fdbfcac9de845e82bd2c8274ba2))
+* drop Node.js v14 ([#729](https://github.com/legobeat/LavaMoat/issues/729)) ([10c667b](https://github.com/legobeat/LavaMoat/commit/10c667bd88eaabf60a8fd8e4493cc7676848b201))
+* **lavapack:** espree should be a dep, not a dev dep ([bd71b06](https://github.com/legobeat/LavaMoat/commit/bd71b061b77343f0a8efa16be00b0801de8471a2))
+* **lavapack:** remove unused sourcemap logic, simplify clearing out sourcemaps from concatenated sources ([#1156](https://github.com/legobeat/LavaMoat/issues/1156)) ([c5b16cf](https://github.com/legobeat/LavaMoat/commit/c5b16cffe07f272368e087bf3424d2760c893f0f))
+* **lavapack:** specify what to publish despite gitignore ([3c3d369](https://github.com/legobeat/LavaMoat/commit/3c3d369cd7db7f9c372a4b4eb956b65e434d7ea2))
+* normalize all package versions ([0800c11](https://github.com/legobeat/LavaMoat/commit/0800c113c3504af312d904c48eb9a6844b10d6b1))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * lavamoat-core bumped from ^15.3.0 to ^16.0.0
+
 ## [6.1.3](https://github.com/LavaMoat/LavaMoat/compare/lavapack-v6.1.2...lavapack-v6.1.3) (2024-03-26)
 
 

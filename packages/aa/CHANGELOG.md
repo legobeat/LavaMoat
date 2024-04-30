@@ -1,5 +1,27 @@
 # Changelog
 
+## [5.0.0](https://github.com/legobeat/LavaMoat/compare/aa-v4.2.0...aa-v5.0.0) (2024-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* The minimum supported Node.js version is now v16.20.0.
+
+### Features
+
+* **aa:** add custom resolver ([90ed26e](https://github.com/legobeat/LavaMoat/commit/90ed26e54b62327a240eed47186541afab4aff24))
+* **aa:** Log unknown package dirs in error message ([0fa3283](https://github.com/legobeat/LavaMoat/commit/0fa32832a1022c160a8685d56683bac652ce67a5))
+* **aa:** ship generated types ([#638](https://github.com/legobeat/LavaMoat/issues/638)) ([d8d5996](https://github.com/legobeat/LavaMoat/commit/d8d5996c82c3bca21bd3091bc1f7b3af8db5f591))
+* **aa:** support symlinks for workspace and devtime linking compatibility ([66996c7](https://github.com/legobeat/LavaMoat/commit/66996c7964fecee08e4fcb0f01ee66047c8d204d))
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([4006c1f](https://github.com/legobeat/LavaMoat/commit/4006c1f386c3024e8a8092ded9b98ede20de084e))
+* drop Node.js v14 ([#729](https://github.com/legobeat/LavaMoat/issues/729)) ([10c667b](https://github.com/legobeat/LavaMoat/commit/10c667bd88eaabf60a8fd8e4493cc7676848b201))
+* normalize all package versions ([0800c11](https://github.com/legobeat/LavaMoat/commit/0800c113c3504af312d904c48eb9a6844b10d6b1))
+* **test/aa:** platform-agnostic path separator ([f4b6eaf](https://github.com/legobeat/LavaMoat/commit/f4b6eaf302bc80b017362901a7237e542d143280))
+
 ## [4.2.0](https://github.com/LavaMoat/LavaMoat/compare/aa-v4.1.0...aa-v4.2.0) (2024-03-26)
 
 
