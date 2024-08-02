@@ -19,6 +19,57 @@
     * lavamoat-core bumped from ^15.2.0 to ^15.2.1
     * lavamoat-tofu bumped from ^7.2.1 to ^7.2.2
 
+## [9.0.0](https://github.com/legobeat/LavaMoat/compare/lavamoat-v8.0.7...lavamoat-v9.0.0) (2024-08-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **node:** remove support for Node.js v16
+* **browserify:** remove support for Node.js v16
+* **perf:** remove support for Node.js v16
+* **tofu:** remove support for Node.js v16
+* **webpack:** remove support for Node.js v16
+* **core:** remove support for Node.js v16
+
+### Bug Fixes
+
+* **allow-scripts:** Indicate peerDependency on @lavamoat/preinstall-always-fail ([87334c7](https://github.com/legobeat/LavaMoat/commit/87334c7c74e96a9e7586de2373af0fe3da823b5f))
+* **deps:** pin dependencies ([4006c1f](https://github.com/legobeat/LavaMoat/commit/4006c1f386c3024e8a8092ded9b98ede20de084e))
+* **deps:** update babel monorepo ([b6aa714](https://github.com/legobeat/LavaMoat/commit/b6aa71446e00e9e201fad90abdc847d12b0d27a0))
+* **deps:** update babel monorepo ([246ec25](https://github.com/legobeat/LavaMoat/commit/246ec256790a0a2cb993d5895ae13a0b716da1c6))
+* **deps:** update babel monorepo ([e30facc](https://github.com/legobeat/LavaMoat/commit/e30facc83fd9506310bc66df34970b599243eb47))
+* **deps:** update babel monorepo to v7.24.5 ([7e466bd](https://github.com/legobeat/LavaMoat/commit/7e466bd5718a0a1b92df24a2d023c0bb1f54b872))
+* **deps:** update babel monorepo to v7.24.6 ([f6d450f](https://github.com/legobeat/LavaMoat/commit/f6d450fa48c8f166dac72a2b606429dafa5a70c4))
+* **deps:** update dependency @npmcli/run-script to v8 ([87334c7](https://github.com/legobeat/LavaMoat/commit/87334c7c74e96a9e7586de2373af0fe3da823b5f))
+* **deps:** update dependency json-stable-stringify to v1.1.1 ([7d28e79](https://github.com/legobeat/LavaMoat/commit/7d28e79a5430f1f7c3987fc128e800efe590dd2a))
+* **deps:** update dependency node-gyp-build to v4.6.1 ([570e00f](https://github.com/legobeat/LavaMoat/commit/570e00fcf70535e8c1abb9ee117d873130283cca))
+* **deps:** update dependency node-gyp-build to v4.8.0 ([f25d495](https://github.com/legobeat/LavaMoat/commit/f25d4957b1abb522d13697ef2d2323485ec51597))
+* **deps:** update dependency node-gyp-build to v4.8.1 ([aa04eda](https://github.com/legobeat/LavaMoat/commit/aa04edafc6c22b8d0e278d6cd45c9497d549c04e))
+* **deps:** update dependency yargs to v17.7.2 ([a1b21d3](https://github.com/legobeat/LavaMoat/commit/a1b21d3db1904d05cd9e82bc62eb56dfafb76be2))
+* **lavamoat:** update for ESM support in policy gen ([612b9f9](https://github.com/legobeat/LavaMoat/commit/612b9f9302dd04d2cd1fbe88c08bd46af5f70775))
+* **node:** remove unused props from LavaMoatOpts type ([7c9ae4a](https://github.com/legobeat/LavaMoat/commit/7c9ae4a2c8e4f65806eb59fe2c56b75212a5ab23))
+* **node:** support Node.js ^22.5.1 ([f631ae2](https://github.com/legobeat/LavaMoat/commit/f631ae25b8c6fb0c5a2eee49f973c6244eda3e28))
+* **perf:** support Node.js ^22.5.1 ([f631ae2](https://github.com/legobeat/LavaMoat/commit/f631ae25b8c6fb0c5a2eee49f973c6244eda3e28))
+
+
+### Miscellaneous Chores
+
+* **browserify:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **core:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **node:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **perf:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **tofu:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **webpack:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @lavamoat/aa bumped from ^4.3.0 to ^4.4.0
+    * lavamoat-core bumped from ^15.4.0 to ^16.0.0
+    * lavamoat-tofu bumped from ^7.3.0 to ^7.4.0
+
 ## [8.0.7](https://github.com/LavaMoat/LavaMoat/compare/lavamoat-v8.0.6...lavamoat-v8.0.7) (2024-07-11)
 
 

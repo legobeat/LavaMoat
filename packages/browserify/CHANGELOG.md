@@ -33,6 +33,58 @@
     * @lavamoat/lavapack bumped from ^6.1.1 to ^6.1.2
     * lavamoat-core bumped from ^15.2.0 to ^15.2.1
 
+## [18.0.0](https://github.com/legobeat/LavaMoat/compare/lavamoat-browserify-v17.0.8...lavamoat-browserify-v18.0.0) (2024-08-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **node:** remove support for Node.js v16
+* **browserify:** remove support for Node.js v16
+* **perf:** remove support for Node.js v16
+* **tofu:** remove support for Node.js v16
+* **webpack:** remove support for Node.js v16
+* **core:** remove support for Node.js v16
+
+### Bug Fixes
+
+* **browserify,perf:** update node.engines to match lavamoat-node ([5946024](https://github.com/legobeat/LavaMoat/commit/59460247072f31e2076c5d80c32937a484500815))
+* **browserify/test:** result output references in error handling ([791a6af](https://github.com/legobeat/LavaMoat/commit/791a6af4f8bdbf02f4415dce643e6f7991578dcf))
+* **deps/browserify,viz:** pify@4.0.1-&gt;5.0.0 ([0feeeb2](https://github.com/legobeat/LavaMoat/commit/0feeeb2725e9fbba9bebb54e50c2a9d135870c60))
+* **deps:** pin dependencies ([4006c1f](https://github.com/legobeat/LavaMoat/commit/4006c1f386c3024e8a8092ded9b98ede20de084e))
+* **deps:** update babel monorepo ([b6aa714](https://github.com/legobeat/LavaMoat/commit/b6aa71446e00e9e201fad90abdc847d12b0d27a0))
+* **deps:** update babel monorepo ([246ec25](https://github.com/legobeat/LavaMoat/commit/246ec256790a0a2cb993d5895ae13a0b716da1c6))
+* **deps:** update babel monorepo ([e30facc](https://github.com/legobeat/LavaMoat/commit/e30facc83fd9506310bc66df34970b599243eb47))
+* **deps:** update babel monorepo to v7.24.6 ([f6d450f](https://github.com/legobeat/LavaMoat/commit/f6d450fa48c8f166dac72a2b606429dafa5a70c4))
+* **deps:** update dependency concat-stream to v2 ([a7d9279](https://github.com/legobeat/LavaMoat/commit/a7d9279652198db3bf62687459dcce971738206a))
+* **deps:** update dependency convert-source-map to v2.0.0 ([f91b369](https://github.com/legobeat/LavaMoat/commit/f91b36962dc52fd63c824e6428589202d9a5535e))
+* **deps:** update dependency duplexify to v4.1.3 ([c7afaf4](https://github.com/legobeat/LavaMoat/commit/c7afaf4a2eecb16784fb5185ee9d69f696034e4d))
+* **deps:** update dependency json-stable-stringify to v1.1.1 ([7d28e79](https://github.com/legobeat/LavaMoat/commit/7d28e79a5430f1f7c3987fc128e800efe590dd2a))
+* **deps:** update dependency readable-stream to v4 ([2a2c624](https://github.com/legobeat/LavaMoat/commit/2a2c624866cb7699ca3c1cf765f44118d2b88f1f))
+* **deps:** update dependency source-map to v0.7.4 ([1274a56](https://github.com/legobeat/LavaMoat/commit/1274a56021be68fe4cbc19108a18fe7e803205b4))
+* **deps:** update dependency through2 to v4 ([f847a36](https://github.com/legobeat/LavaMoat/commit/f847a368528b8fdbfcac9de845e82bd2c8274ba2))
+* **node:** support Node.js ^22.5.1 ([f631ae2](https://github.com/legobeat/LavaMoat/commit/f631ae25b8c6fb0c5a2eee49f973c6244eda3e28))
+* **perf:** support Node.js ^22.5.1 ([f631ae2](https://github.com/legobeat/LavaMoat/commit/f631ae25b8c6fb0c5a2eee49f973c6244eda3e28))
+* **webpack:** prevent lockdown from being minified ([aa195e5](https://github.com/legobeat/LavaMoat/commit/aa195e5c0ba663cda67189fd4ecd7aa62b2a1484))
+
+
+### Miscellaneous Chores
+
+* **browserify:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **core:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **node:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **perf:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **tofu:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **webpack:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @lavamoat/aa bumped from ^4.3.0 to ^4.4.0
+    * @lavamoat/lavapack bumped from ^6.1.4 to ^6.2.0
+    * lavamoat-core bumped from ^15.4.0 to ^16.0.0
+
 ## [17.0.8](https://github.com/LavaMoat/LavaMoat/compare/lavamoat-browserify-v17.0.7...lavamoat-browserify-v17.0.8) (2024-07-11)
 
 

@@ -18,6 +18,69 @@
   * dependencies
     * lavamoat-core bumped from ^15.2.0 to ^15.2.1
 
+## [1.0.0-beta.0](https://github.com/legobeat/LavaMoat/compare/webpack-v0.4.0-beta.0...webpack-v1.0.0-beta.0) (2024-08-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **node:** remove support for Node.js v16
+* **browserify:** remove support for Node.js v16
+* **perf:** remove support for Node.js v16
+* **tofu:** remove support for Node.js v16
+* **webpack:** remove support for Node.js v16
+* **core:** remove support for Node.js v16
+
+### Features
+
+* **core:** add external package name fallback function to options in generatePolicy, use it in webpack ([8a3a0a6](https://github.com/legobeat/LavaMoat/commit/8a3a0a621eba439d028a5c185f898441a7888695))
+* global store with attenuation support ([#1158](https://github.com/legobeat/LavaMoat/issues/1158)) ([f7175a6](https://github.com/legobeat/LavaMoat/commit/f7175a6de366cc975ab158c631dbef16cb346fde))
+* **webpack:** builtin support in plugin opt and buildtime ([494e1fb](https://github.com/legobeat/LavaMoat/commit/494e1fbf15dbed048383d18614af4ece3ab10b05))
+* **webpack:** builtin support in runtime ([92f30fb](https://github.com/legobeat/LavaMoat/commit/92f30fbd4abc176bbf6e3aa7e5a803879dccbe43))
+* **webpack:** implement builtins attenuation by policy ([7f79782](https://github.com/legobeat/LavaMoat/commit/7f7978264732cdcb5575304f4e317243c84a4db7))
+* **webpack:** lockdown inlining ([#1101](https://github.com/legobeat/LavaMoat/issues/1101)) ([7444b47](https://github.com/legobeat/LavaMoat/commit/7444b47bf2e9e1940f7fc37122f87d62a48488b7))
+* **webpack:** policy generation - experimental ([2d8c49a](https://github.com/legobeat/LavaMoat/commit/2d8c49ad622d53e0cdfddf12dfb3d7587905f771))
+* **webpack:** policy loading, generation and overrides put together ([1bf3702](https://github.com/legobeat/LavaMoat/commit/1bf370270c91afafa20b6331b0b478b16cd1b55b))
+* **webpack:** support Node.js ^22.5.1 ([d743fb1](https://github.com/legobeat/LavaMoat/commit/d743fb11b7b757c08acaa8d96f17984f16fe1bd0))
+* **webpack:** support webpack replacing  with __webpack_require__.g ([6c25451](https://github.com/legobeat/LavaMoat/commit/6c254510286964f0753dc0600d7b7798f7eded9c))
+* **webpack:** switch to browser-resolve and include dev dependencies in aa ([29cc3ac](https://github.com/legobeat/LavaMoat/commit/29cc3acb89f9f464a56076cf2d7a29c182352995))
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([4006c1f](https://github.com/legobeat/LavaMoat/commit/4006c1f386c3024e8a8092ded9b98ede20de084e))
+* **deps:** update babel monorepo ([0880e2e](https://github.com/legobeat/LavaMoat/commit/0880e2edde6e8f661e4fdebddcb47e585a43b469))
+* **deps:** update babel monorepo ([d9d40b4](https://github.com/legobeat/LavaMoat/commit/d9d40b4e5358734bd9fdd680a5b8048d9efbc55c))
+* **deps:** update babel monorepo ([b6aa714](https://github.com/legobeat/LavaMoat/commit/b6aa71446e00e9e201fad90abdc847d12b0d27a0))
+* **deps:** update babel monorepo ([246ec25](https://github.com/legobeat/LavaMoat/commit/246ec256790a0a2cb993d5895ae13a0b716da1c6))
+* **deps:** update babel monorepo to v7.24.5 ([7e466bd](https://github.com/legobeat/LavaMoat/commit/7e466bd5718a0a1b92df24a2d023c0bb1f54b872))
+* **deps:** update babel monorepo to v7.24.6 ([f6d450f](https://github.com/legobeat/LavaMoat/commit/f6d450fa48c8f166dac72a2b606429dafa5a70c4))
+* **deps:** update dependency ses to v1.5.0 ([9b871f7](https://github.com/legobeat/LavaMoat/commit/9b871f7623474d8f626042a948a5efb082918d13))
+* **webpack:** dependency fixes ([f9cc277](https://github.com/legobeat/LavaMoat/commit/f9cc277bd549606b56a81cf3351e6105dca50b25))
+* **webpack:** fix global aliases in non-root compartments ([18840ea](https://github.com/legobeat/LavaMoat/commit/18840ea153376e2bf300a3dd36077b09ee91f74c))
+* **webpack:** fix policy generation builtins slipping into packages ([b8a4ebc](https://github.com/legobeat/LavaMoat/commit/b8a4ebce3ef6f64df4ba1f1b5a2cd4df2bb512f8))
+* **webpack:** fix progress order errors covering compilation errors, improve __webpack_require__.nmd compatibility ([#1172](https://github.com/legobeat/LavaMoat/issues/1172)) ([f3e53c8](https://github.com/legobeat/LavaMoat/commit/f3e53c8c44f063f000adc620b0aa3f7a41dda5c6))
+* **webpack:** fix typescript complaints ([fc41eda](https://github.com/legobeat/LavaMoat/commit/fc41eda86bfd680fbeadce72954b787864c2884f))
+* **webpack:** handle excluding modules in policy generation ([5f51ae1](https://github.com/legobeat/LavaMoat/commit/5f51ae15d810b5ed2f1efb65b141575a66651a4e))
+* **webpack:** prevent lockdown from being minified ([aa195e5](https://github.com/legobeat/LavaMoat/commit/aa195e5c0ba663cda67189fd4ecd7aa62b2a1484))
+
+
+### Miscellaneous Chores
+
+* **browserify:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **core:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **node:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **perf:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **tofu:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **webpack:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @lavamoat/aa bumped from ^4.3.0 to ^4.4.0
+    * lavamoat-core bumped from ^15.4.0 to ^16.0.0
+
 ## [0.4.0-beta.0](https://github.com/LavaMoat/LavaMoat/compare/webpack-v0.3.0-beta.0...webpack-v0.4.0-beta.0) (2024-07-11)
 
 
