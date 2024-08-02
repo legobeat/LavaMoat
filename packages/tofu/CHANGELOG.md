@@ -1,5 +1,48 @@
 # Changelog
 
+## [7.4.0](https://github.com/legobeat/LavaMoat/compare/lavamoat-tofu-v7.3.0...lavamoat-tofu-v7.4.0) (2024-08-02)
+
+
+### Features
+
+* **tofu:** add ESM support ([be9594c](https://github.com/legobeat/LavaMoat/commit/be9594c0916fa773e2a9d7db0dae7cc92e16cd3e))
+* **tofu:** provide type definitions ([5057d19](https://github.com/legobeat/LavaMoat/commit/5057d1972eac01531ad0c06de0038a97aa419378))
+* **tofu:** support node.js 22.x ([d6c5e1f](https://github.com/legobeat/LavaMoat/commit/d6c5e1f26977dc84575c2e9a75667b6339ca7aec))
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([4006c1f](https://github.com/legobeat/LavaMoat/commit/4006c1f386c3024e8a8092ded9b98ede20de084e))
+* **deps:** update babel monorepo ([0880e2e](https://github.com/legobeat/LavaMoat/commit/0880e2edde6e8f661e4fdebddcb47e585a43b469))
+* **deps:** update babel monorepo ([d9d40b4](https://github.com/legobeat/LavaMoat/commit/d9d40b4e5358734bd9fdd680a5b8048d9efbc55c))
+* **deps:** update babel monorepo ([b6aa714](https://github.com/legobeat/LavaMoat/commit/b6aa71446e00e9e201fad90abdc847d12b0d27a0))
+* **deps:** update babel monorepo ([246ec25](https://github.com/legobeat/LavaMoat/commit/246ec256790a0a2cb993d5895ae13a0b716da1c6))
+* **deps:** update babel monorepo to v7.24.5 ([7e466bd](https://github.com/legobeat/LavaMoat/commit/7e466bd5718a0a1b92df24a2d023c0bb1f54b872))
+* **deps:** update babel monorepo to v7.24.6 ([f6d450f](https://github.com/legobeat/LavaMoat/commit/f6d450fa48c8f166dac72a2b606429dafa5a70c4))
+* **deps:** update definitelytyped ([a23d8be](https://github.com/legobeat/LavaMoat/commit/a23d8beb8a64ceed6417ac1eb48b866465fd784b))
+* **deps:** update dependency type-fest to v4.10.0 ([9f2cf3c](https://github.com/legobeat/LavaMoat/commit/9f2cf3cb3e00fc5184268bedb6967ffc8d29d066))
+* **deps:** update dependency type-fest to v4.10.1 ([36567e7](https://github.com/legobeat/LavaMoat/commit/36567e7f54efab0efd2021b9f82b5e4e4c77fe4d))
+* **deps:** update dependency type-fest to v4.10.2 ([1580ed9](https://github.com/legobeat/LavaMoat/commit/1580ed967085ae277384fcee3eac32ab9930adcd))
+* **deps:** update dependency type-fest to v4.10.3 ([95c0ae3](https://github.com/legobeat/LavaMoat/commit/95c0ae39d39fd75c4f5b487f5a5bcfdc78bf046e))
+* **deps:** update dependency type-fest to v4.12.0 ([29d157c](https://github.com/legobeat/LavaMoat/commit/29d157cea5885ad3a3b919a305fd63a6a216508f))
+* **deps:** update dependency type-fest to v4.13.1 ([ec89820](https://github.com/legobeat/LavaMoat/commit/ec898201439590242b27ff0c122369a9044386bf))
+* **deps:** update dependency type-fest to v4.14.0 ([1321a58](https://github.com/legobeat/LavaMoat/commit/1321a58964f36af95b30a547154a060edb63d009))
+* **deps:** update dependency type-fest to v4.15.0 ([c48f8e3](https://github.com/legobeat/LavaMoat/commit/c48f8e31c2f0bfc5e8baff190ea7afeef11d205b))
+* **deps:** update dependency type-fest to v4.23.0 ([d04e1f3](https://github.com/legobeat/LavaMoat/commit/d04e1f33af0931598443cbbf102020906cbd9b92))
+* **deps:** update dependency type-fest to v4.9.0 ([70e9ffd](https://github.com/legobeat/LavaMoat/commit/70e9ffdf740a7d79cee9d583a55188e4ab02617d))
+* **tofu/test:** platform-agnostic line separator ([a9c9c0f](https://github.com/legobeat/LavaMoat/commit/a9c9c0fc6c49e5804583a67ad8838cac46bff1a0))
+* **tofu:** ClassProperty nodes are not globals ([ca63a99](https://github.com/legobeat/LavaMoat/commit/ca63a99a023d625dd89b3b11f4ff7d3af73f7dde)), closes [#1098](https://github.com/legobeat/LavaMoat/issues/1098)
+* **tofu:** fix logic error in inspectEsmImports ([4c50878](https://github.com/legobeat/LavaMoat/commit/4c508782be9035c41a32712dc2039b95c8a6bc06))
+* **tofu:** fix type errors ([fe75965](https://github.com/legobeat/LavaMoat/commit/fe7596576265bc931fc2387bf7e352339f8d630b))
+* **tofu:** make lavamoat-core a peer dep ([21b0b2b](https://github.com/legobeat/LavaMoat/commit/21b0b2b1295bde752e5f213dfa93d3a375579e20))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * peerDependencies
+    * lavamoat-core bumped from ^15.4.0 to ^16.0.0
+
 ## [7.3.0](https://github.com/LavaMoat/LavaMoat/compare/lavamoat-tofu-v7.2.3...lavamoat-tofu-v7.3.0) (2024-07-11)
 
 

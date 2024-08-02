@@ -6,6 +6,40 @@
   * dependencies
     * @lavamoat/aa bumped from ^4.0.1 to ^4.1.0
 
+## [3.2.0](https://github.com/legobeat/LavaMoat/compare/allow-scripts-v3.1.0...allow-scripts-v3.2.0) (2024-08-02)
+
+
+### Features
+
+* **allow-scripts:** export loadAllPackageConfigurations, printMissingPoliciesIfAny ([fa70124](https://github.com/legobeat/LavaMoat/commit/fa701246a261926e7f643aedf1678ccb05246989))
+* **allow-scripts:** expose canonical name map as canonicalNamesByPath in loadAllPackageContents ([de6ff77](https://github.com/legobeat/LavaMoat/commit/de6ff77141aa73d1cb63433bb166ebba2b3ed38e))
+* **allow-scripts:** support Node.js v22 ([0c665ec](https://github.com/legobeat/LavaMoat/commit/0c665ec65b635c29f347369809680372c9b58b79))
+
+
+### Bug Fixes
+
+* **allow-scripts:** add corepack to bannedBins ([cef66ec](https://github.com/legobeat/LavaMoat/commit/cef66ec03508bc9484a83c4a037c9e91c0b853c9))
+* **allow-scripts:** Indicate peerDependency on @lavamoat/preinstall-always-fail ([610c493](https://github.com/legobeat/LavaMoat/commit/610c4938f0bd7991c205c5ff17f47f2644629250))
+* **allow-scripts:** Indicate peerDependency on @lavamoat/preinstall-always-fail ([dc9fae1](https://github.com/legobeat/LavaMoat/commit/dc9fae17ae69e6555a039c05ee3b0730850b944b))
+* **allow-scripts:** Run automatic `node-gyp rebuild` for packages containing a `binding.gyp` ([62a2b4e](https://github.com/legobeat/LavaMoat/commit/62a2b4e11a35c2d9f6f91ae4a3030753f27519b1))
+* **deps:** pin dependencies ([4006c1f](https://github.com/legobeat/LavaMoat/commit/4006c1f386c3024e8a8092ded9b98ede20de084e))
+* **deps:** update dependency @npmcli/run-script to v7 ([dc7105d](https://github.com/legobeat/LavaMoat/commit/dc7105d23d959665392425ce95b699b0b6b35e4e))
+* **deps:** update dependency @npmcli/run-script to v7.0.4 ([b84f67b](https://github.com/legobeat/LavaMoat/commit/b84f67bef337e0e36535df0947e55e4c4bfe2d33))
+* **deps:** update dependency @npmcli/run-script to v8 ([610c493](https://github.com/legobeat/LavaMoat/commit/610c4938f0bd7991c205c5ff17f47f2644629250))
+* **deps:** update dependency @npmcli/run-script to v8 ([dc9fae1](https://github.com/legobeat/LavaMoat/commit/dc9fae17ae69e6555a039c05ee3b0730850b944b))
+* **deps:** update dependency bin-links to v4.0.3 ([b8efb10](https://github.com/legobeat/LavaMoat/commit/b8efb100f4ce0b6a42ad37f16b524b3c4d4acc50))
+* **deps:** update dependency bin-links to v4.0.4 ([2844646](https://github.com/legobeat/LavaMoat/commit/2844646907ffcf16c6785ba43c5d551d77fa369a))
+* **deps:** update dependency npm-normalize-package-bin to v3.0.1 ([d2576fb](https://github.com/legobeat/LavaMoat/commit/d2576fb4fd6c21f15a03329d2bdef0521a6ab4f7))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @lavamoat/aa bumped from ^4.3.0 to ^4.4.0
+  * peerDependencies
+    * @lavamoat/preinstall-always-fail bumped from * to 2.2.0
+
 ## [3.1.0](https://github.com/LavaMoat/LavaMoat/compare/allow-scripts-v3.0.4...allow-scripts-v3.1.0) (2024-07-11)
 
 
