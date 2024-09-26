@@ -160,9 +160,9 @@ test('install - allows adding and installing package with preconfigured preinsta
     t.regex(addRes.out, /allowed-dep@.* must be built/);
     t.is(addRes.exitCode, 0);
     t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
-    rimrafSync(join(projectRoot, 'node_modules'));
+    rimrafSync(portablePath(join(projectRoot, 'node_modules')));
 
-    const installRes = run(t, ['install'], projectRoot)
+    const installRes = run(t, ['install', '--refresh-lockfile'], projectRoot)
     t.is(installRes.exitCode, 0);
     t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
   } finally {
@@ -180,7 +180,7 @@ test('install - blocks execution of disallowed scripts', async (t: any) => {
     const addRes = run(t, ['add', '@lavamoat/preinstall-always-fail'], projectRoot)
     t.is(addRes.exitCode, 0);
 
-    const installRes = run(t, ['install'], projectRoot)
+    const installRes = run(t, ['install', '--refresh-lockfile'], projectRoot)
     t.is(installRes.exitCode, 0);
   } finally {
     cleanup(projectName);
@@ -194,7 +194,7 @@ test('install - allows execution of allowed yarn classic dependencies', async (t
   try {
     run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
 
-    const installRes = run(t, ['install', '--inline-builds'], projectRoot, {YARN_IGNORE_SCRIPTS: 'false'})
+    const installRes = run(t, ['install', '--inline-builds', '--refresh-lockfile'], projectRoot, {YARN_IGNORE_SCRIPTS: 'false'})
     t.is(installRes.exitCode, 0);
     t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
   } finally {
@@ -210,7 +210,7 @@ test('install - blocks execution of unallowed yarn classic dependencies', async 
     run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
     run(t, ['config', 'set', 'enableScripts', 'false'], projectRoot)
 
-    const installRes = run(t, ['install', '--inline-builds'], projectRoot)
+    const installRes = run(t, ['install', '--inline-builds', '--refresh-lockfile'], projectRoot)
     t.is(installRes.exitCode, 1);
     t.false(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
     t.false(existsSync(portablePath(join(projectRoot, 'node_modules', 'disallowed-dep', 'foo'))));
@@ -231,6 +231,7 @@ function realisticEnvOptions(projectRoot: string, env: {} = {}): SpawnSyncOption
       COREPACK_ENABLE_STRICT: '0',
       YARN_ENABLE_COLORS: false.toString(),
       YARN_CLONE_CONCURRENCY: '1',
+      YARN_ENABLE_IMMUTABLE_INSTALLS: '0',
       // without this, yarn berry will error on env vars intended for yarn v1
       YARN_ENABLE_STRICT_SETTINGS: false.toString(),
 
