@@ -159,11 +159,13 @@ test('install - allows adding and installing package with preconfigured preinsta
     const addRes = run(t, ['add', 'allowed-dep@file:./vendor/allowed-dep'], projectRoot)
     t.regex(addRes.out, /allowed-dep@.* must be built/);
     t.is(addRes.exitCode, 0);
+    // verify that file got created by allowed lifecycle script in fixture on add
     t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
     rimrafSync(portablePath(join(projectRoot, 'node_modules')));
 
     const installRes = run(t, ['install', '--refresh-lockfile'], projectRoot)
     t.is(installRes.exitCode, 0);
+    // verify that file got recreated by allowed lifecycle script in fixture on install
     t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
   } finally {
     cleanup(projectName);
@@ -187,6 +189,7 @@ test('install - blocks execution of disallowed scripts', async (t: any) => {
   }
 })
 
+// See README.md in protected-unconfigured test project for details
 test('install - allows execution of allowed yarn classic dependencies', async (t: any) => {
   const projectName = 'protected-configured';
   const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', projectName)
@@ -196,12 +199,14 @@ test('install - allows execution of allowed yarn classic dependencies', async (t
 
     const installRes = run(t, ['install', '--inline-builds', '--refresh-lockfile'], projectRoot, {YARN_IGNORE_SCRIPTS: 'false'})
     t.is(installRes.exitCode, 0);
+    // verify that file got created by allowed lifecycle script in fixture on install
     t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
   } finally {
     cleanup(projectName);
   }
 })
 
+// See README.md in protected-unconfigured test project for details
 test('install - blocks execution of unallowed yarn classic dependencies', async (t: any) => {
   const projectName = 'protected-unconfigured';
   const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', projectName)
@@ -212,8 +217,10 @@ test('install - blocks execution of unallowed yarn classic dependencies', async 
 
     const installRes = run(t, ['install', '--inline-builds', '--refresh-lockfile'], projectRoot)
     t.is(installRes.exitCode, 1);
-    t.false(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
+    // verify that file did not get created by disallowed lifecycle script in fixture on install
     t.false(existsSync(portablePath(join(projectRoot, 'node_modules', 'disallowed-dep', 'foo'))));
+    // the file created bu allowed script also gets removed on failure
+    t.false(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
   } finally {
     cleanup(projectName);
   }
