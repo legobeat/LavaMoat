@@ -6,12 +6,16 @@ import { spawnSync } from 'node:child_process'
 import { npmRunPath } from 'npm-run-path';
 import { rimrafSync } from 'rimraf';
 
+type TestContext = {
+  projectName: string
+}
 const isWindows = process.platform === 'win32';
 const portablePath = isWindows
   ? (p: string) => p.replace(/^[\\]/, '')
   : (p: string) => p
 
-const cleanup = (projectName: string) => {
+  test.afterEach.always((t) => {
+    const { projectName } = t.context as TestContext;
   // post-test cleanup of messy `yarn init`
   rimrafSync([
     '.git',
@@ -40,7 +44,7 @@ const cleanup = (projectName: string) => {
       shell: isWindows,
     },
   );
-};
+});
 
 /**
  * Execute allow-scripts binaries with the given arguments
@@ -121,109 +125,89 @@ const run = (
 }
 
 test('install - errors when adding dependency with unspecified preinstall script', async (t: any) => {
-  const projectName = 'uninitialized';
-  const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', projectName);
+  t.context.projectName = 'uninitialized';
+  const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', t.context.projectName);
 
-  try {
-    // init project
-    const initRes = run(t, ['init', '-y'], projectRoot)
-    t.is(initRes.exitCode, 0);
+  // init project
+  const initRes = run(t, ['init', '-y'], projectRoot)
+  t.is(initRes.exitCode, 0);
 
-    // install the plugin
-    const importRes = run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
-    t.is(importRes.err, '');
-    t.regex(importRes.out, /YN0000: Saving the new plugin in .yarn\/plugins\/@yarnpkg\/plugin-allow-scripts.cjs/);
-    t.is(importRes.exitCode, 0);
+  // install the plugin
+  const importRes = run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
+  t.is(importRes.err, '');
+  t.regex(importRes.out, /YN0000: Saving the new plugin in .yarn\/plugins\/@yarnpkg\/plugin-allow-scripts.cjs/);
+  t.is(importRes.exitCode, 0);
 
-    const addRes = run(t, ['add', '@lavamoat/preinstall-always-fail'], projectRoot)
-    t.regex(addRes.err, /allow-scripts blocked execution of unconfigured package script. \["@lavamoat\/preinstall-always-fail","preinstall"/);
-    t.is(addRes.exitCode, 1);
+  const addRes = run(t, ['add', '@lavamoat/preinstall-always-fail'], projectRoot)
+  t.regex(addRes.err, /allow-scripts blocked execution of unconfigured package script. \["@lavamoat\/preinstall-always-fail","preinstall"/);
+  t.is(addRes.exitCode, 1);
 
-    // trigger the plugin
-    const installRes = run(t, ['install'], projectRoot)
-    t.regex(installRes.out, /packages missing configuration:\n- @lavamoat\/preinstall-always-fail/);
-    t.regex(installRes.err, /@lavamoat\/allow-scripts has detected dependencies without configuration. explicit configuration required./);
-    t.is(installRes.exitCode, 1);
-  } finally {
-    cleanup(projectName);
-  }
+  // trigger the plugin
+  const installRes = run(t, ['install'], projectRoot)
+  t.regex(installRes.out, /packages missing configuration:\n- @lavamoat\/preinstall-always-fail/);
+  t.regex(installRes.err, /@lavamoat\/allow-scripts has detected dependencies without configuration. explicit configuration required./);
+  t.is(installRes.exitCode, 1);
 })
 
 test('install - allows adding and installing package with preconfigured preinstall script', async (t: any) => {
-  const projectName = 'allowed';
-  const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', projectName)
+  t.context.projectName = 'allowed';
+  const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', t.context.projectName);
 
-  try {
-    run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
+  run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
 
-    const addRes = run(t, ['add', 'allowed-dep@file:./vendor/allowed-dep'], projectRoot)
-    t.regex(addRes.out, /allowed-dep@.* must be built/);
-    t.is(addRes.exitCode, 0);
-    // verify that file got created by allowed lifecycle script in fixture on add
-    t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
-    rimrafSync(portablePath(join(projectRoot, 'node_modules')));
+  const addRes = run(t, ['add', 'allowed-dep@file:./vendor/allowed-dep'], projectRoot)
+  t.regex(addRes.out, /allowed-dep@.* must be built/);
+  t.is(addRes.exitCode, 0);
+  // verify that file got created by allowed lifecycle script in fixture on add
+  t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
+  rimrafSync(portablePath(join(projectRoot, 'node_modules')));
 
-    const installRes = run(t, ['install', '--refresh-lockfile'], projectRoot)
-    t.is(installRes.exitCode, 0);
-    // verify that file got recreated by allowed lifecycle script in fixture on install
-    t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
-  } finally {
-    cleanup(projectName);
-  }
+  const installRes = run(t, ['install', '--refresh-lockfile'], projectRoot)
+  t.is(installRes.exitCode, 0);
+  // verify that file got recreated by allowed lifecycle script in fixture on install
+  t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
 })
 
 
 test('install - blocks execution of disallowed scripts', async (t: any) => {
-  const projectName = 'blocked';
-  const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', projectName)
+  t.context.projectName = 'blocked';
+  const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', t.context.projectName)
 
-  try {
-    run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
-    const addRes = run(t, ['add', '@lavamoat/preinstall-always-fail'], projectRoot)
-    t.is(addRes.exitCode, 0);
+  run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
+  const addRes = run(t, ['add', '@lavamoat/preinstall-always-fail'], projectRoot)
+  t.is(addRes.exitCode, 0);
 
-    const installRes = run(t, ['install', '--refresh-lockfile'], projectRoot)
-    t.is(installRes.exitCode, 0);
-  } finally {
-    cleanup(projectName);
-  }
+  const installRes = run(t, ['install', '--refresh-lockfile'], projectRoot)
+  t.is(installRes.exitCode, 0);
 })
 
 // See README.md in protected-unconfigured test project for details
 test('install - allows execution of allowed yarn classic dependencies', async (t: any) => {
-  const projectName = 'protected-configured';
-  const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', projectName)
+  t.context.projectName = 'protected-configured';
+  const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', t.context.projectName)
 
-  try {
-    run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
+  run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
 
-    const installRes = run(t, ['install', '--inline-builds', '--refresh-lockfile'], projectRoot, {YARN_IGNORE_SCRIPTS: 'false'})
-    t.is(installRes.exitCode, 0);
-    // verify that file got created by allowed lifecycle script in fixture on install
-    t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
-  } finally {
-    cleanup(projectName);
-  }
+  const installRes = run(t, ['install', '--inline-builds', '--refresh-lockfile'], projectRoot, {YARN_IGNORE_SCRIPTS: 'false'})
+  t.is(installRes.exitCode, 0);
+  // verify that file got created by allowed lifecycle script in fixture on install
+  t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
 })
 
 // See README.md in protected-unconfigured test project for details
 test('install - blocks execution of unallowed yarn classic dependencies', async (t: any) => {
-  const projectName = 'protected-unconfigured';
-  const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', projectName)
+  t.context.projectName = 'protected-unconfigured';
+  const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', t.context.projectName)
 
-  try {
-    run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
-    run(t, ['config', 'set', 'enableScripts', 'false'], projectRoot)
+  run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
+  run(t, ['config', 'set', 'enableScripts', 'false'], projectRoot)
 
-    const installRes = run(t, ['install', '--inline-builds', '--refresh-lockfile'], projectRoot)
-    t.is(installRes.exitCode, 1);
-    // verify that file did not get created by disallowed lifecycle script in fixture on install
-    t.false(existsSync(portablePath(join(projectRoot, 'node_modules', 'disallowed-dep', 'foo'))));
-    // the file created bu allowed script also gets removed on failure
-    t.false(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
-  } finally {
-    cleanup(projectName);
-  }
+  const installRes = run(t, ['install', '--inline-builds', '--refresh-lockfile'], projectRoot)
+  t.is(installRes.exitCode, 1);
+  // verify that file did not get created by disallowed lifecycle script in fixture on install
+  t.false(existsSync(portablePath(join(projectRoot, 'node_modules', 'disallowed-dep', 'foo'))));
+  // the file created bu allowed script also gets removed on failure
+  t.false(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
 })
 
 function realisticEnvOptions(projectRoot: string, env: {} = {}): SpawnSyncOptions {
