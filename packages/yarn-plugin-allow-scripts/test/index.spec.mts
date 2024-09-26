@@ -4,6 +4,7 @@ import { dirname, join, normalize } from 'node:path'
 import { SpawnSyncOptions } from 'node:child_process'
 import { spawnSync } from 'node:child_process'
 import { npmRunPath } from 'npm-run-path';
+import { rimrafSync } from 'rimraf';
 
 const isWindows = process.platform === 'win32';
 const portablePath = isWindows
@@ -11,23 +12,11 @@ const portablePath = isWindows
   : (p: string) => p
 
 const cleanup = (projectName: string) => {
-  const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', projectName)
   // post-test cleanup of messy `yarn init`
-  spawnSync(
-    'corepack',
-    [
-      'npm@9',
-      'exec',
-      'rimraf',
-      '.git',
-      '.yarn',
-    ],
-    {
-      cwd: projectRoot,
-      encoding: 'utf-8',
-      shell: isWindows,
-    },
-  );
+  rimrafSync([
+    '.git',
+    '.yarn',
+  ]);
   spawnSync(
     'git',
     [
@@ -68,28 +57,38 @@ const run = (
   env: {} = {},
 ): {exitCode: number|null, out: string, err: string, output: (string|Buffer|null)[], signal: string|null, error?: Error|undefined} => {
   try {
-    const defaultOpts = realisticEnvOptions(cwd);
-    const result = spawnSync(
-      isWindows
-        ? process.env.COMSPEC || 'cmd.exe'
-        : process.env.SHELL || '/bin/sh',
-      [
-        ...(isWindows ? ['/d', '/s', '/c'] : ['-c']),
+    const defaultOpts = realisticEnvOptions(cwd, {
+      ...process.env,
+      ...env,
+    });
+    const result = isWindows
+      ? spawnSync(
+        process.env.COMSPEC || 'cmd.exe',
         [
-          isWindows ? 'corepack.cmd' : 'corepack',
+          '/d', '/s', '/c',
+          [
+            'corepack.cmd',
+            'yarn@4',
+            ...args
+          ].join(' '),
+        ],
+        {
+          ...defaultOpts,
+        },
+      ) : spawnSync(
+        process.env.SHELL || '/bin/sh',
+      [
+        '-c',
+        [
+          'corepack',
           'yarn@4',
           ...args
         ].join(' '),
       ],
       {
         ...defaultOpts,
-        env: {
-          ...process.env,
-          ...defaultOpts.env,
-          ...env,
-        }
       },
-    )
+    );
     return {
       exitCode: result.status,
       out: result?.stdout?.toString()?.trim(),
@@ -97,7 +96,7 @@ const run = (
       output: result?.output,
       signal: result.signal,
       error: result.error,
-    }
+    };
   } catch(error) {
     console.error(error);
     t.fail(
@@ -137,7 +136,7 @@ test('install - errors when adding dependency with unspecified preinstall script
     t.is(importRes.exitCode, 0);
 
     const addRes = run(t, ['add', '@lavamoat/preinstall-always-fail'], projectRoot)
-    t.regex(addRes.err, /allow-scripts detected attempted execution of unconfigured package script. \["@lavamoat\/preinstall-always-fail","preinstall"/);
+    t.regex(addRes.err, /allow-scripts blocked execution of unconfigured package script. \["@lavamoat\/preinstall-always-fail","preinstall"/);
     t.is(addRes.exitCode, 1);
 
     // trigger the plugin
@@ -150,8 +149,30 @@ test('install - errors when adding dependency with unspecified preinstall script
   }
 })
 
-test('install - allows adding and installing package with specified preinstall script', async (t: any) => {
+test('install - allows adding and installing package with preconfigured preinstall script', async (t: any) => {
   const projectName = 'allowed';
+  const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', projectName)
+
+  try {
+    run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
+
+    const addRes = run(t, ['add', 'allowed-dep@file:./vendor/allowed-dep'], projectRoot)
+    t.regex(addRes.out, /allowed-dep@.* must be built/);
+    t.is(addRes.exitCode, 0);
+    t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
+    rimrafSync(join(projectRoot, 'node_modules'));
+
+    const installRes = run(t, ['install'], projectRoot)
+    t.is(installRes.exitCode, 0);
+    t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
+  } finally {
+    cleanup(projectName);
+  }
+})
+
+
+test('install - blocks execution of disallowed scripts', async (t: any) => {
+  const projectName = 'blocked';
   const projectRoot = join(dirname(import.meta.url.replace(/^file:/, '')), 'projects', projectName)
 
   try {
@@ -159,7 +180,6 @@ test('install - allows adding and installing package with specified preinstall s
     const addRes = run(t, ['add', '@lavamoat/preinstall-always-fail'], projectRoot)
     t.is(addRes.exitCode, 0);
 
-    // trigger the plugin
     const installRes = run(t, ['install'], projectRoot)
     t.is(installRes.exitCode, 0);
   } finally {
@@ -174,7 +194,6 @@ test('install - allows execution of allowed yarn classic dependencies', async (t
   try {
     run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
 
-    // trigger the plugin
     const installRes = run(t, ['install', '--inline-builds'], projectRoot, {YARN_IGNORE_SCRIPTS: 'false'})
     t.is(installRes.exitCode, 0);
     t.true(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
@@ -191,7 +210,6 @@ test('install - blocks execution of unallowed yarn classic dependencies', async 
     run(t, ['plugin', 'import', normalize('../../../bundles/@yarnpkg/plugin-allow-scripts.js')], projectRoot)
     run(t, ['config', 'set', 'enableScripts', 'false'], projectRoot)
 
-    // trigger the plugin
     const installRes = run(t, ['install', '--inline-builds'], projectRoot)
     t.is(installRes.exitCode, 1);
     t.false(existsSync(portablePath(join(projectRoot, 'node_modules', 'allowed-dep', 'foo'))));
@@ -201,7 +219,7 @@ test('install - blocks execution of unallowed yarn classic dependencies', async 
   }
 })
 
-function realisticEnvOptions(projectRoot: string): SpawnSyncOptions {
+function realisticEnvOptions(projectRoot: string, env: {} = {}): SpawnSyncOptions {
   return {
     cwd: isWindows ? projectRoot.replace(/^[\/\\]/, '') : projectRoot,
     env: {
@@ -212,6 +230,7 @@ function realisticEnvOptions(projectRoot: string): SpawnSyncOptions {
       COREPACK_ENABLE_PROJECT_SPEC: '1',
       COREPACK_ENABLE_STRICT: '0',
       YARN_ENABLE_COLORS: false.toString(),
+      YARN_CLONE_CONCURRENCY: '1',
       // without this, yarn berry will error on env vars intended for yarn v1
       YARN_ENABLE_STRICT_SETTINGS: false.toString(),
 
@@ -222,6 +241,7 @@ function realisticEnvOptions(projectRoot: string): SpawnSyncOptions {
       GITHUB_EVENT_PATH: undefined,
       CI: false.toString(),
       INIT_CWD: projectRoot,
+      ...env,
     },
     windowsVerbatimArguments: isWindows,
     encoding: 'utf-8',
