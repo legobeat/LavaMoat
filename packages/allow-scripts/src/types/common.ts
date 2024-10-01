@@ -56,4 +56,40 @@ declare global {
      excessPolicies: string[];
      somePoliciesAreMissing: boolean;
   }
+
+  // setup.js
+  interface AreBinsBlockedOpts {
+    /** Turn off memoization, make a fresh lookup */
+    noMemoization?: boolean;
+  }
+   interface GetOptionsForBinOpts {
+    rootDir: string;
+    name: string;
+  }
+
+  interface PkgConfs {
+    packageJson: LavamoatPackageJson;
+    configs: {
+      lifecycle: ScriptsConfig;
+      bin: BinsConfig;
+    }
+    somePoliciesAreMissing: boolean;
+    canonicalNamesByPath: Map<string,string>;
+  }
+
+  interface SetDefaultConfigurationOpts {
+    rootDir: string;
+  }
+
+  interface WriteRcFileContentOpts {
+    file: string;
+    entry: string;
+  }
+
+  interface SavePackageConfigurationsOpts {
+    rootDir: string;
+    conf: PkgConfs;
+  }
+
+
 }
