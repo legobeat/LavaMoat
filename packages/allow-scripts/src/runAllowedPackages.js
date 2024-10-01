@@ -6,11 +6,6 @@ const { loadAllPackageConfigurations } = require('./setup.js')
 const { FEATURE  } = require('./toggles.js')
 
 /**
- * @typedef RunAllowedPackagesOpts
- * @property {string} rootDir
- */
-
-/**
  * @param {RunAllowedPackagesOpts} param0
  * @returns {Promise<void>}
  */
@@ -124,12 +119,6 @@ async function installBinFirewall(firewalledBins, link) {
     await linkBinAbsolute({ path: packagePath, bin, link, force: true })
   }
 }
-
-/**
- * @typedef RunScriptOpts
- * @property {string} event
- * @property {string} path
- */
 
 /**
  * @param {RunScriptOpts} param0
