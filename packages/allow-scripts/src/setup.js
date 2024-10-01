@@ -49,11 +49,6 @@ module.exports = {
 }
 
 /**
- * @typedef AreBinsBlockedOpts
- * @property {boolean} [noMemoization] Turn off memoization, make a fresh lookup
- */
-
-/**
  * @param {AreBinsBlockedOpts} args
  * @returns {boolean}
  */
@@ -161,12 +156,6 @@ function editPackageJson() {
 }
 
 /**
- * @typedef GetOptionsForBinOpts
- * @property {string} rootDir
- * @property {string} name
- */
-
-/**
  * @param {GetOptionsForBinOpts} param0
  * @returns {Promise<BinInfo[] | undefined>}
  */
@@ -179,31 +168,6 @@ async function getOptionsForBin({ rootDir, name }) {
 
   return binCandidates.get(name)
 }
-
-/**
- * @typedef PkgLavamoatConfig
- * @property {Record<string, any>} [allowScripts]
- * @property {Record<string, any>} [allowBins]
- * @property {Record<string, any>} [allowConfig]
- * @property {Record<string, any>} [allowedPatterns]
- * @property {Record<string, any>} [disallowedPatterns]
- * @property {Record<string, any>} [missingPolicies]
- * @property {Record<string, any>} [excessPolicies]
- */
-
-/**
- * @typedef {import('type-fest').PackageJson & { lavamoat: PkgLavamoatConfig }} LavamoatPackageJson
- */
-
-/**
- * @typedef {Object} PkgConfs
- * @property {LavamoatPackageJson} packageJson
- * @property {Object} configs
- * @property {ScriptsConfig} configs.lifecycle
- * @property {BinsConfig} configs.bin
- * @property {boolean} somePoliciesAreMissing
- * @property {Map<string,string>} canonicalNamesByPath
- */
 
 /**
  * @param {Object} args
@@ -263,11 +227,7 @@ async function loadAllPackageConfigurations({ rootDir }) {
 
     if (lifeCycleScripts.length) {
       /**
-       * @type {{
-       *   canonicalName: string
-       *   path: string
-       *   scripts: LavamoatPackageJson['scripts']
-       * }[]}
+       * @type {PkgInfo[]}
        */
       const collection = packagesWithScriptsLifecycle.get(canonicalName) || []
       collection.push({
@@ -327,11 +287,6 @@ async function loadAllPackageConfigurations({ rootDir }) {
     canonicalNamesByPath,
   }
 }
-
-/**
- * @typedef SetDefaultConfigurationOpts
- * @property {string} rootDir
- */
 
 /**
  * @param {SetDefaultConfigurationOpts} param0
@@ -397,12 +352,6 @@ function isEntryPresent(entry, file) {
 }
 
 /**
- * @typedef WriteRcFileContentOpts
- * @property {string} file
- * @property {string} entry
- */
-
-/**
  * @param {WriteRcFileContentOpts} param0
  */
 function writeRcFileContent({ file, entry }) {
@@ -434,12 +383,6 @@ function prepareBinScriptsPolicy(binCandidates) {
   }
   return policy
 }
-
-/**
- * @typedef SavePackageConfigurationsOpts
- * @property {string} rootDir
- * @property {PkgConfs} conf
- */
 
 /**
  * @param {SavePackageConfigurationsOpts} param0

@@ -1,17 +1,6 @@
 const { loadAllPackageConfigurations } = require('./setup.js')
 
 /**
- * @typedef PrintPackagesListOpts
- * @property {string} rootDir
- */
-
-/**
- * @typedef PrintMissingPoliciesIfAnyOpts
- * @property {string[]} [missingPolicies]
- * @property {Map<string, unknown[]>} [packagesWithScripts]
- */
-
-/**
  * @param {PrintPackagesListOpts} param0
  * @returns {Promise<void>}
  */
