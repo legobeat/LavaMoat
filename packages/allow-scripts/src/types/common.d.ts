@@ -1,8 +1,22 @@
 declare module '@lavamoat/allow-scripts' {
+  import type { JsonObject, PackageJson } from 'type-fest';
+
+  export interface PkgLavamoatConfig {
+    ['allowBins']?: JsonObject;
+    ['allowConfig']?: JsonObject;
+    ['allowScripts']?: JsonObject;
+    ['allowedPatterns']?: JsonObject;
+    ['disallowedPatterns']?: JsonObject;
+    ['excessPolicies']?: JsonObject;
+    ['missingPolicies']?: JsonObject;
+  }
+
+  export type LavamoatPackageJson = PackageJson & { lavamoat: PkgLavamoatConfig };
+
   export interface PkgInfo {
     canonicalName: string;
     path: string;
-    scripts: Object;
+    scripts: LavamoatPackageJson['scripts'];
   }
   /**
    * Configuration for a type of scripts policies
