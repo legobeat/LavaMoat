@@ -6,6 +6,81 @@
   * dependencies
     * lavamoat-tofu bumped from ^7.2.1 to ^7.2.2
 
+## [17.0.0](https://github.com/legobeat/LavaMoat/compare/lavamoat-core-v16.0.1...lavamoat-core-v17.0.0) (2024-10-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **node:** remove support for Node.js v16
+* **browserify:** remove support for Node.js v16
+* **perf:** remove support for Node.js v16
+* **tofu:** remove support for Node.js v16
+* **webpack:** remove support for Node.js v16
+* **core:** remove support for Node.js v16
+
+### Features
+
+* **core:** add external package name fallback function to options in generatePolicy, use it in webpack ([8a3a0a6](https://github.com/legobeat/LavaMoat/commit/8a3a0a621eba439d028a5c185f898441a7888695))
+* **core:** ESM support in policy generation ([60dc4fa](https://github.com/legobeat/LavaMoat/commit/60dc4fa750ffea336f23baaee7f82ea21d2ca8e3))
+* **core:** make makeMinimalViewOfRef usage in builtin attenuation consistent with globals for negative policy overrides, moving implementation to endowmentsToolkit as a side-effect desireable for webpack plugin ([c0c91fc](https://github.com/legobeat/LavaMoat/commit/c0c91fc1b857ccd8d61891c342a080641edbbc86))
+* **core:** nodejs 22 support ([8722914](https://github.com/legobeat/LavaMoat/commit/87229141a2f846247c3f371529dafacfa54b5b04))
+* **core:** return attempted path when parsing JSON of policy fails ([ea7f3d4](https://github.com/legobeat/LavaMoat/commit/ea7f3d49c42e57723707eefd3c399943344077cc))
+* **core:** turn off localeTaming in ses lockdown by default ([e37582f](https://github.com/legobeat/LavaMoat/commit/e37582f201070bfaa734f378aa6b851892adc684))
+* global store with attenuation support ([#1158](https://github.com/legobeat/LavaMoat/issues/1158)) ([f7175a6](https://github.com/legobeat/LavaMoat/commit/f7175a6de366cc975ab158c631dbef16cb346fde))
+* **webpack:** policy loading, generation and overrides put together ([1bf3702](https://github.com/legobeat/LavaMoat/commit/1bf370270c91afafa20b6331b0b478b16cd1b55b))
+
+
+### Bug Fixes
+
+* **core/test:** platform-agnostic line separator ([0a898a3](https://github.com/legobeat/LavaMoat/commit/0a898a3e231b4281d6bd8e5543e5ead7c8f28511))
+* **core:** detect ESM/CJS imports properly ([c2c37e2](https://github.com/legobeat/LavaMoat/commit/c2c37e235d67a8f3ac17fed6f9475481010ef881))
+* **core:** export types from generatePolicy ([b999545](https://github.com/legobeat/LavaMoat/commit/b999545567e6673b42ed6b2c34153d84d7a4b283))
+* **core:** remove circular ref to ambient.ts ([b370419](https://github.com/legobeat/LavaMoat/commit/b3704195a8a85aa88a2057dc5381cd9d297689cb))
+* **core:** udpate lockdown.umd.js ([236bb91](https://github.com/legobeat/LavaMoat/commit/236bb91014ba3f6bcf055b043b319436f608b208))
+* **core:** update LavamoatModuleRecord ([152534d](https://github.com/legobeat/LavaMoat/commit/152534debcc869d72dab50e7e6b031578d13324c))
+* **core:** update LavamoatModuleRecord to use default initializer args ([ff3991c](https://github.com/legobeat/LavaMoat/commit/ff3991cce7962bd9d004024c7bb7306288882f62))
+* **core:** update vendored lockdown.umd.js ([6a062e6](https://github.com/legobeat/LavaMoat/commit/6a062e6521ec28f876742bc723869b5782756f7f))
+* **deps:** update babel monorepo ([0880e2e](https://github.com/legobeat/LavaMoat/commit/0880e2edde6e8f661e4fdebddcb47e585a43b469))
+* **deps:** update babel monorepo ([d9d40b4](https://github.com/legobeat/LavaMoat/commit/d9d40b4e5358734bd9fdd680a5b8048d9efbc55c))
+* **deps:** update babel monorepo ([b6aa714](https://github.com/legobeat/LavaMoat/commit/b6aa71446e00e9e201fad90abdc847d12b0d27a0))
+* **deps:** update babel monorepo to v7.24.5 ([7e466bd](https://github.com/legobeat/LavaMoat/commit/7e466bd5718a0a1b92df24a2d023c0bb1f54b872))
+* **deps:** update babel monorepo to v7.24.6 ([f6d450f](https://github.com/legobeat/LavaMoat/commit/f6d450fa48c8f166dac72a2b606429dafa5a70c4))
+* **deps:** update babel monorepo to v7.25.4 ([6b59ee5](https://github.com/legobeat/LavaMoat/commit/6b59ee5fe7436ea8f2b84260b6fb3e4a02022657))
+* **deps:** update babel monorepo to v7.25.6 ([6a42125](https://github.com/legobeat/LavaMoat/commit/6a4212562b7e2e8f62af99d0a3f504c13e6f8283))
+* **deps:** update dependency @babel/types to v7.23.9 ([c2f91e9](https://github.com/legobeat/LavaMoat/commit/c2f91e9a3c00ff9cf47eb8d7a4eb1ace7e155c64))
+* **deps:** update dependency ses to v1.5.0 ([9b871f7](https://github.com/legobeat/LavaMoat/commit/9b871f7623474d8f626042a948a5efb082918d13))
+* **deps:** update dependency ses to v1.7.0 ([#1262](https://github.com/legobeat/LavaMoat/issues/1262)) ([0209007](https://github.com/legobeat/LavaMoat/commit/0209007898d9d1a288832dc1b903720735d3558d))
+* **deps:** update dependency ses to v1.8.0 ([7e5bece](https://github.com/legobeat/LavaMoat/commit/7e5bece4a1c2cdaf7890c8750d26eadd495a1a52))
+* **deps:** update dependency type-fest to v4.10.2 ([1580ed9](https://github.com/legobeat/LavaMoat/commit/1580ed967085ae277384fcee3eac32ab9930adcd))
+* **deps:** update dependency type-fest to v4.10.3 ([95c0ae3](https://github.com/legobeat/LavaMoat/commit/95c0ae39d39fd75c4f5b487f5a5bcfdc78bf046e))
+* **deps:** update dependency type-fest to v4.12.0 ([29d157c](https://github.com/legobeat/LavaMoat/commit/29d157cea5885ad3a3b919a305fd63a6a216508f))
+* **deps:** update dependency type-fest to v4.13.1 ([ec89820](https://github.com/legobeat/LavaMoat/commit/ec898201439590242b27ff0c122369a9044386bf))
+* **deps:** update dependency type-fest to v4.14.0 ([1321a58](https://github.com/legobeat/LavaMoat/commit/1321a58964f36af95b30a547154a060edb63d009))
+* **deps:** update dependency type-fest to v4.15.0 ([c48f8e3](https://github.com/legobeat/LavaMoat/commit/c48f8e31c2f0bfc5e8baff190ea7afeef11d205b))
+* **deps:** update dependency type-fest to v4.23.0 ([d04e1f3](https://github.com/legobeat/LavaMoat/commit/d04e1f33af0931598443cbbf102020906cbd9b92))
+* **deps:** update dependency type-fest to v4.24.0 ([c735909](https://github.com/legobeat/LavaMoat/commit/c73590938207181ccec21727a5f11b8df2f2b7c0))
+* **deps:** update dependency type-fest to v4.25.0 ([a5c8d3e](https://github.com/legobeat/LavaMoat/commit/a5c8d3e2c34fa9ecfaf94c5f8daa3d8e626fd7d2))
+* **deps:** update dependency type-fest to v4.26.0 ([f4051f9](https://github.com/legobeat/LavaMoat/commit/f4051f9332c9cb4a9d457faacf4a2905ad3e869e))
+* **deps:** update dependency type-fest to v4.26.1 ([6172f93](https://github.com/legobeat/LavaMoat/commit/6172f935be3f00bff84d4f458c7f98b6ca89db40))
+* **webpack:** fix typescript complaints ([fc41eda](https://github.com/legobeat/LavaMoat/commit/fc41eda86bfd680fbeadce72954b787864c2884f))
+
+
+### Miscellaneous Chores
+
+* **browserify:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **core:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **node:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **perf:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **tofu:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+* **webpack:** remove support for Node.js v16 ([6ca05ba](https://github.com/legobeat/LavaMoat/commit/6ca05baa80bf7b022255b8ef476577343e514018))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * lavamoat-tofu bumped from ^8.0.1 to ^9.0.0
+
 ## [16.0.1](https://github.com/LavaMoat/LavaMoat/compare/lavamoat-core-v16.0.0...lavamoat-core-v16.0.1) (2024-09-11)
 
 

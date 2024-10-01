@@ -1,5 +1,57 @@
 # Changelog
 
+## [9.0.0](https://github.com/legobeat/LavaMoat/compare/lavamoat-tofu-v8.0.1...lavamoat-tofu-v9.0.0) (2024-10-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **tofu:** remove support for Node.js v16
+
+### Features
+
+* **tofu:** add ESM support ([be9594c](https://github.com/legobeat/LavaMoat/commit/be9594c0916fa773e2a9d7db0dae7cc92e16cd3e))
+* **tofu:** support node.js 22.x ([d6c5e1f](https://github.com/legobeat/LavaMoat/commit/d6c5e1f26977dc84575c2e9a75667b6339ca7aec))
+
+
+### Bug Fixes
+
+* **deps:** update babel monorepo ([0880e2e](https://github.com/legobeat/LavaMoat/commit/0880e2edde6e8f661e4fdebddcb47e585a43b469))
+* **deps:** update babel monorepo ([d9d40b4](https://github.com/legobeat/LavaMoat/commit/d9d40b4e5358734bd9fdd680a5b8048d9efbc55c))
+* **deps:** update babel monorepo ([b6aa714](https://github.com/legobeat/LavaMoat/commit/b6aa71446e00e9e201fad90abdc847d12b0d27a0))
+* **deps:** update babel monorepo ([246ec25](https://github.com/legobeat/LavaMoat/commit/246ec256790a0a2cb993d5895ae13a0b716da1c6))
+* **deps:** update babel monorepo to v7.24.5 ([7e466bd](https://github.com/legobeat/LavaMoat/commit/7e466bd5718a0a1b92df24a2d023c0bb1f54b872))
+* **deps:** update babel monorepo to v7.24.6 ([f6d450f](https://github.com/legobeat/LavaMoat/commit/f6d450fa48c8f166dac72a2b606429dafa5a70c4))
+* **deps:** update babel monorepo to v7.25.4 ([6b59ee5](https://github.com/legobeat/LavaMoat/commit/6b59ee5fe7436ea8f2b84260b6fb3e4a02022657))
+* **deps:** update babel monorepo to v7.25.6 ([6a42125](https://github.com/legobeat/LavaMoat/commit/6a4212562b7e2e8f62af99d0a3f504c13e6f8283))
+* **deps:** update definitelytyped ([a23d8be](https://github.com/legobeat/LavaMoat/commit/a23d8beb8a64ceed6417ac1eb48b866465fd784b))
+* **deps:** update dependency type-fest to v4.10.2 ([1580ed9](https://github.com/legobeat/LavaMoat/commit/1580ed967085ae277384fcee3eac32ab9930adcd))
+* **deps:** update dependency type-fest to v4.10.3 ([95c0ae3](https://github.com/legobeat/LavaMoat/commit/95c0ae39d39fd75c4f5b487f5a5bcfdc78bf046e))
+* **deps:** update dependency type-fest to v4.12.0 ([29d157c](https://github.com/legobeat/LavaMoat/commit/29d157cea5885ad3a3b919a305fd63a6a216508f))
+* **deps:** update dependency type-fest to v4.13.1 ([ec89820](https://github.com/legobeat/LavaMoat/commit/ec898201439590242b27ff0c122369a9044386bf))
+* **deps:** update dependency type-fest to v4.14.0 ([1321a58](https://github.com/legobeat/LavaMoat/commit/1321a58964f36af95b30a547154a060edb63d009))
+* **deps:** update dependency type-fest to v4.15.0 ([c48f8e3](https://github.com/legobeat/LavaMoat/commit/c48f8e31c2f0bfc5e8baff190ea7afeef11d205b))
+* **deps:** update dependency type-fest to v4.23.0 ([d04e1f3](https://github.com/legobeat/LavaMoat/commit/d04e1f33af0931598443cbbf102020906cbd9b92))
+* **deps:** update dependency type-fest to v4.24.0 ([c735909](https://github.com/legobeat/LavaMoat/commit/c73590938207181ccec21727a5f11b8df2f2b7c0))
+* **deps:** update dependency type-fest to v4.25.0 ([a5c8d3e](https://github.com/legobeat/LavaMoat/commit/a5c8d3e2c34fa9ecfaf94c5f8daa3d8e626fd7d2))
+* **deps:** update dependency type-fest to v4.26.0 ([f4051f9](https://github.com/legobeat/LavaMoat/commit/f4051f9332c9cb4a9d457faacf4a2905ad3e869e))
+* **deps:** update dependency type-fest to v4.26.1 ([6172f93](https://github.com/legobeat/LavaMoat/commit/6172f935be3f00bff84d4f458c7f98b6ca89db40))
+* **tofu/test:** platform-agnostic line separator ([a9c9c0f](https://github.com/legobeat/LavaMoat/commit/a9c9c0fc6c49e5804583a67ad8838cac46bff1a0))
+* **tofu:** ClassProperty nodes are not globals ([ca63a99](https://github.com/legobeat/LavaMoat/commit/ca63a99a023d625dd89b3b11f4ff7d3af73f7dde)), closes [#1098](https://github.com/legobeat/LavaMoat/issues/1098)
+* **tofu:** fix logic error in inspectEsmImports ([4c50878](https://github.com/legobeat/LavaMoat/commit/4c508782be9035c41a32712dc2039b95c8a6bc06))
+* **tofu:** fix type errors ([fe75965](https://github.com/legobeat/LavaMoat/commit/fe7596576265bc931fc2387bf7e352339f8d630b))
+
+
+### Miscellaneous Chores
+
+* **tofu:** remove support for Node.js v16 ([61d4572](https://github.com/legobeat/LavaMoat/commit/61d457204fd5de0dec195e53e70c492175dab6e2))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * peerDependencies
+    * lavamoat-core bumped from >15.4.0 to >17.0.0
+
 ## [8.0.1](https://github.com/LavaMoat/LavaMoat/compare/lavamoat-tofu-v8.0.0...lavamoat-tofu-v8.0.1) (2024-09-11)
 
 

@@ -1,5 +1,20 @@
 # Changelog
 
+## [4.4.0](https://github.com/legobeat/LavaMoat/compare/aa-v4.3.0...aa-v4.4.0) (2024-10-01)
+
+
+### Features
+
+* **aa:** add custom resolver ([90ed26e](https://github.com/legobeat/LavaMoat/commit/90ed26e54b62327a240eed47186541afab4aff24))
+* **aa:** Log unknown package dirs in error message ([0fa3283](https://github.com/legobeat/LavaMoat/commit/0fa32832a1022c160a8685d56683bac652ce67a5))
+* **aa:** support symlinks for workspace and devtime linking compatibility ([66996c7](https://github.com/legobeat/LavaMoat/commit/66996c7964fecee08e4fcb0f01ee66047c8d204d))
+* **allow-scripts:** support Node.js v22 ([0c665ec](https://github.com/legobeat/LavaMoat/commit/0c665ec65b635c29f347369809680372c9b58b79))
+
+
+### Bug Fixes
+
+* **test/aa:** platform-agnostic path separator ([f4b6eaf](https://github.com/legobeat/LavaMoat/commit/f4b6eaf302bc80b017362901a7237e542d143280))
+
 ## [4.3.0](https://github.com/LavaMoat/LavaMoat/compare/aa-v4.2.0...aa-v4.3.0) (2024-07-11)
 
 

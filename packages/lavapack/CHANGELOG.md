@@ -24,6 +24,35 @@
   * dependencies
     * lavamoat-core bumped from ^15.2.0 to ^15.2.1
 
+## [8.0.0](https://github.com/legobeat/LavaMoat/compare/lavapack-v7.0.1...lavapack-v8.0.0) (2024-10-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **lavapack:** remove support for Node.js v16; support v22
+
+### Features
+
+* **lavapack:** check syntax of a module independently of browserify's own check ([9c38cd4](https://github.com/legobeat/LavaMoat/commit/9c38cd47e7875dde53349dd34971c74ce34004d9))
+
+
+### Bug Fixes
+
+* **deps:** update dependency readable-stream to v4 ([2a2c624](https://github.com/legobeat/LavaMoat/commit/2a2c624866cb7699ca3c1cf765f44118d2b88f1f))
+* **lavapack:** remove unused sourcemap logic, simplify clearing out sourcemaps from concatenated sources ([#1156](https://github.com/legobeat/LavaMoat/issues/1156)) ([c5b16cf](https://github.com/legobeat/LavaMoat/commit/c5b16cffe07f272368e087bf3424d2760c893f0f))
+
+
+### Miscellaneous Chores
+
+* **lavapack:** remove support for Node.js v16; support v22 ([9adab79](https://github.com/legobeat/LavaMoat/commit/9adab792eb16e001dcb4f4a017d1fc2d06c804e9))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * lavamoat-core bumped from ^16.0.1 to ^17.0.0
+
 ## [7.0.1](https://github.com/LavaMoat/LavaMoat/compare/lavapack-v7.0.0...lavapack-v7.0.1) (2024-09-11)
 
 
