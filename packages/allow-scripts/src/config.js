@@ -10,6 +10,7 @@ const normalizeBin = require('npm-normalize-package-bin')
 const { loadCanonicalNameMap } = require('@lavamoat/aa')
 
 const bannedBins = new Set(['corepack', 'node', 'npm', 'pnpm', 'yarn'])
+const DEFAULT_LIFECYCLE_EVENTS = ['preinstall', 'install', 'postinstall']
 
 /**
  * @typedef PkgLavamoatConfig
@@ -36,9 +37,10 @@ const bannedBins = new Set(['corepack', 'node', 'npm', 'pnpm', 'yarn'])
 /**
  * @param {Object} args
  * @param {string} args.rootDir
+ * @param {string[]=} args.lifecycleEvents - which script names to consider
  * @returns {Promise<PkgConfs>}
  */
-async function loadAllPackageConfigurations({ rootDir }) {
+async function loadAllPackageConfigurations({ rootDir, lifecycleEvents = DEFAULT_LIFECYCLE_EVENTS }) {
   const packagesWithScriptsLifecycle = new Map()
   /** @type {BinCandidates} */
   const binCandidates = new Map()
@@ -76,7 +78,7 @@ async function loadAllPackageConfigurations({ rootDir }) {
       throw err
     }
     const depScripts = depPackageJson.scripts || {}
-    const lifeCycleScripts = ['preinstall', 'install', 'postinstall'].filter(
+    const lifeCycleScripts = lifecycleEvents.filter(
       (name) => Object.prototype.hasOwnProperty.call(depScripts, name)
     )
 
@@ -160,18 +162,19 @@ async function loadAllPackageConfigurations({ rootDir }) {
  * @typedef GetOptionsForBinOpts
  * @property {string} rootDir
  * @property {string} name
+ * @property {string[]=} lifecycleEvents
  */
 
 /**
  * @param {GetOptionsForBinOpts} param0
  * @returns {Promise<BinInfo[] | undefined>}
  */
-async function getOptionsForBin({ rootDir, name }) {
+async function getOptionsForBin({ rootDir, name, lifecycleEvents = DEFAULT_LIFECYCLE_EVENTS }) {
   const {
     configs: {
       bin: { binCandidates },
     },
-  } = await loadAllPackageConfigurations({ rootDir })
+  } = await loadAllPackageConfigurations({ rootDir, lifecycleEvents })
 
   return binCandidates.get(name)
 }
@@ -179,13 +182,14 @@ async function getOptionsForBin({ rootDir, name }) {
 /**
  * @typedef SetDefaultConfigurationOpts
  * @property {string} rootDir
+ * @property {string[]=} lifecycleEvents
  */
 
 /**
  * @param {SetDefaultConfigurationOpts} param0
  */
-async function setDefaultConfiguration({ rootDir }) {
-  const conf = await loadAllPackageConfigurations({ rootDir })
+async function setDefaultConfiguration({ rootDir, lifecycleEvents = DEFAULT_LIFECYCLE_EVENTS }) {
+  const conf = await loadAllPackageConfigurations({ rootDir, lifecycleEvents })
   const {
     configs: { lifecycle, bin },
     somePoliciesAreMissing,
