@@ -37,7 +37,7 @@ const DEFAULT_LIFECYCLE_EVENTS = ['preinstall', 'install', 'postinstall']
 /**
  * @param {Object} args
  * @param {string} args.rootDir
- * @param {string[]=} args.lifecycleEvents - which script names to consider
+ * @param {string[]} args.lifecycleEvents - which script names to consider
  * @returns {Promise<PkgConfs>}
  */
 async function loadAllPackageConfigurations({ rootDir, lifecycleEvents = DEFAULT_LIFECYCLE_EVENTS }) {
