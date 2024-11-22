@@ -6,6 +6,35 @@
   * dependencies
     * @lavamoat/aa bumped from ^4.0.1 to ^4.1.0
 
+## [3.3.0](https://github.com/legobeat/LavaMoat/compare/allow-scripts-v3.2.1...allow-scripts-v3.3.0) (2024-10-01)
+
+
+### Features
+
+* **allow-scripts:** export loadAllPackageConfigurations, printMissingPoliciesIfAny ([fa70124](https://github.com/legobeat/LavaMoat/commit/fa701246a261926e7f643aedf1678ccb05246989))
+* **allow-scripts:** expose canonical name map as canonicalNamesByPath in loadAllPackageContents ([de6ff77](https://github.com/legobeat/LavaMoat/commit/de6ff77141aa73d1cb63433bb166ebba2b3ed38e))
+* **allow-scripts:** support Node.js v22 ([0c665ec](https://github.com/legobeat/LavaMoat/commit/0c665ec65b635c29f347369809680372c9b58b79))
+
+
+### Bug Fixes
+
+* **allow-scripts:** add corepack to bannedBins ([cef66ec](https://github.com/legobeat/LavaMoat/commit/cef66ec03508bc9484a83c4a037c9e91c0b853c9))
+* **allow-scripts:** fix spawn error diagnostics in run function in test ([727ce01](https://github.com/legobeat/LavaMoat/commit/727ce01f7705ae73b397f426acc380addfb7f1d1))
+* **allow-scripts:** fix test setup to continue spawning npm on windows post security fixes in Node.js ([416d018](https://github.com/legobeat/LavaMoat/commit/416d018da94cd603c7983f28bdfef88456522d3a))
+* **allow-scripts:** indicate peerDependency on @lavamoat/preinstall-always-fail ([#1201](https://github.com/legobeat/LavaMoat/issues/1201)) ([ab8e89c](https://github.com/legobeat/LavaMoat/commit/ab8e89c8ce6087c3d62c00ce9fdb629cba54db1e))
+* **allow-scripts:** Run automatic `node-gyp rebuild` for packages containing a `binding.gyp` ([62a2b4e](https://github.com/legobeat/LavaMoat/commit/62a2b4e11a35c2d9f6f91ae4a3030753f27519b1))
+* **deps:** update dependency @npmcli/run-script to v8 ([dc9fae1](https://github.com/legobeat/LavaMoat/commit/dc9fae17ae69e6555a039c05ee3b0730850b944b))
+* **deps:** update dependency bin-links to v4.0.4 ([2844646](https://github.com/legobeat/LavaMoat/commit/2844646907ffcf16c6785ba43c5d551d77fa369a))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @lavamoat/aa bumped from ^4.3.0 to ^4.4.0
+  * peerDependencies
+    * @lavamoat/preinstall-always-fail bumped from * to 2.2.0
+
 ## [3.2.1](https://github.com/LavaMoat/LavaMoat/compare/allow-scripts-v3.2.0...allow-scripts-v3.2.1) (2024-09-11)
 
 
